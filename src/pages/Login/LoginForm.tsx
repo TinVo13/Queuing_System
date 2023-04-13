@@ -3,6 +3,7 @@ import { Form, Input, Button } from 'antd';
 import React from 'react'
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 
 const LoginStyle = styled.div`
@@ -26,8 +27,10 @@ const InputStyle = styled(Input)`
 
 
 const LoginForm: React.FC = () => {
+    const navigate = useNavigate();
     const onFinish = (values: any) => {
         console.log('Received values of form: ', values);
+        navigate('/');
     };
     return (
         <ConfigProvider
@@ -75,7 +78,7 @@ const LoginForm: React.FC = () => {
                                 <Checkbox>Remember me</Checkbox>
                             </Form.Item> */}
 
-                        <a className="login-form-forgot" href="login/reset-password" style={{ color: 'red' }}>
+                        <a className="login-form-forgot" href="/forgot-password" style={{ color: 'red' }}>
                             Quên mật khẩu
                         </a>
                     </Form.Item>
@@ -83,7 +86,6 @@ const LoginForm: React.FC = () => {
                         <ButtonStyle htmlType="submit" className="login-form-button">
                             Đăng nhập
                         </ButtonStyle>
-                        {/* Or <a href="">register now!</a> */}
                     </Form.Item>
                 </Form>
             </LoginStyle>

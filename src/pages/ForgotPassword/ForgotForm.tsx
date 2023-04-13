@@ -1,6 +1,7 @@
 import { Button, ConfigProvider, Form, Image, Input, Typography } from 'antd'
 import FormItem from 'antd/es/form/FormItem'
 import React, { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 
@@ -33,7 +34,12 @@ const ButtonStyle = styled(Button)`
     color: white;
     margin-left: 10px
 `
-const ResetForm: FC = () => {
+const ForgotForm: FC = () => {
+    const navigate = useNavigate();
+    const onFinish = (values: any) => {
+        console.log('Received values of form: ', values);
+        navigate('/reset-password');
+    };
     return (
         <ConfigProvider
             theme={{
@@ -42,12 +48,12 @@ const ResetForm: FC = () => {
                 }
             }}>
             <ContainerStyle>
-                <Image src={require('../../image/logo.png')} width={200} preview={false}/>
+                <Image src={require('../../image/logo.png')} width={200} preview={false} />
                 <Typography.Title>Đặt lại mật khẩu</Typography.Title>
                 <Typography.Text>Vui lòng hập Email để đặt lại mật khẩu của bạn*</Typography.Text>
-                <FormStyle>
+                <FormStyle onFinish={onFinish}>
                     <FormItemStyle
-                        name={'reset-password'}
+                        name={'email'}
                         rules={[{ required: true, message: 'Vui lòng nhập Email!' }]}>
                         <InputStyle type='email' minLength={10} placeholder='Example abc@gmail.com...'></InputStyle>
                     </FormItemStyle>
@@ -61,4 +67,4 @@ const ResetForm: FC = () => {
     )
 }
 
-export default ResetForm
+export default ForgotForm
