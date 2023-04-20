@@ -1,0 +1,29 @@
+.label-field {
+  font-size: 16;
+  font-weight: bold;
+}
+.label-manager-device {
+  font-size: 24px;
+  font-weight: bold;
+  color: orange;
+}
+.label-device-info {
+  font-size: 20px;
+  color: orange;
+  font-weight: bold;
+}
+.btn-cancel {
+  background-color: #fff2e7;
+  color: #ff9138;
+  height: 48px;
+  width: 147px;
+}
+.btn-submit {
+  background-color: #ff9138;
+  color: #fff2e7;
+  height: 48px;
+  width: 147px;
+}
+.footer{
+    margin: 16px;
+}

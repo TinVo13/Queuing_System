@@ -74,10 +74,6 @@ const LoginForm: React.FC = () => {
                         />
                     </Form.Item>
                     <Form.Item>
-                        {/* <Form.Item name="remember" valuePropName="checked" noStyle>
-                                <Checkbox>Remember me</Checkbox>
-                            </Form.Item> */}
-
                         <a className="login-form-forgot" href="/forgot-password" style={{ color: 'red' }}>
                             Quên mật khẩu
                         </a>

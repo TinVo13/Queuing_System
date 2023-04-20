@@ -26,8 +26,8 @@ function getItem(
     } as MenuItem;
 }
 const items: MenuItem[] = [
-    getItem('Dashboard', '/', <PieChartOutlined />),
-    getItem('Thiết bị', '/device', <DesktopOutlined />),
+    getItem('Dashboard', '/dashboard', <PieChartOutlined />),
+    getItem('Thiết bị', '/device/list-device', <DesktopOutlined />),
     getItem('Dịch vụ', '/service', <UserOutlined />,),
     getItem('Cấp số', '/numbering', <LaptopOutlined />),
     getItem('Báo cáo', '/report', <LineChartOutlined />),
@@ -54,10 +54,10 @@ const SideMenu: React.FC = () => {
                         <div>
                             <Menu onClick={(item) => {
                                 navigate(item.key);
-                            }} theme="light" mode="vertical" items={items} defaultSelectedKeys={['/']} />
+                            }} theme="light" mode="vertical" items={items} defaultSelectedKeys={['/dashboard']}/>
                         </div>
                         <div>
-                            <Button block type='primary' style={{ background:'#FFF2E7', color:'#FF7506'}}>Đăng xuất</Button>
+                            <Button block type='primary' style={{ background:'#FFF2E7', color:'#FF7506'}} onClick={()=>navigate('/login')}>Đăng xuất</Button>
                         </div>
                     </div>
                 </div>

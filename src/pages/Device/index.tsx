@@ -1,9 +1,10 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
 
 const Device:React.FC = () => {
   return (
-    <div>Device</div>
+    <Outlet/>
   )
 }
 
-export default Device
+export default Device;

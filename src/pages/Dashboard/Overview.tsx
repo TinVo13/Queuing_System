@@ -1,4 +1,4 @@
-import { Calendar, Card, Col, ConfigProvider, Progress, Row, Typography, theme } from 'antd'
+import { Calendar, Card, Col, ConfigProvider, Progress, Row, Typography, theme,DatePicker } from 'antd'
 import React from 'react';
 import { TabletTwoTone, MessageTwoTone, DiffTwoTone } from '@ant-design/icons'
 
@@ -24,9 +24,9 @@ const Overview: React.FC = () => {
     return (
         <div style={{ padding: '16px', background: colorBgContainer }}>
             <Text style={{ fontSize: 24 }} type='warning'>Tổng quan</Text>
-            <Row style={{ margin: '16px 0' }}>
+            <Row style={{ margin: '16px 0' }} justify={'center'} align={'middle'}>
                 <Col span={24}>
-                    <Card size='small' >
+                    <Card size='small'>
                         <Row justify={'center'} align={'middle'}>
                             <Col span={5}>
                                 <Row justify={'center'} align={'middle'}>
@@ -188,7 +188,7 @@ const Overview: React.FC = () => {
                 </Col>
             </Row>
             <Row>
-                <Card>
+                <Card size='default' style={{height:'100%'}}>
                     <ConfigProvider
                         theme={{
                             token: {
@@ -196,7 +196,7 @@ const Overview: React.FC = () => {
                             },
                         }}
                     >
-                        <Calendar fullscreen={false} mode='month' />
+                        <DatePicker format={'DD/MM/YYYY'} showToday={false} placement='bottomRight'/>
                     </ConfigProvider>
                 </Card>
             </Row>

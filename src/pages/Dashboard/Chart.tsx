@@ -1,52 +1,34 @@
 import { Avatar, Col, Row, Typography, Card, Select } from 'antd'
 import React from 'react'
-import { CalendarTwoTone, ScheduleTwoTone, ContactsTwoTone, DiffTwoTone, ArrowUpOutlined, ArrowDownOutlined, DownOutlined, SmileOutlined } from '@ant-design/icons'
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Filler,
-    Legend,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
-// import { Line } from '@ant-design/charts';
+import { CalendarTwoTone, ScheduleTwoTone, ContactsTwoTone, DiffTwoTone, ArrowUpOutlined, ArrowDownOutlined, DownOutlined, SmileOutlined } from '@ant-design/icons';
+import { Line } from '@ant-design/charts';
 const { Text } = Typography;
-ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Filler,
-    Legend
-);
-const options = {
-    responsive: true,
-    plugins: {
-        legend: {
-            position: 'top' as const,
+
+const data = [
+    { day: '1', value: 2700 },
+    { day: '13', value: 3600 },
+    { day: '19', value: 4200 },
+    { day: '31', value: 3800 },
+];
+const config = {
+    data,
+    autoFit: true,
+    xField: 'day',
+    yField: 'value',
+    point: {
+        size: 5,
+        shape: 'circle',
+    },
+    label: {
+        style: {
+            fill: '#aaa',
+            opacity: 0.6,
         },
     },
-};
-const labels = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21'
-    , '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
-const data = {
-    labels,
-    datasets: [
-        {
-            fill: true,
-            label: '',
-            data: labels.map(() => Math.random() * 6000),
-            borderColor: 'rgb(53, 162, 235)',
-            backgroundColor: 'rgba(53, 162, 235, 0.5)',
-            tension: 0.5,
-        },
-    ],
+    smooth: true,
+    xAxis: {
+        range: [0, 1]
+    }
 };
 
 const style: React.CSSProperties = {
@@ -55,7 +37,6 @@ const style: React.CSSProperties = {
     borderRadius: '10px'
 };
 const Chart: React.FC = () => {
-
     return (
         <div style={{ margin: '16px' }}>
             <Text style={{ fontSize: 24 }} type='warning'>Biểu đồ cấp số</Text>
@@ -167,7 +148,7 @@ const Chart: React.FC = () => {
             </Row>
             <Row>
                 <Col span={24}>
-                    <Card>
+                    <Card style={{ marginTop: '16px' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <div>
                                 <Text>Bảng thống kê theo ngày</Text>
@@ -185,7 +166,9 @@ const Chart: React.FC = () => {
                                 />
                             </div>
                         </div>
-                        <Line data={data} options={options} />
+                        <div style={{marginTop:'16px'}}>
+                            <Line {...config}/>
+                        </div>
                     </Card>
                 </Col>
             </Row>

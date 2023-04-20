@@ -1,0 +1,171 @@
+import { Button, Card, Col, ConfigProvider, Form, Input, Row, Select, Space, Typography } from 'antd'
+import React from 'react'
+import './index.css';
+import { useNavigate } from 'react-router-dom';
+
+const { Text } = Typography
+
+const AddDevice: React.FC = () => {
+  const navigate = useNavigate();
+  return (
+    <div style={{ margin: 16 }}>
+      <ConfigProvider
+        theme={{
+          token: {
+            colorPrimary: 'orange'
+          }
+        }}>
+        <div style={{ marginBottom: 16 }}>
+          <Text className='label-manager-device'>Quản lý thiết bị</Text>
+        </div>
+        <Form onFinish={()=>navigate('/device/list-device')}>
+          <Card size='default'>
+            <Text className='label-device-info'>Thông tin thiết bị</Text>
+            <Row gutter={24} style={{ marginTop: 10 }}>
+              <Col span={12}>
+                <Space direction='vertical' style={{ width: '100%' }}>
+                  <div>
+                    <Text className='label-field'>Nhập mã thiết bị: </Text>
+                    <Text style={{ color: 'red' }}>*</Text>
+                  </div>
+                  <Form.Item
+                    name={'Mã thiết bị'}
+                    rules={[{
+                      required: true,
+                      message: 'Vui lòng nhập mã thiết bị!'
+                    }]}>
+                    <Input type='text' placeholder='Nhập mã thiết bị' size='large'/>
+                  </Form.Item>
+                </Space>
+              </Col>
+              <Col span={12}>
+                <Space direction='vertical' style={{ width: '100%' }}>
+                  <div>
+                    <Text className='label-field'>Loại thiết bị</Text>
+                    <Text style={{ color: 'red' }}>*</Text>
+                  </div>
+                  <Form.Item
+                    name={'Loại thiết bị'}
+                    rules={[{
+                      required: true,
+                      message: 'Vui lòng chọn loại thiết bị!'
+                    }]}>
+                    <Select
+                      options={[{ label: 'Kiosk', value: 'Kiosk' }, { label: 'Display counter', value: 'Display counter' }]}
+                      placeholder='Chọn loại thiết bị'
+                      size='large' />
+                  </Form.Item>
+                </Space>
+              </Col>
+            </Row>
+            <Row gutter={24}>
+              <Col span={12}>
+                <Space direction='vertical' style={{ width: '100%' }}>
+                  <div>
+                    <Text className='label-field'>Tên thiết bị</Text>
+                    <Text style={{ color: 'red' }}>*</Text>
+                  </div>
+                  <Form.Item
+                    name={'Tên thiết bị'}
+                    rules={[{
+                      required: true,
+                      message: 'Vui lòng nhập tên thiết bị!'
+                    }]}>
+                    <Input type='text' placeholder='Nhập tên thiết bị' size='large' />
+                  </Form.Item>
+                </Space>
+              </Col>
+              <Col span={12}>
+                <Space direction='vertical' style={{ width: '100%' }}>
+                  <div>
+                    <Text className='label-field'>Tên tài khoản:</Text>
+                    <Text style={{ color: 'red' }}>*</Text>
+                  </div>
+                  <Form.Item
+                    name={'Tài khoản'}
+                    rules={[{
+                      required: true,
+                      message: 'Vui lòng nhập tên tài khoảng!'
+                    }]}>
+                    <Input type='text' placeholder='Nhập tài khoản' size='large' />
+                  </Form.Item>
+                </Space>
+              </Col>
+            </Row>
+            <Row gutter={24}>
+              <Col span={12}>
+                <Space direction='vertical' style={{ width: '100%' }}>
+                  <div>
+                    <Text className='label-field'>Địa chỉ IP:</Text>
+                    <Text style={{ color: 'red' }}>*</Text>
+                  </div>
+                  <Form.Item
+                    name={'Địa chỉ IP'}
+                    rules={[{
+                      required: true,
+                      message: 'Vui lòng nhập địa chỉ IP!'
+                    }]}>
+                    <Input type='text' placeholder='Nhập địa chỉ IP' size='large' />
+                  </Form.Item>
+                </Space>
+              </Col>
+              <Col span={12}>
+                <Space direction='vertical' style={{ width: '100%' }}>
+                  <div>
+                    <Text className='label-field'>Mật khẩu</Text>
+                    <Text style={{ color: 'red' }}>*</Text>
+                  </div>
+                  <Form.Item
+                    name={'Mật khẩu'}
+                    rules={[{
+                      required: true,
+                      message: 'Vui lòng nhập mật khẩu!'
+                    }]}>
+                    <Input type='text' placeholder='Nhập mật khẩu' size='large' />
+                  </Form.Item>
+                </Space>
+              </Col>
+            </Row>
+            <Row gutter={24}>
+              <Col span={24}>
+                <Space direction='vertical' style={{width:'100%'}}>
+                  <div>
+                    <Text className='label-field'>Dịch vụ sử dụng:</Text>
+                    <Text style={{ color: 'red' }}>*</Text>
+                  </div>
+                  <Form.Item
+                    name={'Dịch vụ'}
+                    rules={[{
+                      required:true,
+                      message:'Vui lòng nhập dịch vụ!'
+                    }]}>
+                    <Input type='text' placeholder='Nhập dịch vụ sử dụng' size='large' />
+                  </Form.Item>
+                </Space>
+              </Col>
+            </Row>
+            <Row>
+              <Col span={24}>
+                <Text style={{color:'red'}}>* </Text>
+                <Text>Là trường bắt buộc</Text>
+              </Col>
+            </Row>
+          </Card>
+          <Row justify={'center'} align={'middle'} className='footer'>
+            <Space>
+              <Form.Item>
+                <Button className='btn-cancel' onClick={()=>navigate('/device/list-device')}>Hủy bỏ</Button>
+              </Form.Item>
+              <Form.Item>
+                <Button className='btn-submit' htmlType='submit'>Thêm thiết bị</Button>
+              </Form.Item>
+            </Space>
+          </Row>
+        </Form>
+      </ConfigProvider >
+
+    </div>
+  )
+}
+
+export default AddDevice
