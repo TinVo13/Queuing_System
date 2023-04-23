@@ -14,7 +14,7 @@ const LoginStyle = styled.div`
     align-Items: center;
 `
 const ButtonStyle = styled(Button)`
-    background: orange;
+    background: #FF7506;
     color: white;
     width: 150px;
     border: none;
@@ -36,7 +36,7 @@ const LoginForm: React.FC = () => {
         <ConfigProvider
             theme={{
                 token: {
-                    colorPrimary: 'orange',
+                    colorPrimary: '#FF7506',
                 }
             }}>
             <LoginStyle>

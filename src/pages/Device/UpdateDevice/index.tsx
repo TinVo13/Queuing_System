@@ -3,6 +3,7 @@ import Layout from 'antd/es/layout/layout';
 import React from 'react'
 import TagRender from '../../../components/CustomTag';
 import { useNavigate } from 'react-router-dom';
+import { UpdateDeviceType } from '../../../type';
 
 const { Text } = Typography;
 const options: SelectProps['options'] = [
@@ -31,23 +32,15 @@ const options: SelectProps['options'] = [
     value: 'khám tổng quát'
   }
 ]
-interface Device{
-  ma_thiet_bi: string,
-  ten_thiet_bi: string,
-  loai_thiet_bi: string,
-  ten_dang_nhap: string,
-  mat_khau: string,
-  dia_chi_ip: string,
-  dich_vu: string[]
-}
-const initialValue: Device = {
-  ma_thiet_bi: 'KIO_01',
-  ten_thiet_bi: 'Kiosk',
-  loai_thiet_bi: 'Kiosk',
-  ten_dang_nhap: 'Tin',
-  mat_khau: 'abc123',
-  dia_chi_ip: '192.168.0.10',
-  dich_vu: ['Khám tim mạch']
+
+const initialValue: UpdateDeviceType = {
+  maThietBi: 'KIO_01',
+  tenThietBi: 'Kiosk',
+  loaiThietBi: 'Kiosk',
+  tenDangNhap: 'Tin',
+  matKhau: 'abc123',
+  diaChiIP: '192.168.0.10',
+  dichVu: ['Khám tim mạch']
 }
 const UpdateDevice: React.FC = () => {
   const navigate = useNavigate()
@@ -56,7 +49,7 @@ const UpdateDevice: React.FC = () => {
       <ConfigProvider
         theme={{
           token: {
-            colorPrimary: 'orange'
+            colorPrimary: '#FF7506'
           }
         }}>
         <Space direction='vertical' style={{height: '60vh'}}>
@@ -76,7 +69,7 @@ const UpdateDevice: React.FC = () => {
                           <Text style={{ color: 'red' }}>*</Text>
                         </div>
                         <Form.Item
-                          name={'ma_thiet_bi'}
+                          name={'maThietBi'}
                           rules={[{
                             required: true,
                             message: 'Vui lòng nhập mã thiết bị!'
@@ -92,7 +85,7 @@ const UpdateDevice: React.FC = () => {
                           <Text style={{ color: 'red' }}>*</Text>
                         </div>
                         <Form.Item
-                          name={'loai_thiet_bi'}
+                          name={'loaiThietBi'}
                           rules={[{
                             required: true,
                             message: 'Vui lòng chọn loại thiết bị!'
@@ -112,7 +105,7 @@ const UpdateDevice: React.FC = () => {
                           <Text style={{ color: 'red' }}>*</Text>
                         </div>
                         <Form.Item
-                          name={'ten_thiet_bi'}
+                          name={'tenThietBi'}
                           rules={[{
                             required: true,
                             message: 'Vui lòng nhập tên thiết bị!'
@@ -128,7 +121,7 @@ const UpdateDevice: React.FC = () => {
                           <Text style={{ color: 'red' }}>*</Text>
                         </div>
                         <Form.Item
-                          name={'ten_dang_nhap'}
+                          name={'tenDangNhap'}
                           rules={[{
                             required: true,
                             message: 'Vui lòng nhập tên đăng nhập!'
@@ -146,7 +139,7 @@ const UpdateDevice: React.FC = () => {
                           <Text style={{ color: 'red' }}>*</Text>
                         </div>
                         <Form.Item
-                          name={'dia_chi_ip'}
+                          name={'diaChiIP'}
                           rules={[{
                             required: true,
                             message: 'Vui lòng nhập địa chỉ IP!'
@@ -162,7 +155,7 @@ const UpdateDevice: React.FC = () => {
                           <Text style={{ color: 'red' }}>*</Text>
                         </div>
                         <Form.Item
-                          name={'mat_khau'}
+                          name={'matKhau'}
                           rules={[{
                             required: true,
                             message: 'Vui lòng nhập mật khẩu!'
@@ -180,7 +173,7 @@ const UpdateDevice: React.FC = () => {
                           <Text style={{ color: 'red' }}>*</Text>
                         </div>
                         <Form.Item
-                          name={'dich_vu'}
+                          name={'dichVu'}
                           rules={[{
                             required: true,
                             message: 'Vui lòng nhập dịch vụ!'

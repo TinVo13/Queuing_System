@@ -30,7 +30,7 @@ const InputStyle = styled(Input)`
     min-width: 350px;
 `
 const ButtonStyle = styled(Button)`
-    background: orange;
+    background: #FF7506;
     color: white;
     margin-left: 10px
 `
@@ -44,7 +44,7 @@ const ForgotForm: FC = () => {
         <ConfigProvider
             theme={{
                 token: {
-                    colorPrimary: 'orange',
+                    colorPrimary: '#FF7506',
                 }
             }}>
             <ContainerStyle>

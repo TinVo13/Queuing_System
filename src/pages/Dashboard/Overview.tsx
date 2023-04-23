@@ -6,7 +6,7 @@ import { TabletTwoTone, MessageTwoTone, DiffTwoTone } from '@ant-design/icons'
 const { Text } = Typography;
 
 const textstyle1: React.CSSProperties = {
-    color: 'orange',
+    color: '#FF7506',
     fontSize: '14px',
 }
 const textstyle2: React.CSSProperties = {
@@ -30,7 +30,7 @@ const Overview: React.FC = () => {
                         <Row justify={'center'} align={'middle'}>
                             <Col span={5}>
                                 <Row justify={'center'} align={'middle'}>
-                                    <Progress type='circle' percent={90} size={50} strokeColor={'orange'}>
+                                    <Progress type='circle' percent={90} size={50} strokeColor={'#FF7506'}>
                                         {/* <Progress type='circle' percent={10} size={80}/> */}
                                     </Progress>
                                 </Row>
@@ -44,8 +44,8 @@ const Overview: React.FC = () => {
                                 </Row>
                                 <Row>
                                     <Col span={24}>
-                                        <TabletTwoTone twoToneColor={'orange'} />
-                                        <Text type='warning'>Thiết bị</Text>
+                                        <TabletTwoTone twoToneColor={'#FF7506'} />
+                                        <Text style={{color:'#FF7506'}}>Thiết bị</Text>
                                     </Col>
                                 </Row>
                             </Col>
@@ -192,7 +192,7 @@ const Overview: React.FC = () => {
                     <ConfigProvider
                         theme={{
                             token: {
-                                colorPrimary: 'orange',
+                                colorPrimary: '#FF7506',
                             },
                         }}
                     >

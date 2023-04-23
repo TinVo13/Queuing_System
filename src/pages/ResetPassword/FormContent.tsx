@@ -20,7 +20,7 @@ const FormItemStyle = styled(FormItem)`
 `
 const ButtonStyle = styled(Button)`
   width: 150px;
-  background: orange;
+  background: #FF7506;
   color: white;
 `
 const FormContent = () => {
@@ -36,7 +36,7 @@ const FormContent = () => {
     <ConfigProvider
       theme={{
         token: {
-          colorPrimary: 'orange',
+          colorPrimary: '#FF7506',
           colorBgContainer: colorBgContainer,
         }
       }}>

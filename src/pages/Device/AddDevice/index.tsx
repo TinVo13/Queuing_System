@@ -1,6 +1,5 @@
-import { Button, Card, Col, ConfigProvider, Form, Input, Row, Select, Space, Typography } from 'antd'
 import React from 'react'
-import './index.css';
+import { Button, Card, Col, ConfigProvider, Form, Input, Row, Select, Space, Typography } from 'antd'
 import { useNavigate } from 'react-router-dom';
 
 const { Text } = Typography
@@ -12,7 +11,7 @@ const AddDevice: React.FC = () => {
       <ConfigProvider
         theme={{
           token: {
-            colorPrimary: 'orange'
+            colorPrimary: '#FF7506'
           }
         }}>
         <div style={{ marginBottom: 16 }}>
@@ -26,7 +25,7 @@ const AddDevice: React.FC = () => {
                 <Space direction='vertical' style={{ width: '100%' }}>
                   <div>
                     <Text className='label-field'>Nhập mã thiết bị: </Text>
-                    <Text style={{ color: 'red' }}>*</Text>
+                    <Text type='danger'>*</Text>
                   </div>
                   <Form.Item
                     name={'Mã thiết bị'}
@@ -42,7 +41,7 @@ const AddDevice: React.FC = () => {
                 <Space direction='vertical' style={{ width: '100%' }}>
                   <div>
                     <Text className='label-field'>Loại thiết bị</Text>
-                    <Text style={{ color: 'red' }}>*</Text>
+                    <Text type='danger'>*</Text>
                   </div>
                   <Form.Item
                     name={'Loại thiết bị'}
@@ -63,7 +62,7 @@ const AddDevice: React.FC = () => {
                 <Space direction='vertical' style={{ width: '100%' }}>
                   <div>
                     <Text className='label-field'>Tên thiết bị</Text>
-                    <Text style={{ color: 'red' }}>*</Text>
+                    <Text type='danger'>*</Text>
                   </div>
                   <Form.Item
                     name={'Tên thiết bị'}
@@ -79,7 +78,7 @@ const AddDevice: React.FC = () => {
                 <Space direction='vertical' style={{ width: '100%' }}>
                   <div>
                     <Text className='label-field'>Tên tài khoản:</Text>
-                    <Text style={{ color: 'red' }}>*</Text>
+                    <Text type='danger'>*</Text>
                   </div>
                   <Form.Item
                     name={'Tài khoản'}
@@ -97,7 +96,7 @@ const AddDevice: React.FC = () => {
                 <Space direction='vertical' style={{ width: '100%' }}>
                   <div>
                     <Text className='label-field'>Địa chỉ IP:</Text>
-                    <Text style={{ color: 'red' }}>*</Text>
+                    <Text type='danger'>*</Text>
                   </div>
                   <Form.Item
                     name={'Địa chỉ IP'}
@@ -113,7 +112,7 @@ const AddDevice: React.FC = () => {
                 <Space direction='vertical' style={{ width: '100%' }}>
                   <div>
                     <Text className='label-field'>Mật khẩu</Text>
-                    <Text style={{ color: 'red' }}>*</Text>
+                    <Text type='danger'>*</Text>
                   </div>
                   <Form.Item
                     name={'Mật khẩu'}
@@ -131,7 +130,7 @@ const AddDevice: React.FC = () => {
                 <Space direction='vertical' style={{width:'100%'}}>
                   <div>
                     <Text className='label-field'>Dịch vụ sử dụng:</Text>
-                    <Text style={{ color: 'red' }}>*</Text>
+                    <Text type='danger'>*</Text>
                   </div>
                   <Form.Item
                     name={'Dịch vụ'}
@@ -146,7 +145,7 @@ const AddDevice: React.FC = () => {
             </Row>
             <Row>
               <Col span={24}>
-                <Text style={{color:'red'}}>* </Text>
+                <Text type='danger'>* </Text>
                 <Text>Là trường bắt buộc</Text>
               </Col>
             </Row>

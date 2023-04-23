@@ -19,7 +19,7 @@ const data: datatype[] = [
     },
 ]
 const headerstyle: React.CSSProperties = {
-    background:'orange',
+    background:'#FF7506',
 }
 const Notification: React.FC = () => {
     return (

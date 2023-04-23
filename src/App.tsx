@@ -15,6 +15,10 @@ import ListDevice from './pages/Device/ListDevice/ListDevice';
 import AddDevice from './pages/Device/AddDevice';
 import DetailDevice from './pages/Device/DetailDevice';
 import UpdateDevice from './pages/Device/UpdateDevice';
+import ListService from './pages/Service/ListService';
+import AddService from './pages/Service/AddService';
+import DetailService from './pages/Service/DetailService';
+import UpdateService from './pages/Service/UpdateService';
 
 
 function App() {
@@ -31,8 +35,13 @@ function App() {
                 <Route path='list-device/detail-device' Component={DetailDevice}></Route>
                 <Route path='list-device/update-device' Component={UpdateDevice}></Route>
               </Route>
+              <Route path='/service' Component={Service}>
+                <Route path='list-service' Component={ListService}></Route>
+                <Route path='list-service/add-service' Component={AddService}></Route>
+                <Route path='list-service/detail-service' Component={DetailService}></Route>
+                <Route path='list-service/update-service' Component={UpdateService}></Route>
+              </Route>
               <Route path='/report' Component={Report}></Route>
-              <Route path='/service' Component={Service}></Route>
               <Route path='/userinfo' element={<UserInfo />} />
             </Route>
           </Route>

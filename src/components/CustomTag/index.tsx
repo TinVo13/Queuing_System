@@ -10,7 +10,7 @@ const TagRender = (props: CustomTagProps) => {
     }
     return (
         <Tag
-            color={'orange'}
+            color={'#FF7506'}
             onMouseDown={onPreventMouseDown}
             closable={closable}
             onClose={onClose}

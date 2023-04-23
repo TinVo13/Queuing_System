@@ -1,10 +1,50 @@
 .App {
   display: flex;
   flex-direction: row;
-  margin: -8px;
+}
+body{
+  margin: 0;
+  padding: 0;
 }
 .SideMenuAndPageContent{
   display: flex;
   flex: 1;
   flex-direction: column;
+}
+.btn-cancel {
+  background-color: #fff2e7;
+  color: #ff9138;
+  height: 48px;
+  width: 147px;
+  border-color: #FF9138;
+}
+.btn-submit {
+  background-color: #ff9138;
+  color: #fff2e7;
+  height: 48px;
+  width: 147px;
+}
+.label-field {
+  font-size: 16;
+  font-weight: bold;
+}
+.label-manager-device {
+  font-size: 24px;
+  font-weight: bold;
+  color: #FF7506;
+}
+.label-device-info {
+  font-size: 20px;
+  color: #FF7506;
+  font-weight: bold;
+}
+
+.footer{
+    margin: 16px;
+}
+.ant-table-thead .ant-table-cell {
+  background-color: #FF9138 !important;
+}
+.ant-table-thead title{
+  color: white;
 }

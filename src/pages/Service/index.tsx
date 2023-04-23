@@ -1,8 +1,9 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
 
 const Service:React.FC = () => {
   return (
-    <div>Service</div>
+    <Outlet/>
   )
 }
 

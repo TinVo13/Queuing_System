@@ -60,7 +60,7 @@ const Chart: React.FC = () => {
                                 <Text style={{ fontSize: 30 }}>4.343</Text>
                             </Col>
                             <Col span={8}>
-                                <div style={{ borderRadius: '10px', background: 'orange' }}>
+                                <div style={{ borderRadius: '10px', background: '#FF7506' }}>
                                     <Text>31,32%</Text>
                                 </div>
                             </Col>
@@ -86,7 +86,7 @@ const Chart: React.FC = () => {
                                 <Text style={{ fontSize: 30 }}>4.343</Text>
                             </Col>
                             <Col span={8}>
-                                <div style={{ borderRadius: '10px', background: 'orange' }}>
+                                <div style={{ borderRadius: '10px', background: '#FF7506' }}>
                                     <Text>31,32%</Text>
                                 </div>
                             </Col>
@@ -112,7 +112,7 @@ const Chart: React.FC = () => {
                                 <Text style={{ fontSize: 30 }}>4.343</Text>
                             </Col>
                             <Col span={8}>
-                                <div style={{ borderRadius: '10px', background: 'orange' }}>
+                                <div style={{ borderRadius: '10px', background: '#FF7506' }}>
                                     <Text>31,32%</Text>
                                 </div>
                             </Col>
@@ -138,7 +138,7 @@ const Chart: React.FC = () => {
                                 <Text style={{ fontSize: 30 }}>4.343</Text>
                             </Col>
                             <Col span={8}>
-                                <div style={{ borderRadius: '10px', background: 'orange' }}>
+                                <div style={{ borderRadius: '10px', background: '#FF7506' }}>
                                     <Text>31,32%</Text>
                                 </div>
                             </Col>
@@ -167,7 +167,7 @@ const Chart: React.FC = () => {
                             </div>
                         </div>
                         <div style={{marginTop:'16px'}}>
-                            <Line {...config}/>
+                            {/* <Line {...config}/> */}
                         </div>
                     </Card>
                 </Col>
