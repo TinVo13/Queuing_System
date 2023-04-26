@@ -17,7 +17,7 @@ const AddService: React.FC = () => {
                 <Space direction='vertical'>
                     <Row>
                         <Col span={24}>
-                            <Text style={{ color: '#FF7506', fontSize: 24, fontWeight: 700 }}>Danh sách dịch vụ</Text>
+                            <Text className='label-h1' strong>Danh sách dịch vụ</Text>
                         </Col>
                     </Row>
                     <Row>
@@ -27,7 +27,7 @@ const AddService: React.FC = () => {
                                     <Card>
                                         <Space direction='vertical' style={{ width: '100%' }}>
                                             <Row>
-                                                <Text strong style={{color:'#FF7506'}}>Thông tin dịch vụ</Text>
+                                                <Text strong className='label-h2'>Thông tin dịch vụ</Text>
                                             </Row>
                                             <Row gutter={24}>
                                                 <Col span={12}>
@@ -68,7 +68,7 @@ const AddService: React.FC = () => {
                                                 </Col>
                                             </Row>
                                             <Row>
-                                                <Text style={{color:'#FF7506'}} strong>Quy tắt cấp số</Text>
+                                                <Text className='label-h2' strong>Quy tắt cấp số</Text>
                                             </Row>
                                             <Row gutter={10}>
                                                 <Col>

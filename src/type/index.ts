@@ -32,3 +32,13 @@ export interface UpdateServiceType {
     maDichVu: string,
     tenDichVu: string,
 }
+export interface NumberingType{
+    key: number,
+    stt: number,
+    tenKhachHang: string,
+    tenDichVu: string,
+    thoiGianCap: string,
+    hanSuDung: string,
+    trangThai: string,
+    nguonCap: string
+}

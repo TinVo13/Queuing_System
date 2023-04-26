@@ -3,6 +3,6 @@ import Login from "../pages/Login";
 
 const PrivateRoute = () => {
     const auth = 'tin';
-    return auth? <Outlet/> : <Login/>;
+    return (auth ? <Outlet/>: <Login/>);
 }
 export default PrivateRoute;

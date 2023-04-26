@@ -23,7 +23,7 @@ const UpdateService = () => {
                 <Space direction='vertical'>
                     <Row>
                         <Col span={24}>
-                            <Text style={{ color: '#FF7506', fontSize: 24, fontWeight: 700 }}>Danh sách thiết bị</Text>
+                            <Text className='label-h1' strong>Danh sách thiết bị</Text>
                         </Col>
                     </Row>
                     <Row>
@@ -33,7 +33,7 @@ const UpdateService = () => {
                                     <Card>
                                         <Space direction='vertical' style={{ width: '100%' }}>
                                             <Row>
-                                                <Text strong style={{color:'#FF7506'}}>Thông tin dịch vụ</Text>
+                                                <Text strong className='label-h2'>Thông tin dịch vụ</Text>
                                             </Row>
                                             <Row gutter={24}>
                                                 <Col span={12}>

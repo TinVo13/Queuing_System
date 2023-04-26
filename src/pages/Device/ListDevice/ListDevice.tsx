@@ -20,7 +20,7 @@ const ListDevice: React.FC = () => {
                 <Space direction='vertical'>
                     <Row>
                         <Col span={24}>
-                            <Text style={{ color: '#FF7506', fontSize: 24, fontWeight: 700 }}>Danh sách thiết bị</Text>
+                            <Text className='label-h1' strong>Danh sách thiết bị</Text>
                         </Col>
                     </Row>
                     <Row>
@@ -28,7 +28,7 @@ const ListDevice: React.FC = () => {
                             <Row justify={'space-between'}>
                                 <Space direction='horizontal'>
                                     <Space direction='vertical'>
-                                        <Text>Trạng thái hoạt động</Text>
+                                        <Text strong>Trạng thái hoạt động</Text>
                                         <Select
                                             size='large'
                                             defaultValue='tất cả'
@@ -47,7 +47,7 @@ const ListDevice: React.FC = () => {
                                             }]} />
                                     </Space>
                                     <Space direction='vertical'>
-                                        <Text>Trạng thái kết nối</Text>
+                                        <Text strong>Trạng thái kết nối</Text>
                                         <Select
                                             size='large'
                                             defaultValue='tất cả'
@@ -67,11 +67,10 @@ const ListDevice: React.FC = () => {
                                     </Space>
                                 </Space>
                                 <Space direction='vertical'>
-                                    <Text>Từ khóa</Text>
+                                    <Text strong>Từ khóa</Text>
                                     <Input size='large' type='text' placeholder='Nhập từ khóa' suffix={<SearchOutlined style={{ color: '#FF7506' }} />} style={{ width: '300px' }} />
                                 </Space>
                             </Row>
-
                         </Col>
                         <Col span={2}>
                         </Col>

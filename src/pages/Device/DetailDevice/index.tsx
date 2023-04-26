@@ -1,7 +1,6 @@
 import { Button, Card, Col, ConfigProvider, Row, Space, Typography } from 'antd'
 import Layout from 'antd/es/layout/layout'
 import React from 'react'
-import './index.css';
 import { EditOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom';
 
@@ -12,7 +11,7 @@ const DetailDevice: React.FC = () => {
     <Layout style={{ margin: 16, }}>
       <Row>
         <Col span={24}>
-          <Text className='device-manager'>Quản lý thiết bị</Text>
+          <Text className='label-h1' strong>Quản lý thiết bị</Text>
         </Col>
       </Row>
       <Row>
@@ -21,18 +20,18 @@ const DetailDevice: React.FC = () => {
             <Space direction='vertical' style={{ width: '100%', height: '60vh' }}>
               <Row>
                 <Col span={24}>
-                  <Text className='device-info'>Thông tin thiết bị</Text>
+                  <Text className='label-h2' strong>Thông tin thiết bị</Text>
                 </Col>
               </Row>
               <Row>
                 <Col span={4}>
-                  <Text className='text-device'>Mã thiết bị:</Text>
+                  <Text strong>Mã thiết bị:</Text>
                 </Col>
                 <Col span={8}>
                   <Text>KIO_01</Text>
                 </Col>
                 <Col span={4}>
-                  <Text className='text-device'>Loại thiết bị:</Text>
+                  <Text strong>Loại thiết bị:</Text>
                 </Col>
                 <Col span={8}>
                   <Text>Kiosk</Text>
@@ -40,13 +39,13 @@ const DetailDevice: React.FC = () => {
               </Row>
               <Row>
                 <Col span={4}>
-                  <Text className='text-device'>Tên thiết bị:</Text>
+                  <Text strong>Tên thiết bị:</Text>
                 </Col>
                 <Col span={8}>
                   <Text>Kiosk</Text>
                 </Col>
                 <Col span={4}>
-                  <Text className='text-device'>Tên đăng nhập:</Text>
+                  <Text strong>Tên đăng nhập:</Text>
                 </Col>
                 <Col span={8}>
                   <Text>Tin</Text>
@@ -54,13 +53,13 @@ const DetailDevice: React.FC = () => {
               </Row>
               <Row>
                 <Col span={4}>
-                  <Text className='text-device'>Địa chỉ IP:</Text>
+                  <Text strong>Địa chỉ IP:</Text>
                 </Col>
                 <Col span={8}>
                   <Text>192.168.0.10</Text>
                 </Col>
                 <Col span={4}>
-                  <Text className='text-device'>Mật khẩu:</Text>
+                  <Text strong>Mật khẩu:</Text>
                 </Col>
                 <Col span={8}>
                   <Text>abc123</Text>
@@ -68,7 +67,7 @@ const DetailDevice: React.FC = () => {
               </Row>
               <Row>
                 <Col span={24}>
-                  <Text className='text-device'>Dịch vụ sử dụng:</Text>
+                  <Text strong>Dịch vụ sử dụng:</Text>
                 </Col>
               </Row>
               <Row>

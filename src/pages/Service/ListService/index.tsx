@@ -20,13 +20,13 @@ const ListService = () => {
                 <Space direction='vertical'>
                     <Row>
                         <Col span={24}>
-                            <Text style={{ color: '#FF7506', fontSize: 24 }} strong>Quản lý dịch vụ</Text>
+                            <Text className='label-h1' strong>Quản lý dịch vụ</Text>
                         </Col>
                     </Row>
                     <Row>
                         <Col span={22}>
                             <Row justify={'space-between'}>
-                                <Space direction='horizontal'>
+                                <Space>
                                     <Space direction='vertical'>
                                         <Text strong>Trạng thái hoạt động</Text>
                                         <Select

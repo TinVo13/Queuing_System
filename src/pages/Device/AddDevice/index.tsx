@@ -15,16 +15,16 @@ const AddDevice: React.FC = () => {
           }
         }}>
         <div style={{ marginBottom: 16 }}>
-          <Text className='label-manager-device'>Quản lý thiết bị</Text>
+          <Text className='label-h1' strong>Quản lý thiết bị</Text>
         </div>
         <Form onFinish={()=>navigate('/device/list-device')}>
           <Card size='default'>
-            <Text className='label-device-info'>Thông tin thiết bị</Text>
+            <Text className='label-h2' strong>Thông tin thiết bị</Text>
             <Row gutter={24} style={{ marginTop: 10 }}>
               <Col span={12}>
                 <Space direction='vertical' style={{ width: '100%' }}>
                   <div>
-                    <Text className='label-field'>Nhập mã thiết bị: </Text>
+                    <Text strong>Nhập mã thiết bị: </Text>
                     <Text type='danger'>*</Text>
                   </div>
                   <Form.Item
@@ -40,7 +40,7 @@ const AddDevice: React.FC = () => {
               <Col span={12}>
                 <Space direction='vertical' style={{ width: '100%' }}>
                   <div>
-                    <Text className='label-field'>Loại thiết bị</Text>
+                    <Text strong>Loại thiết bị</Text>
                     <Text type='danger'>*</Text>
                   </div>
                   <Form.Item
@@ -61,7 +61,7 @@ const AddDevice: React.FC = () => {
               <Col span={12}>
                 <Space direction='vertical' style={{ width: '100%' }}>
                   <div>
-                    <Text className='label-field'>Tên thiết bị</Text>
+                    <Text strong>Tên thiết bị</Text>
                     <Text type='danger'>*</Text>
                   </div>
                   <Form.Item
@@ -77,14 +77,14 @@ const AddDevice: React.FC = () => {
               <Col span={12}>
                 <Space direction='vertical' style={{ width: '100%' }}>
                   <div>
-                    <Text className='label-field'>Tên tài khoản:</Text>
+                    <Text strong>Tên tài khoản:</Text>
                     <Text type='danger'>*</Text>
                   </div>
                   <Form.Item
                     name={'Tài khoản'}
                     rules={[{
                       required: true,
-                      message: 'Vui lòng nhập tên tài khoảng!'
+                      message: 'Vui lòng nhập tên tài khoản!'
                     }]}>
                     <Input type='text' placeholder='Nhập tài khoản' size='large' />
                   </Form.Item>
@@ -95,7 +95,7 @@ const AddDevice: React.FC = () => {
               <Col span={12}>
                 <Space direction='vertical' style={{ width: '100%' }}>
                   <div>
-                    <Text className='label-field'>Địa chỉ IP:</Text>
+                    <Text strong>Địa chỉ IP:</Text>
                     <Text type='danger'>*</Text>
                   </div>
                   <Form.Item
@@ -111,7 +111,7 @@ const AddDevice: React.FC = () => {
               <Col span={12}>
                 <Space direction='vertical' style={{ width: '100%' }}>
                   <div>
-                    <Text className='label-field'>Mật khẩu</Text>
+                    <Text strong>Mật khẩu</Text>
                     <Text type='danger'>*</Text>
                   </div>
                   <Form.Item
@@ -129,7 +129,7 @@ const AddDevice: React.FC = () => {
               <Col span={24}>
                 <Space direction='vertical' style={{width:'100%'}}>
                   <div>
-                    <Text className='label-field'>Dịch vụ sử dụng:</Text>
+                    <Text strong>Dịch vụ sử dụng:</Text>
                     <Text type='danger'>*</Text>
                   </div>
                   <Form.Item

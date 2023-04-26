@@ -1,4 +1,4 @@
-import { DetailServiceType, DeviceType } from "../type";
+import { DetailServiceType, DeviceType, NumberingType } from "../type";
 import { ServiceType } from "../type";
 
 export const DataDevice: DeviceType[] = [
@@ -236,5 +236,117 @@ export const DataDetailService: DetailServiceType[] = [
         key: 10,
         soThuTu: '20100001',
         trangThai: 'Đã hoàn thành'
+    },
+]
+export const DataListNumbeing:NumberingType[] = [
+    {
+        key: 1,
+        stt: 220001,
+        tenKhachHang: 'Võ Trung Tín',
+        tenDichVu: 'Khám tim mạch',
+        thoiGianCap: '14:35 - 07/11/2021',
+        hanSuDung: '14:35 - 12/11/2021',
+        trangThai: 'Đang chờ',
+        nguonCap: 'Kiosk'
+    },
+    {
+        key: 2,
+        stt: 220002,
+        tenKhachHang: 'Võ Trung Tín',
+        tenDichVu: 'Khám sản - Phụ khoa',
+        thoiGianCap: '14:35 - 07/11/2021',
+        hanSuDung: '14:35 - 12/11/2021',
+        trangThai: 'Đang chờ',
+        nguonCap: 'Kiosk'
+    },
+    {
+        key: 3,
+        stt: 220003,
+        tenKhachHang: 'Võ Trung Tín',
+        tenDichVu: 'Khám răng hàm mặt',
+        thoiGianCap: '14:35 - 07/11/2021',
+        hanSuDung: '14:35 - 12/11/2021',
+        trangThai: 'Đã sử dụng',
+        nguonCap: 'Kiosk'
+    },
+    {
+        key: 4,
+        stt: 220004,
+        tenKhachHang: 'Võ Trung Tín',
+        tenDichVu: 'Khám tai mũi họng',
+        thoiGianCap: '14:35 - 07/11/2021',
+        hanSuDung: '14:35 - 12/11/2021',
+        trangThai: 'Bỏ qua',
+        nguonCap: 'Kiosk'
+    },
+    {
+        key: 5,
+        stt: 220005,
+        tenKhachHang: 'Võ Trung Tín',
+        tenDichVu: 'Khám hô hấp',
+        thoiGianCap: '14:35 - 07/11/2021',
+        hanSuDung: '14:35 - 12/11/2021',
+        trangThai: 'Đã sử dụng',
+        nguonCap: 'Kiosk'
+    },
+    {
+        key: 6,
+        stt: 220006,
+        tenKhachHang: 'Võ Trung Tín',
+        tenDichVu: 'Khám tổng quát',
+        thoiGianCap: '14:35 - 07/11/2021',
+        hanSuDung: '14:35 - 12/11/2021',
+        trangThai: 'Đang chờ',
+        nguonCap: 'Kiosk'
+    },
+    {
+        key: 7,
+        stt: 220007,
+        tenKhachHang: 'Võ Trung Tín',
+        tenDichVu: 'Khám tim mạch',
+        thoiGianCap: '14:35 - 07/11/2021',
+        hanSuDung: '14:35 - 12/11/2021',
+        trangThai: 'Đang chờ',
+        nguonCap: 'Kiosk'
+    },
+    {
+        key: 8,
+        stt: 220008,
+        tenKhachHang: 'Võ Trung Tín',
+        tenDichVu: 'Khám tim mạch',
+        thoiGianCap: '14:35 - 07/11/2021',
+        hanSuDung: '14:35 - 12/11/2021',
+        trangThai: 'Bỏ qua',
+        nguonCap:'Kiosk'
+    },
+    {
+        key: 9,
+        stt: 220009,
+        tenKhachHang: 'Võ Trung Tín',
+        tenDichVu: 'Khám tim mạch',
+        thoiGianCap: '14:35 - 07/11/2021',
+        hanSuDung: '14:35 - 12/11/2021',
+        trangThai: 'Đã sử dụng',
+        nguonCap: 'Kiosk'
+    },
+    {
+        key: 10,
+        stt: 220010,
+        tenKhachHang: 'Võ Trung Tín',
+        tenDichVu: 'Khám tim mạch',
+        thoiGianCap: '14:35 - 07/11/2021',
+        hanSuDung: '14:35 - 12/11/2021',
+        trangThai: 'Đang chờ',
+        nguonCap: 'Kiosk'
+    },
+    {
+        key: 11,
+        stt: 220011,
+        tenKhachHang: 'Võ Trung Tín',
+        tenDichVu: 'Khám tim mạch',
+        thoiGianCap: '14:35 - 07/11/2021',
+        hanSuDung: '14:35 - 12/11/2021',
+        trangThai: 'Đang chờ',
+        nguonCap: 'Kiosk'
     },
 ]

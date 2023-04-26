@@ -67,6 +67,7 @@ const TableService: React.FC = () => {
                 pagination={{ pageSize: 9 }}
                 size='small'
                 bordered
+                rowClassName={(record, index) => (index%2===0 ? 'table-row-light' :  'table-row-dark')}
             />
         </ConfigProvider>
     )

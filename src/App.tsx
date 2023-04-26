@@ -19,6 +19,10 @@ import ListService from './pages/Service/ListService';
 import AddService from './pages/Service/AddService';
 import DetailService from './pages/Service/DetailService';
 import UpdateService from './pages/Service/UpdateService';
+import Numbering from './pages/Numbering';
+import ListNumbering from './pages/Numbering/ListNumbering';
+import AddNumbering from './pages/Numbering/AddNumbering';
+import DetailNumbering from './pages/Numbering/DetailNumbering';
 
 
 function App() {
@@ -27,8 +31,8 @@ function App() {
       <Fragment>
         <Routes>
           <Route path='/' Component={PrivateRoute}>
-            <Route path='' Component={PageContent}>
-              <Route path='/dashboard' Component={Dashboard}></Route>
+            <Route path='/' Component={PageContent}>
+              <Route path='/*' Component={Dashboard}></Route>
               <Route path='/device' Component={Device}>
                 <Route path='list-device' Component={ListDevice}></Route>
                 <Route path='list-device/add-device' Component={AddDevice}></Route>
@@ -40,6 +44,11 @@ function App() {
                 <Route path='list-service/add-service' Component={AddService}></Route>
                 <Route path='list-service/detail-service' Component={DetailService}></Route>
                 <Route path='list-service/update-service' Component={UpdateService}></Route>
+              </Route>
+              <Route path='/numbering' Component={Numbering}>
+                <Route path='list-numbering' Component={ListNumbering}></Route>
+                <Route path='list-numbering/add-numbering' Component={AddNumbering}></Route>
+                <Route path='list-numbering/detail-numbering' Component={DetailNumbering}></Route>
               </Route>
               <Route path='/report' Component={Report}></Route>
               <Route path='/userinfo' element={<UserInfo />} />

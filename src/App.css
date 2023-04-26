@@ -24,27 +24,35 @@ body{
   height: 48px;
   width: 147px;
 }
-.label-field {
-  font-size: 16;
-  font-weight: bold;
-}
-.label-manager-device {
-  font-size: 24px;
-  font-weight: bold;
-  color: #FF7506;
-}
-.label-device-info {
-  font-size: 20px;
-  color: #FF7506;
-  font-weight: bold;
-}
-
 .footer{
-    margin: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    background: #FF7506;
+    height: 1000;
 }
 .ant-table-thead .ant-table-cell {
   background-color: #FF9138 !important;
 }
 .ant-table-thead title{
   color: white;
+}
+.table-row-light {
+  background-color: #ffffff;
+}
+.table-row-dark {
+  background-color: #FFF2E7;
+}
+.label-h1{
+  color: #FF7506;
+  font-size: 24px;
+}
+.label-h2{
+  font-size: 20px;
+  color: #FF7506;
+}
+.btn-update{
+  height: 100px;
+  width: 90px;
+  background-color: #FFF2E7;
 }

@@ -93,6 +93,7 @@ const TableDevice: React.FC = () => {
                 columns={column}
                 pagination={{ pageSize: 5 }}
                 size='small'
+                rowClassName={(record, index) => (index%2===0 ? 'table-row-light' :  'table-row-dark')}
                 bordered
             />
         </ConfigProvider>

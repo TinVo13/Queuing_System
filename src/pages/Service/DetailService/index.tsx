@@ -127,7 +127,7 @@ const DetailService = () => {
                                     <Row gutter={24}>
                                         <Col span={6}>
                                             <Space direction='vertical'>
-                                                <Text>Trạng thái</Text>
+                                                <Text strong>Trạng thái</Text>
                                                 <Select
                                                     size='large'
                                                     style={{ width: 160 }}
@@ -141,7 +141,7 @@ const DetailService = () => {
                                         </Col>
                                         <Col span={10}>
                                             <Space direction='vertical'>
-                                                <Text>Chọn thời gian</Text>
+                                                <Text strong>Chọn thời gian</Text>
                                                 <RangePicker
                                                     size='large'
                                                     format={'DD/MM/YYYY'}
@@ -150,10 +150,10 @@ const DetailService = () => {
                                         </Col>
                                         <Col span={8}>
                                             <Space direction='vertical'>
-                                                <Text>Từ khóa</Text>
+                                                <Text strong>Từ khóa</Text>
                                                 <Input size='large' suffix={<SearchOutlined />} placeholder='Nhập từ khóa' />
                                             </Space>
-                                        </Col>
+                                        </Col>  
                                     </Row>
                                     <Row>
                                         <Col span={24}>

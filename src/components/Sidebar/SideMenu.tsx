@@ -29,7 +29,7 @@ const items: MenuItem[] = [
     getItem('Dashboard', '/dashboard', <PieChartOutlined />),
     getItem('Thiết bị', '/device/list-device', <DesktopOutlined />),
     getItem('Dịch vụ', '/service/list-service', <UserOutlined />,),
-    getItem('Cấp số', '/numbering', <LaptopOutlined />),
+    getItem('Cấp số', '/numbering/list-numbering', <LaptopOutlined />),
     getItem('Báo cáo', '/report', <LineChartOutlined />),
     getItem('Cài đặt hệ thống', 'sub1', <SettingOutlined />, [
         getItem('Quản lý vai trò', '6'),
