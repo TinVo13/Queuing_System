@@ -2,11 +2,11 @@
   display: flex;
   flex-direction: row;
 }
-body{
+body {
   margin: 0;
   padding: 0;
 }
-.SideMenuAndPageContent{
+.SideMenuAndPageContent {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -16,7 +16,7 @@ body{
   color: #ff9138;
   height: 48px;
   width: 147px;
-  border-color: #FF9138;
+  border-color: #ff9138;
 }
 .btn-submit {
   background-color: #ff9138;
@@ -24,35 +24,48 @@ body{
   height: 48px;
   width: 147px;
 }
-.footer{
-    display: flex;
-    justify-content: center;
-    align-items: end;
-    background: #FF7506;
-    height: 1000;
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background: #ff7506;
+  height: 1000;
 }
 .ant-table-thead .ant-table-cell {
-  background-color: #FF9138 !important;
+  background-color: #ff9138 !important;
 }
-.ant-table-thead title{
+.ant-table-thead title {
   color: white;
 }
 .table-row-light {
   background-color: #ffffff;
 }
 .table-row-dark {
-  background-color: #FFF2E7;
+  background-color: #fff2e7;
 }
-.label-h1{
-  color: #FF7506;
+.label-h1 {
+  color: #ff7506;
   font-size: 24px;
 }
-.label-h2{
+.label-h2 {
   font-size: 20px;
-  color: #FF7506;
+  color: #ff7506;
 }
-.btn-update{
+.btn-update {
   height: 100px;
   width: 90px;
-  background-color: #FFF2E7;
+  background-color: #fff2e7;
+}
+.label-number {
+  color: #ff7506;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 60px;
+}
+.label-title {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 48px;
+  letter-spacing: 0em;
+  text-align: left;
 }

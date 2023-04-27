@@ -48,7 +48,7 @@ const ForgotForm: FC = () => {
                 }
             }}>
             <ContainerStyle>
-                <Image src={require('../../image/logo.png')} width={200} preview={false} />
+                <Image src={require('../../assets/logo.png')} width={200} preview={false} />
                 <Typography.Title>Đặt lại mật khẩu</Typography.Title>
                 <Typography.Text>Vui lòng hập Email để đặt lại mật khẩu của bạn*</Typography.Text>
                 <FormStyle onFinish={onFinish}>
@@ -58,7 +58,7 @@ const ForgotForm: FC = () => {
                         <InputStyle type='email' minLength={10} placeholder='Example abc@gmail.com...'></InputStyle>
                     </FormItemStyle>
                     <FormItemStyle >
-                        <Button className='form-item-cancel'>Hủy</Button>
+                        <Button className='form-item-cancel' onClick={()=>navigate('/login')}>Hủy</Button>
                         <ButtonStyle htmlType='submit' className='form-item-continue'>Tiếp tục</ButtonStyle>
                     </FormItemStyle>
                 </FormStyle>

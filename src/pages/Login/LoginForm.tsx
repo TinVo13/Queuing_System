@@ -30,7 +30,7 @@ const LoginForm: React.FC = () => {
     const navigate = useNavigate();
     const onFinish = (values: any) => {
         console.log('Received values of form: ', values);
-        navigate('/');
+        navigate('/auth/dashboard');
     };
     return (
         <ConfigProvider
@@ -47,7 +47,7 @@ const LoginForm: React.FC = () => {
                     onFinish={onFinish}
                 >
                     <Form.Item style={{display: 'flex',justifyContent:'center',alignItems:'center' }}>
-                        <Image src={require('../../image/logo.png')} width={200} alt='hinh anh' preview={false}/>
+                        <Image src={require('../../assets/logo.png')} width={200} alt='hinh anh' preview={false}/>
                     </Form.Item>
                     Tên đăng nhập *
                     <Form.Item

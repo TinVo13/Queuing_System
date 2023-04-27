@@ -26,11 +26,11 @@ function getItem(
     } as MenuItem;
 }
 const items: MenuItem[] = [
-    getItem('Dashboard', '/dashboard', <PieChartOutlined />),
-    getItem('Thiết bị', '/device/list-device', <DesktopOutlined />),
-    getItem('Dịch vụ', '/service/list-service', <UserOutlined />,),
-    getItem('Cấp số', '/numbering/list-numbering', <LaptopOutlined />),
-    getItem('Báo cáo', '/report', <LineChartOutlined />),
+    getItem('Dashboard', '/auth/dashboard', <PieChartOutlined />),
+    getItem('Thiết bị', '/auth/device/list-device', <DesktopOutlined />),
+    getItem('Dịch vụ', '/auth/service/list-service', <UserOutlined />,),
+    getItem('Cấp số', '/auth/numbering/list-numbering', <LaptopOutlined />),
+    getItem('Báo cáo', '/auth/report', <LineChartOutlined />),
     getItem('Cài đặt hệ thống', 'sub1', <SettingOutlined />, [
         getItem('Quản lý vai trò', '6'),
         getItem('Quản lý tài khoản', '7'),
@@ -48,13 +48,13 @@ const SideMenu: React.FC = () => {
                 }}>
                 <div >
                     <div style={{ height: 100, margin: 16, display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
-                        <Image src={require('../../image/logowhite.png')} width={150} preview={false} />
+                        <Image src={require('../../assets/logowhite.png')} width={150} preview={false} />
                     </div>
                     <div style={{ height:'80vh',display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center'}}>
                         <div>
                             <Menu onClick={(item) => {
                                 navigate(item.key);
-                            }} theme="light" mode="vertical" items={items} defaultSelectedKeys={['/dashboard']} />
+                            }} theme="light" mode="vertical" items={items} defaultSelectedKeys={['/auth/dashboard']} />
                         </div>
                         <div>
                             <Button block type='primary' style={{ background: '#FFF2E7', color: '#FF7506' }} onClick={() => navigate('/login')}>Đăng xuất</Button>

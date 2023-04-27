@@ -4,7 +4,7 @@ import { SearchOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import TableService from '../../../components/Table/Service/TableService';
 
-const { Text, Paragraph } = Typography;
+const { Text } = Typography;
 const {RangePicker} = DatePicker;
 const ListService = () => {
     const navigate = useNavigate();
@@ -70,10 +70,10 @@ const ListService = () => {
                         <Col span={2}>
                             <Layout>
                                 <Row justify={'end'} align={'middle'}>
-                                    <Button style={{ background: '#FFF2E7', height: 94 }} onClick={() => navigate('/service/list-service/add-service')}>
+                                    <Button style={{ background: '#FFF2E7', height: 94 }} onClick={() => navigate('/auth/service/list-service/add-service')}>
                                         <Row justify={'center'}>
                                             <PlusCircleOutlined style={{display:'flex',justifyContent:'center',height:23,width:23,background:'#FF7506',color:'#FFF2E7',borderRadius:5}}/>
-                                            <Paragraph style={{ whiteSpace: 'initial' }}>Thêm dịch vụ</Paragraph>
+                                            <Text style={{ whiteSpace: 'initial' }}>Thêm dịch vụ</Text>
                                         </Row>
                                     </Button>
                                 </Row>

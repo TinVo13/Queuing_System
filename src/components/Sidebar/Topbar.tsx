@@ -20,7 +20,7 @@ const Topbar: React.FC = () => {
                 <Col span={5}>
                     <Row justify={'center'} align={'middle'}>
                         <Col md={6}>
-                            <Avatar size={'large'} icon={<UserOutlined />} onClick={() => navigate('/userinfo')} />
+                            <Avatar size={'large'} icon={<UserOutlined />} onClick={() => navigate('/auth/userinfo')} />
                         </Col>
                         <Col md={18}>
                             <Row>
@@ -28,7 +28,7 @@ const Topbar: React.FC = () => {
                                     <Typography.Text>Xin chào</Typography.Text>
                                 </Col>
                                 <Col>
-                                    <Typography.Text onClick={() => navigate('/userinfo')}>VoTrungTin</Typography.Text>
+                                    <Typography.Text onClick={() => navigate('/auth/userinfo')}>VoTrungTin</Typography.Text>
                                 </Col>
                             </Row>
                         </Col>

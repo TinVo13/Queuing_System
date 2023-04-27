@@ -167,7 +167,7 @@ const Chart: React.FC = () => {
                             </div>
                         </div>
                         <div style={{marginTop:'16px'}}>
-                            {/* <Line {...config}/> */}
+                            <Line {...config}/>
                         </div>
                     </Card>
                 </Col>

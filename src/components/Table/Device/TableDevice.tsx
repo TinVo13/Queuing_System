@@ -66,7 +66,7 @@ const TableDevice: React.FC = () => {
             key: 'chitiet',
             render: () => (
                 <Space>
-                    <NavLink to={'/device/list-device/detail-device'}>Chi tiết</NavLink>
+                    <NavLink to={'/auth/device/list-device/detail-device'}>Chi tiết</NavLink>
                 </Space>
             )
         },
@@ -75,7 +75,7 @@ const TableDevice: React.FC = () => {
             key: 'capnhat',
             render: () => (
                 <Space>
-                    <NavLink to={'/device/list-device/update-device'}>Cập nhật</NavLink>
+                    <NavLink to={'/auth/device/list-device/update-device'}>Cập nhật</NavLink>
                 </Space>
             )
         },

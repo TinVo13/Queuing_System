@@ -38,7 +38,7 @@ const column: ColumnsType<ServiceType> = [
         key: 'chitiet',
         render: () => (
             <Space>
-                <NavLink to={'/service/list-service/detail-service'}>Chi tiết</NavLink>
+                <NavLink to={'/auth/service/list-service/detail-service'}>Chi tiết</NavLink>
             </Space>
         )
     },
@@ -47,7 +47,7 @@ const column: ColumnsType<ServiceType> = [
         key: 'capnhat',
         render: () => (
             <Space>
-                <NavLink to={'/service/list-service/update-service'}>Cập nhật</NavLink>
+                <NavLink to={'/auth/service/list-service/update-service'}>Cập nhật</NavLink>
             </Space>
         )
     },

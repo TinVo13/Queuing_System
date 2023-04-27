@@ -1,5 +1,5 @@
 import React from 'react'
-import { Badge, Button, Checkbox, Col, ConfigProvider, DatePicker, Input, Layout, Row, Select, Space, Table, Typography } from 'antd'
+import { Badge, Button, Col, ConfigProvider, DatePicker, Input, Layout, Row, Select, Space, Table, Typography } from 'antd'
 import { SearchOutlined, ArrowRightOutlined, PlusCircleOutlined } from '@ant-design/icons'
 import { NumberingType } from '../../../type'
 import { ColumnsType } from 'antd/es/table'
@@ -39,9 +39,9 @@ const column: ColumnsType<NumberingType> = [
         key: 'trangThai',
         render: (_, record) => (
             <Space>
-                {record.trangThai === 'Đang chờ' && <Badge status='processing' text={record.trangThai}/>
-                ||record.trangThai === 'Đã sử dụng' && <Badge status='default' text={record.trangThai}/>
-                ||record.trangThai === 'Bỏ qua' && <Badge status='error' text={record.trangThai}/>}
+                {record.trangThai === 'Đang chờ' && <Badge status='processing' text={record.trangThai} />}
+                {record.trangThai === 'Bỏ qua' && <Badge status='error' text={record.trangThai} />}
+                {record.trangThai === 'Đã sử dụng' && <Badge status='default' text={record.trangThai} />}
             </Space>
         )
     },
@@ -53,7 +53,7 @@ const column: ColumnsType<NumberingType> = [
     {
         title: '',
         render: (_, record) => (
-            <NavLink to={'/numbering/list-numbering/detail-numbering'}>Chi tiết</NavLink>
+            <NavLink to={'/auth/numbering/list-numbering/detail-numbering'}>Chi tiết</NavLink>
         )
     }
 ]
@@ -67,10 +67,11 @@ const ListNumbering: React.FC = () => {
                 token: {
                     colorPrimary: '#FF7506',
                     colorBorderSecondary: '#FFE3CD',
+                    colorBorder: '#FFF2E7'
                 },
-                components:{
-                    Badge:{
-                        colorPrimary:'blue',
+                components: {
+                    Badge: {
+                        colorPrimary: 'blue',
                     }
                 }
             }}>
@@ -152,10 +153,10 @@ const ListNumbering: React.FC = () => {
                         <Col span={2}>
                             <Layout>
                                 <Row justify={'end'} align={'middle'}>
-                                    <Button style={{ background: '#FFF2E7', height: 94 }} onClick={() => navigate('/numbering/list-numbering/add-numbering')} type='ghost'>
+                                    <Button style={{ background: '#FFF2E7', height: 94 }} onClick={() => navigate('/auth/numbering/list-numbering/add-numbering')}>
                                         <Row justify={'center'}>
                                             <PlusCircleOutlined style={{ display: 'flex', justifyContent: 'center', height: 23, width: 23, background: '#FF7506', color: '#FFF2E7', borderRadius: 5 }} />
-                                            <Text style={{ whiteSpace: 'initial' }}>Cấp số mới</Text>
+                                            <Text style={{ whiteSpace: 'initial' }}>Thêm số mới</Text>
                                         </Row>
                                     </Button>
                                 </Row>

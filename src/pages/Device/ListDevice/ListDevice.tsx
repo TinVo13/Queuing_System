@@ -1,10 +1,10 @@
 import { Button, Col, ConfigProvider, Input, Layout, Row, Select, Space, Typography } from 'antd'
 import React from 'react'
-import { SearchOutlined, PlusCircleTwoTone } from '@ant-design/icons'
+import { SearchOutlined, PlusCircleOutlined } from '@ant-design/icons'
 import TableDevice from '../../../components/Table/Device/TableDevice';
 import { useNavigate } from 'react-router-dom';
 
-const { Text, Paragraph } = Typography;
+const { Text } = Typography;
 
 const ListDevice: React.FC = () => {
     const navigate = useNavigate();
@@ -82,11 +82,11 @@ const ListDevice: React.FC = () => {
                         <Col span={2}>
                             <Layout>
                                 <Row justify={'end'} align={'middle'}>
-                                    <Button style={{ background: '#FFF2E7', height: 94 }} onClick={() => navigate('/device/list-device/add-device')}>
-                                        <Space direction='vertical'>
-                                            <PlusCircleTwoTone twoToneColor={'#FF7506'} size={100} />
-                                            <Paragraph style={{ whiteSpace: 'initial' }}>Thêm thiết bị</Paragraph>
-                                        </Space>
+                                    <Button style={{ background: '#FFF2E7', height: 94 }} onClick={() => navigate('/auth/device/list-device/add-device')}>
+                                        <Row justify={'center'}>
+                                            <PlusCircleOutlined style={{ display: 'flex', justifyContent: 'center', height: 23, width: 23, background: '#FF7506', color: '#FFF2E7', borderRadius: 5 }} />
+                                            <Text style={{ whiteSpace: 'initial' }}>Thêm thiết bị</Text>
+                                        </Row>
                                     </Button>
                                 </Row>
                             </Layout>

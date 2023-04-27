@@ -30,7 +30,7 @@ const FormContent = () => {
   const navigate = useNavigate();
   const onFinish = (values: any) => {
     console.log('Received values of form: ', values);
-    navigate('/');
+    navigate('/auth/dashboard');
   };
   return (
     <ConfigProvider
@@ -41,7 +41,7 @@ const FormContent = () => {
         }
       }}>
       <DivStyle>
-        <Image alt='hinh anh' src={require('../../image/logo.png')} width={200} preview={false} />
+        <Image alt='hinh anh' src={require('../../assets/logo.png')} width={200} preview={false} />
         <Form
           name="normal_login"
           className="login-form"

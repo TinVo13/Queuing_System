@@ -4,7 +4,7 @@ import React from 'react';
 const ImageContent = () => {
   return (
     <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
-      <Image src={require('../../image/reset.png')} preview={false}/>
+      <Image src={require('../../assets/reset.png')} preview={false}/>
     </div>
   )
 }

@@ -3,7 +3,7 @@ import PageContent from './pages/PageContent';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Login from './pages/Login';
-import PrivateRoute from './AppRoutes/PrivateRoute';
+import PrivateRoute from './route/PrivateRoute';
 import Dashboard from './pages/Dashboard';
 import ResetPassword from './pages/ResetPassword';
 import ForgotPassword from './pages/ForgotPassword';
@@ -23,6 +23,7 @@ import Numbering from './pages/Numbering';
 import ListNumbering from './pages/Numbering/ListNumbering';
 import AddNumbering from './pages/Numbering/AddNumbering';
 import DetailNumbering from './pages/Numbering/DetailNumbering';
+import NumberingWithoutLogin from './pages/Numbering/NumberingWithoutLogin';
 
 
 function App() {
@@ -31,29 +32,30 @@ function App() {
       <Fragment>
         <Routes>
           <Route path='/' Component={PrivateRoute}>
-            <Route path='/' Component={PageContent}>
-              <Route path='/*' Component={Dashboard}></Route>
-              <Route path='/device' Component={Device}>
+            <Route path='/auth' Component={PageContent}>
+              <Route path='dashboard' Component={Dashboard}></Route>
+              <Route path='device' Component={Device}>
                 <Route path='list-device' Component={ListDevice}></Route>
                 <Route path='list-device/add-device' Component={AddDevice}></Route>
                 <Route path='list-device/detail-device' Component={DetailDevice}></Route>
                 <Route path='list-device/update-device' Component={UpdateDevice}></Route>
               </Route>
-              <Route path='/service' Component={Service}>
+              <Route path='service' Component={Service}>
                 <Route path='list-service' Component={ListService}></Route>
                 <Route path='list-service/add-service' Component={AddService}></Route>
                 <Route path='list-service/detail-service' Component={DetailService}></Route>
                 <Route path='list-service/update-service' Component={UpdateService}></Route>
               </Route>
-              <Route path='/numbering' Component={Numbering}>
+              <Route path='numbering' Component={Numbering}>
                 <Route path='list-numbering' Component={ListNumbering}></Route>
                 <Route path='list-numbering/add-numbering' Component={AddNumbering}></Route>
                 <Route path='list-numbering/detail-numbering' Component={DetailNumbering}></Route>
               </Route>
-              <Route path='/report' Component={Report}></Route>
-              <Route path='/userinfo' element={<UserInfo />} />
+              <Route path='report' Component={Report}></Route>
+              <Route path='userinfo' element={<UserInfo />} />
             </Route>
           </Route>
+          <Route path='/numbering' Component={NumberingWithoutLogin}></Route>
           <Route path='/login' element={<Login />} />
           <Route path='/reset-password' element={<ResetPassword />} />
           <Route path='/forgot-password' element={<ForgotPassword />} />

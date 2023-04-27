@@ -22,7 +22,7 @@ const AddService: React.FC = () => {
                     </Row>
                     <Row>
                         <Col span={24}>
-                            <Form onFinish={()=>navigate('/service/list-service')}>
+                            <Form onFinish={()=>navigate('/auth/service/list-service')}>
                                 <Space direction='vertical' size={'large'} style={{ width: '100%' }}>
                                     <Card>
                                         <Space direction='vertical' style={{ width: '100%' }}>
@@ -126,7 +126,7 @@ const AddService: React.FC = () => {
                                     <Row justify={'center'} align={'middle'}>
                                         <Space>
                                             <Form.Item>
-                                                <Button className='btn-cancel' onClick={()=>navigate('/service/list-service')}>Hủy bỏ</Button>
+                                                <Button className='btn-cancel' onClick={()=>navigate('/auth/service/list-service')}>Hủy bỏ</Button>
                                             </Form.Item>
                                             <Form.Item>
                                                 <Button htmlType='submit' className='btn-submit'>Thêm dịch vụ</Button>

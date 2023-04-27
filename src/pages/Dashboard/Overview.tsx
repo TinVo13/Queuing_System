@@ -1,4 +1,4 @@
-import { Calendar, Card, Col, ConfigProvider, Progress, Row, Typography, theme,DatePicker } from 'antd'
+import { Calendar, Card, Col, ConfigProvider, Progress, Row, Typography, theme, DatePicker, Badge } from 'antd'
 import React from 'react';
 import { TabletTwoTone, MessageTwoTone, DiffTwoTone } from '@ant-design/icons'
 
@@ -45,19 +45,19 @@ const Overview: React.FC = () => {
                                 <Row>
                                     <Col span={24}>
                                         <TabletTwoTone twoToneColor={'#FF7506'} />
-                                        <Text style={{color:'#FF7506'}}>Thiết bị</Text>
+                                        <Text style={{ color: '#FF7506' }}>Thiết bị</Text>
                                     </Col>
                                 </Row>
                             </Col>
                             <Col span={9}>
                                 <Row>
                                     <Col span={24}>
-                                        <Text>Đang hoạt động</Text>
+                                        <Badge status='warning' text='Đang hoạt động' />
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col span={24}>
-                                        <Text>Ngưng hoạt động</Text>
+                                        <Badge status='default' text='Ngưng hoạt động' />
                                     </Col>
                                 </Row>
                             </Col>
@@ -102,12 +102,12 @@ const Overview: React.FC = () => {
                             <Col span={9}>
                                 <Row>
                                     <Col span={24}>
-                                        <Text>Đang hoạt động</Text>
+                                        <Badge status='processing' text='Đang hoạt động' />
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col span={24}>
-                                        <Text>Ngưng hoạt động</Text>
+                                        <Badge status='default' text='Ngưng hoạt động' />
                                     </Col>
                                 </Row>
                             </Col>
@@ -152,17 +152,17 @@ const Overview: React.FC = () => {
                             <Col span={9}>
                                 <Row>
                                     <Col span={24}>
-                                        <Text>Đã sử dụng</Text>
+                                        <Badge status='success' text='Đã sử dụng' />
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col span={24}>
-                                        <Text>Đang chờ</Text>
+                                        <Badge status='default' text='Đang chờ' />
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col span={24}>
-                                        <Text>Bỏ qua</Text>
+                                        <Badge status='error' text='Bỏ qua' />
                                     </Col>
                                 </Row>
                             </Col>
@@ -188,7 +188,7 @@ const Overview: React.FC = () => {
                 </Col>
             </Row>
             <Row>
-                <Card size='default' style={{height:'100%'}}>
+                <Card size='default' style={{ height: '100%' }}>
                     <ConfigProvider
                         theme={{
                             token: {
@@ -196,7 +196,7 @@ const Overview: React.FC = () => {
                             },
                         }}
                     >
-                        <DatePicker format={'DD/MM/YYYY'} showToday={false} placement='bottomRight'/>
+                        <DatePicker format={'DD/MM/YYYY'} showToday={false} placement='bottomLeft' />
                     </ConfigProvider>
                 </Card>
             </Row>
