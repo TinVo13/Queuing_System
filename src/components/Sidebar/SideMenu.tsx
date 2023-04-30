@@ -32,9 +32,9 @@ const items: MenuItem[] = [
     getItem('Cấp số', '/auth/numbering/list-numbering', <LaptopOutlined />),
     getItem('Báo cáo', '/auth/report', <LineChartOutlined />),
     getItem('Cài đặt hệ thống', 'sub1', <SettingOutlined />, [
-        getItem('Quản lý vai trò', '6'),
-        getItem('Quản lý tài khoản', '7'),
-        getItem('Nhật ký người dùng', '8')]),
+        getItem('Quản lý vai trò', '/auth/system-setting/list-role'),
+        getItem('Quản lý tài khoản', '/auth/system-setting/list-account'),
+        getItem('Nhật ký người dùng', '/auth/system-setting/list-userlog')]),
 ];
 const SideMenu: React.FC = () => {
     const navigate = useNavigate();

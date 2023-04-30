@@ -1,37 +1,12 @@
-import { Card, Col, ConfigProvider, Form, Input, Row, Select, Space, Typography, SelectProps, Button } from 'antd';
+import { Card, Col, ConfigProvider, Form, Input, Row, Select, Space, Typography, Button } from 'antd';
 import Layout from 'antd/es/layout/layout';
 import React from 'react'
 import TagRender from '../../../components/CustomTag';
 import { useNavigate } from 'react-router-dom';
 import { UpdateDeviceType } from '../../../type';
+import { SelectionService } from '../../../components/Selection/ItemSelection';
 
 const { Text } = Typography;
-const options: SelectProps['options'] = [
-  {
-    label: 'Khám tim mạch',
-    value: 'khám tim mạch'
-  },
-  {
-    label: 'Khám sản phụ khoa',
-    value: 'khám sản phụ khoa'
-  },
-  {
-    label: 'Khám răng hàm mặt',
-    value: 'khám răng hàm mặt'
-  },
-  {
-    label: 'Khám tai mũi họng',
-    value: 'khám tai mũi họng'
-  },
-  {
-    label: 'Khám hô hấp',
-    value: 'khám hô hấp'
-  },
-  {
-    label: 'Khám tổng quát',
-    value: 'khám tổng quát'
-  }
-]
 
 const initialValue: UpdateDeviceType = {
   maThietBi: 'KIO_01',
@@ -183,7 +158,7 @@ const UpdateDevice: React.FC = () => {
                                 allowClear
                                 style={{ width: '100%' }}
                                 placeholder='Chọn một dịch vụ'
-                                options={options}
+                                options={SelectionService}
                               />
                             </Form.Item>
                           </Space>

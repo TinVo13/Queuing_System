@@ -5,6 +5,7 @@ import { NumberingType } from '../../../type'
 import { ColumnsType } from 'antd/es/table'
 import { DataListNumbeing } from '../../../data'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { SelectionService } from '../../../components/Selection/ItemSelection'
 
 
 const column: ColumnsType<NumberingType> = [
@@ -75,26 +76,22 @@ const ListNumbering: React.FC = () => {
                     }
                 }
             }}>
-            <Layout style={{ margin: '16px', }}>
+            <Layout>
                 <Space direction='vertical'>
                     <Row>
-                        <Text style={{ color: '#FF7506', fontSize: 24 }} strong>Quản lý cấp số</Text>
+                        <Col span={22} style={{paddingLeft:16}}>
+                            <Text className='label-h1' strong>Quản lý cấp số</Text>
+                        </Col>
+                        <Col span={2}></Col>
                     </Row>
                     <Row>
-                        <Col span={22}>
+                        <Col span={22} style={{ paddingLeft: 16 }}>
                             <Row justify={'space-between'}>
                                 <Space direction='vertical'>
                                     <Text strong>Tên dịch vụ</Text>
                                     <Select
                                         size='large'
-                                        options={[
-                                            { label: 'Tất cả', value: 'tất cả' },
-                                            { label: 'Khám tim mạch', value: 'khám tim mạch' },
-                                            { label: 'Khám sản - Phụ khoa', value: 'khám sản - phụ khoa' },
-                                            { label: 'Khám răng hàm mặt', value: 'khám răng hàm mặt' },
-                                            { label: 'Khám tai mũi họng', value: 'khám tai mũi họng' },
-                                            { label: 'Khám hô hấp', value: 'khám hô hấp' },
-                                            { label: 'Khám tổng quát', value: 'khám tổng quát' }]}
+                                        options={SelectionService}
                                         defaultValue={'Tất cả'}
                                         style={{ width: 150 }} />
                                 </Space>
@@ -139,21 +136,21 @@ const ListNumbering: React.FC = () => {
                         </Col>
                         <Col span={2}></Col>
                     </Row>
-                    <Row gutter={24}>
-                        <Col span={22}>
+                    <Row >
+                        <Col span={22} style={{ paddingLeft: 16 }}>
                             <Table
                                 dataSource={DataListNumbeing}
                                 columns={column}
                                 pagination={{ pageSize: 9 }}
                                 bordered
                                 tableLayout='auto'
-                                size='small'
+                                size='middle'
                                 rowClassName={(record, index) => (index % 2 === 0 ? 'table-row-light' : 'table-row-dark')} />
                         </Col>
                         <Col span={2}>
                             <Layout>
                                 <Row justify={'end'} align={'middle'}>
-                                    <Button style={{ background: '#FFF2E7', height: 94 }} onClick={() => navigate('/auth/numbering/list-numbering/add-numbering')}>
+                                    <Button style={{ background: '#FFF2E7', height: 94, width: 80 }} onClick={() => navigate('/auth/numbering/list-numbering/add-numbering')}>
                                         <Row justify={'center'}>
                                             <PlusCircleOutlined style={{ display: 'flex', justifyContent: 'center', height: 23, width: 23, background: '#FF7506', color: '#FFF2E7', borderRadius: 5 }} />
                                             <Text style={{ whiteSpace: 'initial' }}>Thêm số mới</Text>

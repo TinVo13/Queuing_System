@@ -32,7 +32,7 @@ export interface UpdateServiceType {
     maDichVu: string,
     tenDichVu: string,
 }
-export interface NumberingType{
+export interface NumberingType {
     key: number,
     stt: number,
     tenKhachHang: string,
@@ -41,4 +41,38 @@ export interface NumberingType{
     hanSuDung: string,
     trangThai: string,
     nguonCap: string
+}
+export interface ReportType {
+    key: number,
+    stt: number,
+    tenDichVu: string,
+    thoiGianCap: string,
+    tinhTrang: string,
+    nguonCap: string
+}
+export interface Options {
+    label: string,
+    value: string
+}
+export interface RoleType {
+    key: number,
+    tenVaiTro: string,
+    soNguoiDung: number,
+    moTa: string
+}
+export interface AccountType {
+    key: number,
+    tenDangNhap: string,
+    hoTen: string,
+    soDienThoai: string,
+    email: string,
+    vaiTro: string,
+    trangThaiHoatDong: string
+}
+export interface UserLogType{
+    key:number,
+    tenDangNhap:string,
+    thoiGianTacDong:string,
+    ipThucHien:string,
+    thaoTacThucHien:string
 }

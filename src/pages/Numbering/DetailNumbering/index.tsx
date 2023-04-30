@@ -14,7 +14,6 @@ const DetailNumbering: React.FC = () => {
         token: {
           colorPrimary: '#FF9138',
           colorBorder: '#FFF2E7',
-          colorBorderSecondary: '#FFE3CD',
         },
         components: {
           Badge: {
@@ -24,14 +23,14 @@ const DetailNumbering: React.FC = () => {
       }}>
       <Layout>
         <Space direction='vertical'>
-          <Row justify={'space-evenly'}>
-            <Col span={21}>
+          <Row>
+            <Col span={22}>
               <Text className='label-h1' strong>Quản lý cấp số</Text>
             </Col>
             <Col span={2}></Col>
           </Row>
           <Row>
-            <Col span={22} style={{ padding: '0 16px' }}>
+            <Col span={22} style={{ paddingLeft: 16 }}>
               <Card style={{ height: '80vh' }}>
                 <Space direction='vertical' style={{ width: '100%' }}>
                   <Text className='label-h2' strong>Thông tin cấp số</Text>
@@ -123,7 +122,7 @@ const DetailNumbering: React.FC = () => {
             <Col span={2}>
               <Row justify={'end'} align={'middle'}>
                 <Button
-                  style={{ height: 75, width: 100,background:'#FFF2E7'}}
+                  style={{ height: 75, width: 80,background:'#FFF2E7'}}
                   onClick={()=>navigate('/auth/numbering/list-numbering')}>
                   <Row justify={'center'} align={'middle'}>
                     <RollbackOutlined style={{ background: '#FF9138', padding: 5, borderRadius: 8, color: 'white' }} />
@@ -131,7 +130,6 @@ const DetailNumbering: React.FC = () => {
                   </Row>
                 </Button>
               </Row>
-
             </Col>
           </Row>
         </Space>

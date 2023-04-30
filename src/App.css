@@ -33,9 +33,7 @@ body {
 }
 .ant-table-thead .ant-table-cell {
   background-color: #ff9138 !important;
-}
-.ant-table-thead title {
-  color: white;
+  color: white !important;
 }
 .table-row-light {
   background-color: #ffffff;

@@ -16,7 +16,7 @@ const ListService = () => {
                     colorBorder: '#FFF2E7'
                 }
             }}>
-            <Layout style={{ margin: '16px', }}>
+            <Layout style={{ margin: '0 16px', }}>
                 <Space direction='vertical'>
                     <Row>
                         <Col span={24}>
