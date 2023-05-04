@@ -53,7 +53,7 @@ const AddNumbering: React.FC = () => {
                   <Row justify={'center'} align={'middle'} gutter={24}>
                     <Space>
                       <Form.Item>
-                        <Button className='btn-cancel' onClick={() => navigate('/auth/numbering/list-numbering')}>Hủy bỏ</Button>
+                        <Button className='btn-cancel' onClick={() => navigate('/numbering/list-numbering')}>Hủy bỏ</Button>
                       </Form.Item>
                       <Form.Item>
                         <Button htmlType='submit' className='btn-submit'>In số</Button>

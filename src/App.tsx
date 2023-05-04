@@ -40,7 +40,7 @@ function App() {
       <Fragment>
         <Routes>
           <Route path='/' Component={PrivateRoute}>
-            <Route path='/auth' Component={PageContent}>
+            <Route path='/' Component={PageContent}>
               <Route path='dashboard' Component={Dashboard}></Route>
               <Route path='device' Component={Device}>
                 <Route path='list-device' Component={ListDevice}></Route>

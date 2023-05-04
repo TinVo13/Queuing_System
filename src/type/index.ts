@@ -1,11 +1,11 @@
 export interface DeviceType {
     key: number;
-    mathietbi: string;
-    tenthietbi: string;
-    diachiip: string;
-    trangthaihoatdong: string;
-    trangthaiketnoi: string;
-    dichvusudung: string;
+    maThietBi: string;
+    tenThietBi: string;
+    diaChiIP: string;
+    trangThaiHoatDong: string;
+    trangThaiKetNoi: string;
+    dichVuSuDung: string;
 }
 export interface UpdateDeviceType {
     maThietBi: string,

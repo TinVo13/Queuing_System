@@ -154,7 +154,7 @@ const DetailService = () => {
                         <Col span={2}>
                             <Layout>
                                 <Row justify={'end'} align={'middle'}>
-                                    <Button style={{ background: '#FFF2E7', height: 94, width: 100 }} onClick={() => navigate('/auth/service/list-service/update-service')} type='ghost'>
+                                    <Button style={{ background: '#FFF2E7', height: 94, width: 100 }} onClick={() => navigate('/service/list-service/update-service')} type='ghost'>
                                         <Row justify={'center'}>
                                             <EditOutlined style={style} />
                                             <Text style={{ whiteSpace: 'initial', color: '#FF7506' }}>Cập nhật danh sách</Text>
@@ -162,7 +162,7 @@ const DetailService = () => {
                                     </Button>
                                 </Row>
                                 <Row justify={'end'} align={'middle'}>
-                                    <Button style={{ background: '#FFF2E7', height: 94, width: 100 }} onClick={() => navigate('/auth/service/list-service')} type='ghost'>
+                                    <Button style={{ background: '#FFF2E7', height: 94, width: 100 }} onClick={() => navigate('/service/list-service')} type='ghost'>
                                         <Row justify={'center'}>
                                             <RollbackOutlined style={style} />
                                             <Text style={{ whiteSpace: 'initial', color: '#FF7506' }}>Quay lại</Text>

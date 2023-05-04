@@ -39,7 +39,7 @@ const UpdateDevice: React.FC = () => {
               <Col span={22}>
                 <Form
                   size='middle'
-                  onFinish={() => navigate('/auth/device/list-device')}
+                  onFinish={() => navigate('/device/list-device')}
                   initialValues={initialValue}
                 >
                   <Space direction='vertical' size={'large'} style={{ width: '100%' }}>
@@ -174,7 +174,7 @@ const UpdateDevice: React.FC = () => {
                     <Row justify={'center'} align={'middle'}>
                       <Space>
                         <Form.Item>
-                          <Button className='btn-cancel' onClick={() => navigate('/auth/device/list-device')}>Hủy bỏ</Button>
+                          <Button className='btn-cancel' onClick={() => navigate('/device/list-device')}>Hủy bỏ</Button>
                         </Form.Item>
                         <Form.Item>
                           <Button htmlType='submit' className='btn-submit' type='ghost'>Cập nhật</Button>

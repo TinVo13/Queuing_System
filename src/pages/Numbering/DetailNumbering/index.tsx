@@ -24,7 +24,7 @@ const DetailNumbering: React.FC = () => {
       <Layout>
         <Space direction='vertical'>
           <Row>
-            <Col span={22}>
+            <Col span={22} style={{paddingLeft:16}}>
               <Text className='label-h1' strong>Quản lý cấp số</Text>
             </Col>
             <Col span={2}></Col>
@@ -123,7 +123,7 @@ const DetailNumbering: React.FC = () => {
               <Row justify={'end'} align={'middle'}>
                 <Button
                   style={{ height: 75, width: 80,background:'#FFF2E7'}}
-                  onClick={()=>navigate('/auth/numbering/list-numbering')}>
+                  onClick={()=>navigate('/numbering/list-numbering')}>
                   <Row justify={'center'} align={'middle'}>
                     <RollbackOutlined style={{ background: '#FF9138', padding: 5, borderRadius: 8, color: 'white' }} />
                     <Text style={{color:'#FF9138'}}>Quay lại</Text>

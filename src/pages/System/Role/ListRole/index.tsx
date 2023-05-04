@@ -29,7 +29,7 @@ const columns: ColumnsType<RoleType> = [
         key: 'capNhat',
         render: () => (
             <Space>
-                <NavLink to={'/auth/system-setting/list-role/update-role'}>Cập nhật</NavLink>
+                <NavLink to={'/system-setting/list-role/update-role'}>Cập nhật</NavLink>
             </Space>
         )
     }
@@ -37,7 +37,7 @@ const columns: ColumnsType<RoleType> = [
 const ListRole: React.FC = () => {
     const navigate = useNavigate();
     const handleAddRole = () => {
-        navigate('/auth/system-setting/list-role/add-role');
+        navigate('/system-setting/list-role/add-role');
     }
     return (
         <ConfigProvider

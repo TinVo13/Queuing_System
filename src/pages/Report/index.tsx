@@ -1,7 +1,8 @@
 import React from 'react'
-import { Button, Col, ConfigProvider, DatePicker, Layout, Row, Space, Typography } from 'antd'
+import { Button, Col, ConfigProvider, DatePicker, Layout, Row, Space, Table, Typography } from 'antd'
 import { DownloadOutlined } from '@ant-design/icons';
-import TableReport from '../../components/Table/Report/TableReport';
+import { DataReport } from '../../data';
+import { ColumnTableReport } from '../../components/Table/ColumnTable';
 
 const { Text } = Typography;
 const { RangePicker } = DatePicker;
@@ -10,8 +11,16 @@ const Report: React.FC = () => {
   return (
     <ConfigProvider
       theme={{
+        inherit:false,
         token: {
-          colorPrimary: '#FF9138'
+          colorPrimary: '#FF9138',
+          colorBorder: '#FFF2E7',
+          colorBorderSecondary: '#FFE3CD',
+        },
+        components: {
+          Badge: {
+            colorPrimary: '#4277FF'
+          }
         }
       }}>
       <Layout>
@@ -27,7 +36,13 @@ const Report: React.FC = () => {
           </Row>
           <Row justify={'space-evenly'}>
             <Col span={22} style={{ paddingLeft: 16 }}>
-              <TableReport />
+              <Table
+                size='middle'
+                dataSource={DataReport}
+                columns={ColumnTableReport}
+                pagination={{ pageSize: 10 }}
+                rowClassName={(record, index) => (index % 2 === 0 ? 'table-row-light' : 'table-row-dark')}
+                bordered />
             </Col>
             <Col span={2}>
               <Layout>

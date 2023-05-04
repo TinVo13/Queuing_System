@@ -1,19 +1,112 @@
-import { Button, Col, ConfigProvider, Input, Layout, Row, Select, Space, Typography } from 'antd'
-import React from 'react'
+import { Badge, Button, Col, ConfigProvider, Input, Layout, Row, Select, Space, Table, Typography } from 'antd'
+import React, { useState } from 'react'
 import { SearchOutlined, PlusCircleOutlined } from '@ant-design/icons'
-import TableDevice from '../../../components/Table/Device/TableDevice';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { DataDevice } from '../../../data';
+import { ColumnsType } from 'antd/es/table';
+import { DeviceType } from '../../../type';
 
-const { Text } = Typography;
+const { Text,Paragraph } = Typography;
 
 const ListDevice: React.FC = () => {
     const navigate = useNavigate();
+    const [ellipsis, setEllipsis] = useState(true);// eslint-disable-next-line
+    const [searchText,setSearchText] = useState("");
+    const [searchSelection, setSearchSelection] = useState("tất cả");
+    const [connectSelection, setConnectSelection] = useState("tất cả");
+    const columns: ColumnsType<DeviceType> = [
+        {
+            title: 'Mã thiết bị',
+            dataIndex: 'maThietBi',
+            key: 'maThietBi',
+            filteredValue:[searchText],
+            onFilter:(value:any,record)=>{
+                return String(record.tenThietBi).toLowerCase().includes(value.toLowerCase())||
+                String(record.maThietBi).toLowerCase().includes(value.toLowerCase())||
+                String(record.diaChiIP).toLowerCase().includes(value.toLowerCase())||
+                String(record.dichVuSuDung).toLowerCase().includes(value.toLowerCase());
+            }
+        },
+        {
+            title: 'Tên thiết bị',
+            dataIndex: 'tenThietBi',
+            key: 'tenThietBi',
+        },
+        {
+            title: 'Địa chỉ IP',
+            dataIndex: 'diaChiIP',
+            key: 'diaChiIP',
+        },
+        {
+            title: 'Trạng thái hoạt động',
+            dataIndex: 'trangThaiHoatDong',
+            key: 'trangThaiHoatDong',
+            filteredValue:[searchSelection],
+            onFilter:(value:any,record)=>{
+                return value.toLowerCase()==="tất cả"?(record.trangThaiHoatDong.includes(""))
+                :(record.trangThaiHoatDong.toLowerCase()===value.toLowerCase());
+            },
+            render: (_, record) => (
+                <Space>
+                    {record.trangThaiHoatDong === 'Ngưng hoạt động' ? <Badge status="error" text={record.trangThaiHoatDong}/> : <Badge status="success" text={record.trangThaiHoatDong}/>}
+                </Space>
+            )
+        },
+        {
+            title: 'Trạng thái kết nối',
+            dataIndex: 'trangThaiKetNoi',
+            key: 'trangThaiKetNoi',
+            filteredValue:[connectSelection],
+            onFilter:(value:any,record)=>{
+                return value.toLowerCase()==="tất cả"?(record.trangThaiKetNoi.includes(""))
+                :(record.trangThaiKetNoi.toLowerCase()===value.toLowerCase());
+            },
+            render: (_, record) => (
+                <Space>
+                    {record.trangThaiKetNoi === 'Mất kết nối' ? <Badge status="error" text={record.trangThaiKetNoi}/> : <Badge status="success" text={record.trangThaiKetNoi}/>}
+                </Space>
+            )
+        },
+        {
+            title: 'Dịch vụ sử dụng',
+            dataIndex: 'dichVuSuDung',
+            key: 'dichVuSuDung',
+            width: '20%',
+            render: (_, record) => (
+                <Space>
+                    <Paragraph ellipsis={ellipsis ? { rows: 2, expandable: true, symbol: 'Xem thêm' } : false}>
+                        {record.dichVuSuDung}
+                    </Paragraph>
+                    {/* {record.dichvusudung} */}
+                </Space>
+            )
+        },
+        {
+            title: '',
+            key: 'chitiet',
+            render: () => (
+                <Space>
+                    <NavLink to={'/device/list-device/detail-device'}>Chi tiết</NavLink>
+                </Space>
+            )
+        },
+        {
+            title: '',
+            key: 'capnhat',
+            render: () => (
+                <Space>
+                    <NavLink to={'/device/list-device/update-device'}>Cập nhật</NavLink>
+                </Space>
+            )
+        },
+    ]
     return (
         <ConfigProvider
             theme={{
                 token: {
                     colorPrimary: '#FF9138',
-                    colorBorder: '#FFF2E7'
+                    colorBorder: '#FFF2E7',
+                    colorBorderSecondary: '#FFE3CD',
                 }
             }}>
             <Layout style={{ margin: '0 16px', }}>
@@ -30,6 +123,7 @@ const ListDevice: React.FC = () => {
                                     <Space direction='vertical'>
                                         <Text strong>Trạng thái hoạt động</Text>
                                         <Select
+                                            onSelect={(value)=>{setSearchSelection(value)}}
                                             size='large'
                                             defaultValue='tất cả'
                                             style={{ width: '300px' }}
@@ -49,6 +143,7 @@ const ListDevice: React.FC = () => {
                                     <Space direction='vertical'>
                                         <Text strong>Trạng thái kết nối</Text>
                                         <Select
+                                            onSelect={(value)=>{setConnectSelection(value)}}
                                             size='large'
                                             defaultValue='tất cả'
                                             style={{ width: '300px' }}
@@ -68,7 +163,15 @@ const ListDevice: React.FC = () => {
                                 </Space>
                                 <Space direction='vertical'>
                                     <Text strong>Từ khóa</Text>
-                                    <Input size='large' type='text' placeholder='Nhập từ khóa' suffix={<SearchOutlined style={{ color: '#FF7506' }} />} style={{ width: '300px' }} />
+                                    <Input 
+                                    onChange={(e)=>{
+                                        setSearchText(e.target.value);
+                                    }}
+                                    size='large' 
+                                    type='text' 
+                                    placeholder='Nhập từ khóa' 
+                                    suffix={<SearchOutlined style={{ color: '#FF7506' }} />} 
+                                    style={{ width: '300px' }} />
                                 </Space>
                             </Row>
                         </Col>
@@ -77,12 +180,19 @@ const ListDevice: React.FC = () => {
                     </Row>
                     <Row gutter={24}>
                         <Col span={22}>
-                            <TableDevice />
+                            <Table
+                                dataSource={DataDevice}
+                                columns={columns}
+                                pagination={{ pageSize: 5 }}
+                                size='middle'
+                                rowClassName={(record, index) => (index % 2 === 0 ? 'table-row-light' : 'table-row-dark')}
+                                bordered
+                            />
                         </Col>
                         <Col span={2}>
                             <Layout>
                                 <Row justify={'end'} align={'middle'}>
-                                    <Button style={{ background: '#FFF2E7', height: 94 }} onClick={() => navigate('/auth/device/list-device/add-device')}>
+                                    <Button style={{ background: '#FFF2E7', height: 94 }} onClick={() => navigate('/device/list-device/add-device')}>
                                         <Row justify={'center'}>
                                             <PlusCircleOutlined style={{ display: 'flex', justifyContent: 'center', height: 23, width: 23, background: '#FF7506', color: '#FFF2E7', borderRadius: 5 }} />
                                             <Text style={{ whiteSpace: 'initial' }}>Thêm thiết bị</Text>

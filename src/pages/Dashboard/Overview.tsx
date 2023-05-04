@@ -23,7 +23,7 @@ const Overview: React.FC = () => {
     } = theme.useToken();
     return (
         <div style={{ padding: '16px', background: colorBgContainer }}>
-            <Text style={{ fontSize: 24 }} type='warning'>Tổng quan</Text>
+            <Text className='label-h1' strong>Tổng quan</Text>
             <Row style={{ margin: '16px 0' }} justify={'center'} align={'middle'}>
                 <Col span={24}>
                     <Card size='small'>

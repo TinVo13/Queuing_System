@@ -43,7 +43,7 @@ const columns: ColumnsType<AccountType> = [
     key: 'capNhat',
     render: () => (
       <Space>
-        <NavLink to={'/auth/system-setting/list-account/update-account'}>Cập nhật</NavLink>
+        <NavLink to={'/system-setting/list-account/update-account'}>Cập nhật</NavLink>
       </Space>
     )
   }
@@ -52,7 +52,7 @@ const { Text } = Typography;
 const ListAccount: React.FC = () => {
   const navigate = useNavigate();
   const handleAddAccount = () => {
-    navigate('/auth/system-setting/list-account/add-account');
+    navigate('/system-setting/list-account/add-account');
   }
   return (
     <ConfigProvider

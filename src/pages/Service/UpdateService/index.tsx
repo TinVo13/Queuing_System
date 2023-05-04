@@ -28,7 +28,7 @@ const UpdateService = () => {
                     </Row>
                     <Row>
                         <Col span={24}>
-                            <Form onFinish={()=>navigate('/auth/service/list-service')} initialValues={initialValue}>
+                            <Form onFinish={()=>navigate('/service/list-service')} initialValues={initialValue}>
                                 <Space direction='vertical' size={'large'} style={{ width: '100%' }}>
                                     <Card>
                                         <Space direction='vertical' style={{ width: '100%' }}>
@@ -132,7 +132,7 @@ const UpdateService = () => {
                                     <Row justify={'center'} align={'middle'}>
                                         <Space>
                                             <Form.Item>
-                                                <Button className='btn-cancel' onClick={()=>navigate('/auth/service/list-service')}>Hủy bỏ</Button>
+                                                <Button className='btn-cancel' onClick={()=>navigate('/service/list-service')}>Hủy bỏ</Button>
                                             </Form.Item>
                                             <Form.Item>
                                                 <Button htmlType='submit' className='btn-submit' type='ghost'>Cập nhật</Button>

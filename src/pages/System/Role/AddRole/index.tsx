@@ -8,10 +8,10 @@ const { Text } = Typography;
 const AddRole: React.FC = () => {
   const navigate = useNavigate();
   const handleCancel = () => {
-    navigate('/auth/system-setting/list-role');
+    navigate('/system-setting/list-role');
   }
   const handleConfirm = () => {
-    navigate('/auth/system-setting/list-role');
+    navigate('/system-setting/list-role');
   }
   return (
     <ConfigProvider

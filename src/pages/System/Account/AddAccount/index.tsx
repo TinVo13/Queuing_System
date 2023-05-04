@@ -7,10 +7,10 @@ const { Text } = Typography;
 const AddAccount: React.FC = () => {
   const navigate = useNavigate();
   const handleCancel = () => {
-    navigate('/auth/system-setting/list-account');
+    navigate('/system-setting/list-account');
   }
   const handleAdd = () => {
-    navigate('/auth/system-setting/list-account');
+    navigate('/system-setting/list-account');
   }
   return (
     <ConfigProvider

@@ -7,10 +7,10 @@ const {Text} = Typography;
 const UpdateAccount = () => {
   const navigate = useNavigate();
   const handleCancel = () => {
-    navigate('/auth/system-setting/list-account');
+    navigate('/system-setting/list-account');
   }
   const handleUpdate = () => {
-    navigate('/auth/system-setting/list-account');
+    navigate('/system-setting/list-account');
   }
   return (
     <ConfigProvider

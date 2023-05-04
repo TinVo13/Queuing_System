@@ -39,7 +39,7 @@ const style: React.CSSProperties = {
 const Chart: React.FC = () => {
     return (
         <div style={{ margin: '16px' }}>
-            <Text style={{ fontSize: 24 }} type='warning'>Biểu đồ cấp số</Text>
+            <Text className='label-h1' strong>Biểu đồ cấp số</Text>
             <Row gutter={20} style={{ marginTop: '16px' }}>
                 <Col className="gutter-row" span={6}>
                     <div style={style}>
@@ -167,7 +167,7 @@ const Chart: React.FC = () => {
                             </div>
                         </div>
                         <div style={{marginTop:'16px'}}>
-                            {/* <Line {...config}/> */}
+                            <Line {...config}/>
                         </div>
                     </Card>
                 </Col>

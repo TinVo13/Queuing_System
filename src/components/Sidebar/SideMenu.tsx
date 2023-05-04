@@ -26,15 +26,15 @@ function getItem(
     } as MenuItem;
 }
 const items: MenuItem[] = [
-    getItem('Dashboard', '/auth/dashboard', <PieChartOutlined />),
-    getItem('Thiết bị', '/auth/device/list-device', <DesktopOutlined />),
-    getItem('Dịch vụ', '/auth/service/list-service', <UserOutlined />,),
-    getItem('Cấp số', '/auth/numbering/list-numbering', <LaptopOutlined />),
-    getItem('Báo cáo', '/auth/report', <LineChartOutlined />),
+    getItem('Dashboard', '/dashboard', <PieChartOutlined />),
+    getItem('Thiết bị', '/device/list-device', <DesktopOutlined />),
+    getItem('Dịch vụ', '/service/list-service', <UserOutlined />,),
+    getItem('Cấp số', '/numbering/list-numbering', <LaptopOutlined />),
+    getItem('Báo cáo', '/report', <LineChartOutlined />),
     getItem('Cài đặt hệ thống', 'sub1', <SettingOutlined />, [
-        getItem('Quản lý vai trò', '/auth/system-setting/list-role'),
-        getItem('Quản lý tài khoản', '/auth/system-setting/list-account'),
-        getItem('Nhật ký người dùng', '/auth/system-setting/list-userlog')]),
+        getItem('Quản lý vai trò', '/system-setting/list-role'),
+        getItem('Quản lý tài khoản', '/system-setting/list-account'),
+        getItem('Nhật ký người dùng', '/system-setting/list-userlog')]),
 ];
 const SideMenu: React.FC = () => {
     const navigate = useNavigate();
@@ -43,7 +43,7 @@ const SideMenu: React.FC = () => {
             <ConfigProvider
                 theme={{
                     token: {
-                        colorPrimary: '#FF9138'
+                        colorPrimary: '#FF9138',
                     }
                 }}>
                 <div >
@@ -54,7 +54,7 @@ const SideMenu: React.FC = () => {
                         <div>
                             <Menu onClick={(item) => {
                                 navigate(item.key);
-                            }} theme="light" mode="vertical" items={items} defaultSelectedKeys={['/auth/dashboard']} />
+                            }} theme="light" mode="vertical" items={items} defaultSelectedKeys={['/dashboard']} />
                         </div>
                         <div>
                             <Button block type='primary' style={{ background: '#FFF2E7', color: '#FF7506' }} onClick={() => navigate('/login')}>Đăng xuất</Button>

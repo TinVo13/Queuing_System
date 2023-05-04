@@ -23,7 +23,7 @@ const AddDevice: React.FC = () => {
           </Row>
           <Row justify={'space-evenly'}>
             <Col span={22}>
-              <Form onFinish={() => navigate('/auth/device/list-device')}>
+              <Form onFinish={() => navigate('/device/list-device')}>
                 <Space direction='vertical' style={{ width: '100%' }} size={'large'}>
                   <Card>
                     <Text className='label-h2' strong>Thông tin thiết bị</Text>
@@ -148,7 +148,7 @@ const AddDevice: React.FC = () => {
                   <Row justify={'center'} align={'middle'}>
                     <Space>
                       <Form.Item>
-                        <Button className='btn-cancel' onClick={() => navigate('/auth/device/list-device')}>Hủy bỏ</Button>
+                        <Button className='btn-cancel' onClick={() => navigate('/device/list-device')}>Hủy bỏ</Button>
                       </Form.Item>
                       <Form.Item>
                         <Button className='btn-submit' htmlType='submit'>Thêm thiết bị</Button>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Badge, Button, Col, ConfigProvider, DatePicker, Input, Layout, Row, Select, Space, Table, Typography } from 'antd'
 import { SearchOutlined, ArrowRightOutlined, PlusCircleOutlined } from '@ant-design/icons'
 import { NumberingType } from '../../../type'
@@ -8,59 +8,67 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { SelectionService } from '../../../components/Selection/ItemSelection'
 
 
-const column: ColumnsType<NumberingType> = [
-    {
-        title: 'STT',
-        dataIndex: 'stt',
-        key: 'stt',
-    },
-    {
-        title: 'Tên khách hàng',
-        dataIndex: 'tenKhachHang',
-        key: 'tenKhachHang',
-    },
-    {
-        title: 'Tên dịch vụ',
-        dataIndex: 'tenDichVu',
-        key: 'tenDichVu',
-    },
-    {
-        title: 'Thời gian cấp',
-        dataIndex: 'thoiGianCap',
-        key: 'thoiGianCap',
-    },
-    {
-        title: 'Hạn sử dụng',
-        dataIndex: 'hanSuDung',
-        key: 'hanSuDung',
-    },
-    {
-        title: 'Trạng thái',
-        dataIndex: 'trangThai',
-        key: 'trangThai',
-        render: (_, record) => (
-            <Space>
-                {record.trangThai === 'Đang chờ' && <Badge status='processing' text={record.trangThai} />}
-                {record.trangThai === 'Bỏ qua' && <Badge status='error' text={record.trangThai} />}
-                {record.trangThai === 'Đã sử dụng' && <Badge status='default' text={record.trangThai} />}
-            </Space>
-        )
-    },
-    {
-        title: 'Nguồn cấp',
-        dataIndex: 'nguonCap',
-        key: 'nguonCap'
-    },
-    {
-        title: '',
-        render: (_, record) => (
-            <NavLink to={'/auth/numbering/list-numbering/detail-numbering'}>Chi tiết</NavLink>
-        )
-    }
-]
+
 const { Text } = Typography
 const ListNumbering: React.FC = () => {
     const navigate = useNavigate();
+    const [searchText, setSearchText] = useState("");
+    const column: ColumnsType<NumberingType> = [
+        {
+            title: 'STT',
+            dataIndex: 'stt',
+            key: 'stt',
+            filteredValue: [searchText],
+            onFilter: (value: any, record) => {
+                return String(record.stt).toLowerCase().includes(value.toLowerCase()) ||
+                    String(record.tenDichVu).toLowerCase().includes(value.toLowerCase()) ||
+                    String(record.tenKhachHang).toLowerCase().includes(value.toLowerCase());
+            }
+        },
+        {
+            title: 'Tên khách hàng',
+            dataIndex: 'tenKhachHang',
+            key: 'tenKhachHang',
+        },
+        {
+            title: 'Tên dịch vụ',
+            dataIndex: 'tenDichVu',
+            key: 'tenDichVu',
+        },
+        {
+            title: 'Thời gian cấp',
+            dataIndex: 'thoiGianCap',
+            key: 'thoiGianCap',
+        },
+        {
+            title: 'Hạn sử dụng',
+            dataIndex: 'hanSuDung',
+            key: 'hanSuDung',
+        },
+        {
+            title: 'Trạng thái',
+            dataIndex: 'trangThai',
+            key: 'trangThai',
+            render: (_, record) => (
+                <Space>
+                    {record.trangThai === 'Đang chờ' && <Badge status='processing' text={record.trangThai} />}
+                    {record.trangThai === 'Bỏ qua' && <Badge status='error' text={record.trangThai} />}
+                    {record.trangThai === 'Đã sử dụng' && <Badge status='default' text={record.trangThai} />}
+                </Space>
+            )
+        },
+        {
+            title: 'Nguồn cấp',
+            dataIndex: 'nguonCap',
+            key: 'nguonCap'
+        },
+        {
+            title: '',
+            render: (_, record) => (
+                <NavLink to={'/numbering/list-numbering/detail-numbering'}>Chi tiết</NavLink>
+            )
+        }
+    ]
     return (
         <ConfigProvider
             theme={{
@@ -79,7 +87,7 @@ const ListNumbering: React.FC = () => {
             <Layout>
                 <Space direction='vertical'>
                     <Row>
-                        <Col span={22} style={{paddingLeft:16}}>
+                        <Col span={22} style={{ paddingLeft: 16 }}>
                             <Text className='label-h1' strong>Quản lý cấp số</Text>
                         </Col>
                         <Col span={2}></Col>
@@ -130,7 +138,13 @@ const ListNumbering: React.FC = () => {
                                 </Row>
                                 <Space direction='vertical'>
                                     <Text strong>Từ khóa</Text>
-                                    <Input size='large' type='text' placeholder='Nhập từ khóa' suffix={<SearchOutlined style={{ color: '#FF7506' }} />} style={{ width: '300px' }} />
+                                    <Input 
+                                    onChange={(e)=>{setSearchText(e.target.value)}}
+                                    size='large' 
+                                    type='text' 
+                                    placeholder='Nhập từ khóa' 
+                                    suffix={<SearchOutlined style={{ color: '#FF7506' }} />} 
+                                    style={{ width: '300px' }} />
                                 </Space>
                             </Row>
                         </Col>
@@ -150,7 +164,7 @@ const ListNumbering: React.FC = () => {
                         <Col span={2}>
                             <Layout>
                                 <Row justify={'end'} align={'middle'}>
-                                    <Button style={{ background: '#FFF2E7', height: 94, width: 80 }} onClick={() => navigate('/auth/numbering/list-numbering/add-numbering')}>
+                                    <Button style={{ background: '#FFF2E7', height: 94, width: 80 }} onClick={() => navigate('/numbering/list-numbering/add-numbering')}>
                                         <Row justify={'center'}>
                                             <PlusCircleOutlined style={{ display: 'flex', justifyContent: 'center', height: 23, width: 23, background: '#FF7506', color: '#FFF2E7', borderRadius: 5 }} />
                                             <Text style={{ whiteSpace: 'initial' }}>Thêm số mới</Text>

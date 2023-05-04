@@ -86,7 +86,7 @@ const DetailDevice: React.FC = () => {
                   colorPrimary: '#FF7506'
                 }
               }}>
-              <Button className='btn-update' onClick={()=>navigate('/auth/device/list-device/update-device')}>
+              <Button className='btn-update' onClick={()=>navigate('/device/list-device/update-device')}>
                 <EditOutlined style={{ background: '#FF7506', color: '#FFF2E7', padding: 5, borderRadius: 10 }} />
                 <Paragraph style={{ whiteSpace: 'initial', fontSize: 14 }}>Cập nhật thiết bị</Paragraph>
               </Button>

@@ -3,14 +3,15 @@ import React from 'react';
 import { UserOutlined, BellOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import Notification from '../Notification';
+import BreadCrumb from '../BreadCrumb/BreadCrumb';
 
 const Topbar: React.FC = () => {
     const navigate = useNavigate();
     return (
         <div>
-            <Row justify={'center'} align={'middle'} style={{ padding: '10px' }}>
+            <Row justify={'center'} align={'middle'} style={{ padding:"0px 16px" }}>
                 <Col span={18}>
-                    <Breadcrumb items={[{ title: 'Dashboard' }, { title: 'Device' }]} />
+                    <BreadCrumb/>
                 </Col>
                 <Col span={1}>
                     <Popover content={<Notification />} title="Thông báo" trigger={'click'} placement='bottomRight' style={{ width: '360px' }}>
@@ -20,7 +21,7 @@ const Topbar: React.FC = () => {
                 <Col span={5}>
                     <Row justify={'center'} align={'middle'}>
                         <Col md={6}>
-                            <Avatar size={'large'} icon={<UserOutlined />} onClick={() => navigate('/auth/userinfo')} />
+                            <Avatar size={'large'} icon={<UserOutlined />} onClick={() => navigate('/userinfo')} />
                         </Col>
                         <Col md={18}>
                             <Row>
@@ -28,7 +29,7 @@ const Topbar: React.FC = () => {
                                     <Typography.Text>Xin chào</Typography.Text>
                                 </Col>
                                 <Col>
-                                    <Typography.Text onClick={() => navigate('/auth/userinfo')}>VoTrungTin</Typography.Text>
+                                    <Typography.Text onClick={() => navigate('/userinfo')}>VoTrungTin</Typography.Text>
                                 </Col>
                             </Row>
                         </Col>
