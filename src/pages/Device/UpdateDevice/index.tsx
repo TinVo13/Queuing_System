@@ -20,7 +20,9 @@ const UpdateDevice: React.FC = () => {
     }
     getDevice();
   }, []);
-  form.setFieldsValue(device);
+  React.useEffect(()=>{
+    form.setFieldsValue(device);
+  })
   const handleUpdateDevice = (values:DeviceType) => {
     values.trangThaiHoatDong = "Ngưng hoạt động";
     values.trangThaiKetNoi = "Mất kết nối";

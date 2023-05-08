@@ -54,7 +54,7 @@ const BreadCrumb: React.FC = () => {
                         ) : (
                             <Item key={name}>
                                 {/* <Link to={`${routeTo}`} style={{color:'black',fontWeight:'bold'}}>{name}</Link> */}
-                                <Text strong style={{fontSize:20}}>{name}</Text>
+                                <Text strong style={{fontSize:20,color:'#7E7D88'}}>{name}</Text>
                             </Item>
                         )
                     })}

@@ -2,6 +2,10 @@ import { Avatar, Col, Row, Typography, Card, Select } from 'antd'
 import React from 'react'
 import { CalendarTwoTone, ScheduleTwoTone, ContactsTwoTone, DiffTwoTone, ArrowUpOutlined, ArrowDownOutlined, DownOutlined, SmileOutlined } from '@ant-design/icons';
 import { Line } from '@ant-design/charts';
+import Day from './Day';
+import Week from './Week';
+import Month from './Month';
+
 const { Text } = Typography;
 
 const data = [
@@ -37,6 +41,23 @@ const style: React.CSSProperties = {
     borderRadius: '10px'
 };
 const Chart: React.FC = () => {
+    const [chart,setChart] = React.useState<JSX.Element>(<Day/>);
+    const handleChangeChart = (value:string) => {
+        console.log(value);
+        switch (value) {
+            case "Ngày":
+                setChart(<Day/>)
+                break;
+            case "Tuần":
+                setChart(<Week/>)
+                break;
+            case "Tháng":
+                setChart(<Month/>)
+                break;
+            default:
+                break;
+        }
+    }
     return (
         <div style={{ margin: '16px' }}>
             <Text className='label-h1' strong>Biểu đồ cấp số</Text>
@@ -163,11 +184,12 @@ const Chart: React.FC = () => {
                                         { value: 'Tuần', label: 'Tuần' },
                                         { value: 'Tháng', label: 'Tháng' }
                                     ]}
+                                    onChange={handleChangeChart}
                                 />
                             </div>
                         </div>
-                        <div style={{marginTop:'16px'}}>
-                            {/* <Line {...config}/> */}
+                        <div style={{ marginTop: '16px' }}>
+                            {chart}
                         </div>
                     </Card>
                 </Col>

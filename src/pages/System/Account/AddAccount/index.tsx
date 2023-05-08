@@ -6,11 +6,9 @@ import { AddAccountType } from '../../../../type/types';
 import { addAccount } from '../../../../firebase/controller';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../../firebase/firebaseConfig';
-import { useAppDispatch, useAppSelector } from '../../../../store/store';
 
 const { Text } = Typography;
 const AddAccount: React.FC = () => {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const handleCancel = () => {
     navigate('/system-setting/list-account');
@@ -21,10 +19,6 @@ const AddAccount: React.FC = () => {
         //add account to firestore
         const uid = userCredential.user.uid;
         addAccount(value, uid);
-        console.log("Tạo thành công!")
-        //store redux
-        //const users = useAppSelector(state => state.account.accounts);
-
       }).catch(error => {
         console.log(error);
       })

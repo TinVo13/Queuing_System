@@ -4,14 +4,25 @@ import { UserOutlined, BellOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import Notification from '../Notification';
 import BreadCrumb from '../BreadCrumb/BreadCrumb';
+import { AccountType } from '../../type/types';
+import { getAccountByID } from '../../firebase/controller';
+import { auth } from '../../firebase/firebaseConfig';
 
 const Topbar: React.FC = () => {
     const navigate = useNavigate();
+    const [account, setAccount] = React.useState<AccountType>();
+    //const account:AccountType = useAppSelector(state=>state.account);
+    React.useEffect(()=>{
+        const getData = async () => {
+            setAccount(await getAccountByID(auth.currentUser?.uid!));
+        }
+        getData();
+    },[])
     return (
         <div>
-            <Row justify={'center'} align={'middle'} style={{ padding:"0px 16px" }}>
+            <Row justify={'center'} align={'middle'} style={{ padding: "8px 16px" }}>
                 <Col span={18}>
-                    <BreadCrumb/>
+                    <BreadCrumb />
                     {/* <Breadcrumb/> */}
                 </Col>
                 <Col span={1}>
@@ -30,7 +41,7 @@ const Topbar: React.FC = () => {
                                     <Typography.Text>Xin chào</Typography.Text>
                                 </Col>
                                 <Col>
-                                    <Typography.Text onClick={() => navigate('/userinfo')}>VoTrungTin</Typography.Text>
+                                    <Typography.Text onClick={() => navigate('/userinfo')}>{account?.hoTen}</Typography.Text>
                                 </Col>
                             </Row>
                         </Col>

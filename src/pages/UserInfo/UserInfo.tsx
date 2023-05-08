@@ -1,8 +1,18 @@
 import { Avatar, Col, Form, Input, Row, Typography, theme } from 'antd'
 import React, { FC } from 'react'
 import { UserOutlined } from '@ant-design/icons';
+import { Account } from '../../type/types';
+import { getAccountByID } from '../../firebase/controller';
+import { auth } from '../../firebase/firebaseConfig';
 
 const UserInfo: FC = () => {
+    const [account,setAccount] = React.useState<Account>();
+    React.useEffect(()=>{
+        const getData = async () =>{
+            setAccount(await getAccountByID(auth.currentUser?.uid!));
+        }
+        getData();
+    },[])
     const {
         token: { colorBgContainer },
     } = theme.useToken();
@@ -16,7 +26,7 @@ const UserInfo: FC = () => {
                         </Row>
                     </Col>
                     <Col>
-                        <Typography.Title level={3}>Vo Trung Tin</Typography.Title>
+                        <Typography.Title level={3}>{account?.hoTen}</Typography.Title>
                     </Col>
                 </Row>
 
@@ -25,15 +35,15 @@ const UserInfo: FC = () => {
                 <Form style={{ margin: '10px' }}>
                     <Form.Item>
                         <Typography.Text>Tên người dùng</Typography.Text>
-                        <Input type='text' width={'100%'} disabled value={'Vo Trung Tin'} size='middle' />
+                        <Input type='text' width={'100%'} disabled value={account?.hoTen} size='middle' />
                     </Form.Item>
                     <Form.Item>
                         <Typography.Text>Số điện thoại</Typography.Text>
-                        <Input type='text' width={'100%'} disabled value={'0388055011'} size='middle' />
+                        <Input type='text' width={'100%'} disabled value={account?.soDienThoai} size='middle' />
                     </Form.Item>
                     <Form.Item>
                         <Typography.Text>Email:</Typography.Text>
-                        <Input type='text' width={'100%'} disabled value={'votrungtinoppo@gmail.com'} size='middle' />
+                        <Input type='text' width={'100%'} disabled value={account?.email} size='middle' />
                     </Form.Item>
                 </Form>
             </Col>
@@ -41,15 +51,15 @@ const UserInfo: FC = () => {
                 <Form style={{ margin: '10px' }}>
                     <Form.Item>
                         <Typography.Text>Tên đăng nhập</Typography.Text>
-                        <Input type='text' width={'100%'} disabled value={'VoTrungTin'} size='middle' />
+                        <Input type='text' width={'100%'} disabled value={account?.tenDangNhap} size='middle' />
                     </Form.Item>
                     <Form.Item>
                         <Typography.Text>Mật khẩu</Typography.Text>
-                        <Input type='text' width={'100%'} disabled value={'0388055011'} size='middle' />
+                        <Input type='text' width={'100%'} disabled value={account?.matKhau} size='middle' />
                     </Form.Item>
                     <Form.Item>
                         <Typography.Text>Vai trò</Typography.Text>
-                        <Input type='text' width={'100%'} disabled value={'Kế toán'} size='middle' />
+                        <Input type='text' width={'100%'} disabled value={account?.vaiTro} size='middle' />
                     </Form.Item>
                 </Form>
             </Col>

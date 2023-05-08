@@ -33,7 +33,6 @@ import UpdateAccount from './pages/System/Account/UpdateAccount';
 import SystemSetting from './pages/System';
 import UserLog from './pages/System/User';
 import { useAppSelector } from './store/store';
-import { Account } from './store/features/accountSlice';
 import ErrorPage from './pages/ErrorPage';
 
 
@@ -45,7 +44,7 @@ function App() {
           //private route
           <Route path='/' element={<PrivateRoute />}>
             <Route path='/' Component={PageContent}>
-              <Route index path='dashboard' Component={Dashboard}></Route>
+              <Route index path='dashboard' element={<Dashboard/>}></Route>
               <Route path='device' Component={Device}>
                 <Route path='list-device' Component={ListDevice}></Route>
                 <Route path='list-device/add-device' Component={AddDevice}></Route>

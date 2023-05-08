@@ -1,7 +1,6 @@
 import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 import { AccountType, AddAccountType, AddDeviceType, AddNumberingType, AddRoleType, AddServiceType, DeviceType, NumberingType, RoleType, ServiceType } from "../type/types";
-import { Account } from "../store/features/accountSlice";
 
 export async function getAllUser() {
     try {
@@ -118,27 +117,27 @@ export const updateRole = async (key: string, role: RoleType) => {
     await setDoc(getDate, role);
 }
 //get collection account
-export const accountCollection = collection(db,"accounts");
+export const accountCollection = collection(db, "accounts");
 
 //add account
-export const addAccount = async (account: AddAccountType,key:string) => {
-    const getData = await setDoc(doc(db,"accounts",key),account);
-    console.log('Thêm thành công!');
+export const addAccount = async (account: AddAccountType, key: string) => {
+    const getData = await setDoc(doc(db, "accounts", key), account);
+    console.log('Thêm thành công!: '+getData);
 }
 //get account by id
-export const getAccountByID =async (key:string) => {
+export const getAccountByID = async (key: string) => {
     const getDate = doc(db, "accounts", key);
     const docSnap = await getDoc(getDate);
     if (docSnap.exists()) {
         const newObj = {
-            key: docSnap.id,
+            key:docSnap.id,
             ...docSnap.data()
         }
         return newObj;
     }
 }
 //update account
-export const updateAccount = async (key:string,account:AccountType)=>{
+export const updateAccount = async (key: string, account: AccountType) => {
     const getDate = doc(db, "accounts", key);
     await setDoc(getDate, account);
 }

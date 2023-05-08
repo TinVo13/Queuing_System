@@ -33,14 +33,12 @@ interface Account {
 const { Title } = Typography;
 const LoginForm: React.FC = () => {
     const navigate = useNavigate();
-    //const dispatch = useAppDispatch();
-
     const [loading, setLoading] = React.useState(false);
     const handleSignIn = async (values: Account) => {
         console.log(values);
         setLoading(true);
         try {
-            const userCredential = await signInWithEmailAndPassword(auth, values.userName, values.password);
+            await signInWithEmailAndPassword(auth, values.userName, values.password);
             setLoading(false);
             navigate('/dashboard')
         } catch (error) {
@@ -56,7 +54,7 @@ const LoginForm: React.FC = () => {
                     colorPrimary: '#FF7506',
                 }
             }}>
-            {loading ? (<Space><Spin size='large'/><Title level={1}>Đang đăng nhập...</Title></Space>) :
+            {loading ? (<Space><Spin size='large' /><Title level={1}>Đang đăng nhập...</Title></Space>) :
                 <LoginStyle>
                     <Form
                         name="normal_login"

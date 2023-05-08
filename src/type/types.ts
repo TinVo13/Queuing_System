@@ -121,6 +121,16 @@ export interface AddAccountType {
     vaiTro: string,
     trangThaiHoatDong: string
 }
+export interface Account {
+    key?: string,
+    tenDangNhap?: string,
+    hoTen?: string,
+    soDienThoai?: string,
+    email?: string,
+    vaiTro?: any,
+    trangThaiHoatDong?: any,
+    matKhau?:string
+}
 export interface UserLogType{
     key:number,
     tenDangNhap:string,
