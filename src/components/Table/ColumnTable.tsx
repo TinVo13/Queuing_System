@@ -1,5 +1,5 @@
 import { ColumnsType } from "antd/es/table";
-import { ReportType, ServiceType } from "../../type";
+import { ReportType, ServiceType } from "../../type/types";
 import { Badge, Space } from "antd";
 import { NavLink } from "react-router-dom";
 import { SelectionService, SelectionStatus } from "../Selection/ItemSelection";

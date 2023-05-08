@@ -1,17 +1,76 @@
 import React from 'react'
 import { Button, Card, Checkbox, Col, ConfigProvider, Form, Input, Layout, Row, Space, Typography } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import TextArea from 'antd/es/input/TextArea';
+import { AddRoleType, RoleType } from '../../../../type/types';
+import { optionsCheckbox, optionsCheckboxs } from '../../../../components/Selection/ItemSelection';
+import { CheckboxValueType } from 'antd/es/checkbox/Group';
+import { CheckboxChangeEvent } from 'antd/es/checkbox';
+import { addRole, getRoleByID, updateRole } from '../../../../firebase/controller';
 
-const {Text} = Typography;
-const UpdateRole:React.FC = () => {
+const { Text } = Typography;
+const UpdateRole: React.FC = () => {
   const navigate = useNavigate();
+  const [form] = Form.useForm();
+  const {key} = useParams();
+  const [role,setRole] = React.useState<RoleType>();
+  const [checkedList, setCheckedList] = React.useState<CheckboxValueType[]>([]);
+  const [indeterminate, setIndeterminate] = React.useState(true);
+  const [checkAll, setCheckAll] = React.useState(false);
+  const [checkedListB, setCheckedListB] = React.useState<CheckboxValueType[]>([]);
+  const [indeterminateB, setIndeterminateB] = React.useState(true);
+  const [checkAllB, setCheckAllB] = React.useState(false);
+
+  const onChange = (list: CheckboxValueType[]) => {
+    setCheckedList(list);
+    setIndeterminate(!!list.length && list.length < optionsCheckbox.length);
+    setCheckAll(list.length === optionsCheckbox.length);
+  };
+  const onChangeB = (list: CheckboxValueType[]) => {
+    setCheckedListB(list);
+    setIndeterminateB(!!list.length && list.length < optionsCheckboxs.length);
+    setCheckAllB(list.length === optionsCheckboxs.length);
+  };
+  const onCheckAllChange = (e: CheckboxChangeEvent) => {
+    setCheckedList(e.target.checked ? optionsCheckbox : []);
+    setIndeterminate(false);
+    setCheckAll(e.target.checked);
+  };
+  const onCheckAllChangeB = (e: CheckboxChangeEvent) => {
+    setCheckedListB(e.target.checked ? optionsCheckboxs : []);
+    setIndeterminateB(false);
+    setCheckAllB(e.target.checked);
+  };
   const handleCancel = () => {
     navigate('/system-setting/list-role');
   }
-  const handleConfirm = () => {
+  const handleConfirm = (values: AddRoleType) => {
+    const a = [];
+    const b = [];
+    for(var i = 0;i<checkedList.length;i++){
+      if(checkedList.length===0){
+        return;
+      }
+      a.push(checkedList[i].toString())
+    }
+    for(var i = 0;i<checkedList.length;i++){
+      if(checkedListB.length===0){
+        return;
+      }
+      b.push(checkedListB[i].toString())
+    }
+    values.chucNang = a.concat(b);
+    values.soNguoiDung = 1;
+    updateRole(String(key),values);
     navigate('/system-setting/list-role');
   }
+  React.useEffect(()=>{
+    const getRole = async () => {
+      setRole(await getRoleByID(String(key)));
+    }
+    getRole();
+  },[])
+  form.setFieldsValue(role);
   return (
     <ConfigProvider
       theme={{
@@ -28,7 +87,7 @@ const UpdateRole:React.FC = () => {
           </Row>
           <Row>
             <Col span={24}>
-              <Form onFinish={handleConfirm}>
+              <Form onFinish={(value)=>handleConfirm(value)} form={form}>
                 <Space direction='vertical' size={'large'} style={{ width: '100%' }}>
                   <Card>
                     <Space direction='vertical' style={{ width: '100%' }}>
@@ -72,17 +131,25 @@ const UpdateRole:React.FC = () => {
                               <Space direction='vertical'>
                                 <Space direction='vertical'>
                                   <Text className='label-h2' strong>Nhóm chức năng A</Text>
-                                  <Checkbox value={'Tất cả'}>Tất cả</Checkbox>
-                                  <Checkbox value={'Chức năng X'}>Chức năng X</Checkbox>
-                                  <Checkbox value={'Chức năng Y'}>Chức năng Y</Checkbox>
-                                  <Checkbox value={'Chức năng Z'}>Chức năng Z</Checkbox>
+                                  <Form.Item
+                                    valuePropName='checked'>
+                                    <Space direction='vertical'>
+                                      <Checkbox indeterminate={indeterminate} onChange={onCheckAllChange} checked={checkAll}>
+                                        Tất cả
+                                      </Checkbox>
+                                      <Checkbox.Group options={optionsCheckbox} value={checkedList} onChange={onChange} />
+                                    </Space>
+                                  </Form.Item>
                                 </Space>
                                 <Space direction='vertical'>
                                   <Text className='label-h2' strong>Nhóm chức năng B</Text>
-                                  <Checkbox value={'Tất cả'}>Tất cả</Checkbox>
-                                  <Checkbox value={'Chức năng Y'}>Chức năng X</Checkbox>
-                                  <Checkbox value={'Chức năng Y'}>Chức năng Y</Checkbox>
-                                  <Checkbox value={'Chức năng Z'}>Chức năng Z</Checkbox>
+                                  <Form.Item
+                                    valuePropName='checked'>
+                                      <Checkbox indeterminate={indeterminateB} onChange={onCheckAllChangeB} checked={checkAllB}>
+                                        Tất cả
+                                      </Checkbox>
+                                      <Checkbox.Group options={optionsCheckboxs} value={checkedListB} onChange={onChangeB} />
+                                  </Form.Item>
                                 </Space>
                               </Space>
                             </Card>
@@ -97,7 +164,7 @@ const UpdateRole:React.FC = () => {
                         <Button className='btn-cancel' onClick={handleCancel}>Hủy bỏ</Button>
                       </Form.Item>
                       <Form.Item>
-                        <Button htmlType='submit' className='btn-submit' type='ghost'>Thêm</Button>
+                        <Button htmlType='submit' className='btn-submit' type='ghost'>Cập nhật</Button>
                       </Form.Item>
                     </Space>
                   </Row>
@@ -108,7 +175,7 @@ const UpdateRole:React.FC = () => {
         </Space>
       </Layout>
     </ConfigProvider>
-    )
+  )
 }
 
 export default UpdateRole;

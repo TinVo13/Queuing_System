@@ -32,6 +32,9 @@ import AddAccount from './pages/System/Account/AddAccount';
 import UpdateAccount from './pages/System/Account/UpdateAccount';
 import SystemSetting from './pages/System';
 import UserLog from './pages/System/User';
+import { useAppSelector } from './store/store';
+import { Account } from './store/features/accountSlice';
+import ErrorPage from './pages/ErrorPage';
 
 
 function App() {
@@ -39,43 +42,47 @@ function App() {
     <BrowserRouter>
       <Fragment>
         <Routes>
-          <Route path='/' Component={PrivateRoute}>
+          //private route
+          <Route path='/' element={<PrivateRoute />}>
             <Route path='/' Component={PageContent}>
-              <Route path='dashboard' Component={Dashboard}></Route>
+              <Route index path='dashboard' Component={Dashboard}></Route>
               <Route path='device' Component={Device}>
                 <Route path='list-device' Component={ListDevice}></Route>
                 <Route path='list-device/add-device' Component={AddDevice}></Route>
-                <Route path='list-device/detail-device' Component={DetailDevice}></Route>
-                <Route path='list-device/update-device' Component={UpdateDevice}></Route>
+                <Route path='list-device/detail-device/:key' Component={DetailDevice}></Route>
+                <Route path='list-device/update-device/:key' Component={UpdateDevice}></Route>
               </Route>
               <Route path='service' Component={Service}>
                 <Route path='list-service' Component={ListService}></Route>
                 <Route path='list-service/add-service' Component={AddService}></Route>
-                <Route path='list-service/detail-service' Component={DetailService}></Route>
-                <Route path='list-service/update-service' Component={UpdateService}></Route>
+                <Route path='list-service/detail-service/:key' Component={DetailService}></Route>
+                <Route path='list-service/update-service/:key' Component={UpdateService}></Route>
               </Route>
               <Route path='numbering' Component={Numbering}>
                 <Route path='list-numbering' Component={ListNumbering}></Route>
                 <Route path='list-numbering/add-numbering' Component={AddNumbering}></Route>
-                <Route path='list-numbering/detail-numbering' Component={DetailNumbering}></Route>
+                <Route path='list-numbering/detail-numbering/:key' Component={DetailNumbering}></Route>
               </Route>
               <Route path='report' Component={Report}></Route>
+              <Route path='userinfo' element={<UserInfo />} />
               <Route path='system-setting' Component={SystemSetting}>
                 <Route path='list-role' Component={ListRole}></Route>
                 <Route path='list-role/add-role' Component={AddRole}></Route>
-                <Route path='list-role/update-role' Component={UpdateRole}></Route>
+                <Route path='list-role/update-role/:key' Component={UpdateRole}></Route>
                 <Route path='list-account' Component={ListAccount}></Route>
                 <Route path='list-account/add-account' Component={AddAccount}></Route>
-                <Route path='list-account/update-account' Component={UpdateAccount}></Route>
+                <Route path='list-account/update-account/:key' Component={UpdateAccount}></Route>
                 <Route path='list-userlog' Component={UserLog}></Route>
               </Route>
-              <Route path='userinfo' element={<UserInfo />} />
             </Route>
           </Route>
+          //public route
           <Route path='/login' element={<Login />} />
           <Route path='/reset-password' element={<ResetPassword />} />
           <Route path='/forgot-password' element={<ForgotPassword />} />
-          <Route path='/numbering' Component={NumberingWithoutLogin}></Route>
+          <Route path='/numbering1' Component={NumberingWithoutLogin}></Route>
+          //error page
+          <Route path='*' element={<ErrorPage />}></Route>
         </Routes>
       </Fragment>
     </BrowserRouter>

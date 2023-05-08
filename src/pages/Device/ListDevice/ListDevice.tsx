@@ -2,29 +2,44 @@ import { Badge, Button, Col, ConfigProvider, Input, Layout, Row, Select, Space, 
 import React, { useState } from 'react'
 import { SearchOutlined, PlusCircleOutlined } from '@ant-design/icons'
 import { NavLink, useNavigate } from 'react-router-dom';
-import { DataDevice } from '../../../data';
 import { ColumnsType } from 'antd/es/table';
-import { DeviceType } from '../../../type';
+import { DeviceType } from '../../../type/types';
+import { deviceCollection } from '../../../firebase/controller';
+import { DocumentData, QuerySnapshot, onSnapshot } from 'firebase/firestore';
 
-const { Text,Paragraph } = Typography;
+const { Text, Paragraph } = Typography;
 
 const ListDevice: React.FC = () => {
     const navigate = useNavigate();
     const [ellipsis, setEllipsis] = useState(true);// eslint-disable-next-line
-    const [searchText,setSearchText] = useState("");
+    const [searchText, setSearchText] = useState("");
     const [searchSelection, setSearchSelection] = useState("tất cả");
     const [connectSelection, setConnectSelection] = useState("tất cả");
+    const [device, setDevice] = React.useState<DeviceType[]>([]);
+
+    React.useEffect(() =>
+        onSnapshot(deviceCollection, (snapshot: QuerySnapshot<DocumentData>) => {
+            setDevice(
+                snapshot.docs.map((doc) => {
+                    return {
+                        key: doc.id,
+                        ...doc.data()
+                    };
+                })
+            );
+        })
+        , []);
     const columns: ColumnsType<DeviceType> = [
         {
             title: 'Mã thiết bị',
             dataIndex: 'maThietBi',
             key: 'maThietBi',
-            filteredValue:[searchText],
-            onFilter:(value:any,record)=>{
-                return String(record.tenThietBi).toLowerCase().includes(value.toLowerCase())||
-                String(record.maThietBi).toLowerCase().includes(value.toLowerCase())||
-                String(record.diaChiIP).toLowerCase().includes(value.toLowerCase())||
-                String(record.dichVuSuDung).toLowerCase().includes(value.toLowerCase());
+            filteredValue: [searchText],
+            onFilter: (value: any, record) => {
+                return String(record.tenThietBi).toLowerCase().includes(value.toLowerCase()) ||
+                    String(record.maThietBi).toLowerCase().includes(value.toLowerCase()) ||
+                    String(record.diaChiIP).toLowerCase().includes(value.toLowerCase()) ||
+                    String(record.dichVuSuDung).toLowerCase().includes(value.toLowerCase());
             }
         },
         {
@@ -41,14 +56,14 @@ const ListDevice: React.FC = () => {
             title: 'Trạng thái hoạt động',
             dataIndex: 'trangThaiHoatDong',
             key: 'trangThaiHoatDong',
-            filteredValue:[searchSelection],
-            onFilter:(value:any,record)=>{
-                return value.toLowerCase()==="tất cả"?(record.trangThaiHoatDong.includes(""))
-                :(record.trangThaiHoatDong.toLowerCase()===value.toLowerCase());
+            filteredValue: [searchSelection],
+            onFilter: (value: any, record) => {
+                return value.toLowerCase() === "tất cả" ? (record.trangThaiHoatDong.includes(""))
+                    : (record.trangThaiHoatDong?.toLowerCase() === value.toLowerCase());
             },
             render: (_, record) => (
                 <Space>
-                    {record.trangThaiHoatDong === 'Ngưng hoạt động' ? <Badge status="error" text={record.trangThaiHoatDong}/> : <Badge status="success" text={record.trangThaiHoatDong}/>}
+                    {record.trangThaiHoatDong === 'Ngưng hoạt động' ? <Badge status="error" text={record.trangThaiHoatDong} /> : <Badge status="success" text={record.trangThaiHoatDong} />}
                 </Space>
             )
         },
@@ -56,14 +71,14 @@ const ListDevice: React.FC = () => {
             title: 'Trạng thái kết nối',
             dataIndex: 'trangThaiKetNoi',
             key: 'trangThaiKetNoi',
-            filteredValue:[connectSelection],
-            onFilter:(value:any,record)=>{
-                return value.toLowerCase()==="tất cả"?(record.trangThaiKetNoi.includes(""))
-                :(record.trangThaiKetNoi.toLowerCase()===value.toLowerCase());
+            filteredValue: [connectSelection],
+            onFilter: (value: any, record) => {
+                return value.toLowerCase() === "tất cả" ? (record.trangThaiKetNoi.includes(""))
+                    : (record.trangThaiKetNoi.toLowerCase() === value.toLowerCase());
             },
             render: (_, record) => (
                 <Space>
-                    {record.trangThaiKetNoi === 'Mất kết nối' ? <Badge status="error" text={record.trangThaiKetNoi}/> : <Badge status="success" text={record.trangThaiKetNoi}/>}
+                    {record.trangThaiKetNoi === 'Mất kết nối' ? <Badge status="error" text={record.trangThaiKetNoi} /> : <Badge status="success" text={record.trangThaiKetNoi} />}
                 </Space>
             )
         },
@@ -77,25 +92,24 @@ const ListDevice: React.FC = () => {
                     <Paragraph ellipsis={ellipsis ? { rows: 2, expandable: true, symbol: 'Xem thêm' } : false}>
                         {record.dichVuSuDung}
                     </Paragraph>
-                    {/* {record.dichvusudung} */}
                 </Space>
             )
         },
         {
             title: '',
             key: 'chitiet',
-            render: () => (
+            render: (_, record) => (
                 <Space>
-                    <NavLink to={'/device/list-device/detail-device'}>Chi tiết</NavLink>
+                    <NavLink to={`/device/list-device/detail-device/${record.key}`}>Chi tiết</NavLink>
                 </Space>
             )
         },
         {
             title: '',
             key: 'capnhat',
-            render: () => (
+            render: (_, record) => (
                 <Space>
-                    <NavLink to={'/device/list-device/update-device'}>Cập nhật</NavLink>
+                    <NavLink to={`/device/list-device/update-device/${record.key}`}>Cập nhật</NavLink>
                 </Space>
             )
         },
@@ -123,7 +137,7 @@ const ListDevice: React.FC = () => {
                                     <Space direction='vertical'>
                                         <Text strong>Trạng thái hoạt động</Text>
                                         <Select
-                                            onSelect={(value)=>{setSearchSelection(value)}}
+                                            onSelect={(value) => { setSearchSelection(value) }}
                                             size='large'
                                             defaultValue='tất cả'
                                             style={{ width: '300px' }}
@@ -143,7 +157,7 @@ const ListDevice: React.FC = () => {
                                     <Space direction='vertical'>
                                         <Text strong>Trạng thái kết nối</Text>
                                         <Select
-                                            onSelect={(value)=>{setConnectSelection(value)}}
+                                            onSelect={(value) => { setConnectSelection(value) }}
                                             size='large'
                                             defaultValue='tất cả'
                                             style={{ width: '300px' }}
@@ -163,15 +177,15 @@ const ListDevice: React.FC = () => {
                                 </Space>
                                 <Space direction='vertical'>
                                     <Text strong>Từ khóa</Text>
-                                    <Input 
-                                    onChange={(e)=>{
-                                        setSearchText(e.target.value);
-                                    }}
-                                    size='large' 
-                                    type='text' 
-                                    placeholder='Nhập từ khóa' 
-                                    suffix={<SearchOutlined style={{ color: '#FF7506' }} />} 
-                                    style={{ width: '300px' }} />
+                                    <Input
+                                        onChange={(e) => {
+                                            setSearchText(e.target.value);
+                                        }}
+                                        size='large'
+                                        type='text'
+                                        placeholder='Nhập từ khóa'
+                                        suffix={<SearchOutlined style={{ color: '#FF7506' }} />}
+                                        style={{ width: '300px' }} />
                                 </Space>
                             </Row>
                         </Col>
@@ -181,7 +195,7 @@ const ListDevice: React.FC = () => {
                     <Row gutter={24}>
                         <Col span={22}>
                             <Table
-                                dataSource={DataDevice}
+                                dataSource={device}
                                 columns={columns}
                                 pagination={{ pageSize: 5 }}
                                 size='middle'

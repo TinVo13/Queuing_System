@@ -6,6 +6,10 @@ const textstyle: React.CSSProperties = {
     color: 'white',
 }
 const ModelNumbering:React.FC = () => {
+    const [number,setNumber] = React.useState<number>(0);
+    React.useEffect(()=>{
+        setNumber(Math.floor(Math.random() * 9000000) + 1000000);
+    },[]);
     return (
         <Space direction='vertical' size={'large'} style={{ width: '100%' }}>
             <Space direction='vertical' align='center' style={{ width: '100%' }}>
@@ -13,7 +17,7 @@ const ModelNumbering:React.FC = () => {
                     <Text className='label-title'>Số thứ tự được cấp</Text>
                 </Row>
                 <Row justify={'center'}>
-                    <Text className='label-number'>2001201</Text>
+                    <Text className='label-number'>{number}</Text>
                 </Row>
                 <Row justify={'center'}>
                     <Text>DV: Khám răng hàm mặt<Text strong>(Tại quầy số 1)</Text></Text>

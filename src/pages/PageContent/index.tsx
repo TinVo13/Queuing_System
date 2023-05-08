@@ -3,7 +3,6 @@ import SideMenu from '../../components/Sidebar/SideMenu'
 import Topbar from '../../components/Topbar/Topbar'
 import { Outlet } from 'react-router-dom'
 import Layout from 'antd/es/layout/layout'
-import { Col, Row, Space } from 'antd'
 
 const container: React.CSSProperties = {
     display: 'flex',

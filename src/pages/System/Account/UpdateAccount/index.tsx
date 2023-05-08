@@ -1,17 +1,33 @@
 import { Button, Card, Col, ConfigProvider, Form, Input, Layout, Row, Select, Space, Typography } from 'antd';
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { SelectionRole, Status } from '../../../../components/Selection/ItemSelection';
+import { AccountType } from '../../../../type/types';
+import { getAccountByID, updateAccount } from '../../../../firebase/controller';
 
-const {Text} = Typography;
+const { Text } = Typography;
 const UpdateAccount = () => {
+  const { key } = useParams();
+  const [form] = Form.useForm();
+  const [account, setAccount] = React.useState<AccountType>();
   const navigate = useNavigate();
   const handleCancel = () => {
     navigate('/system-setting/list-account');
   }
-  const handleUpdate = () => {
+  const handleUpdate = (account: AccountType) => {
+    updateAccount(String(key), account);
     navigate('/system-setting/list-account');
   }
+  React.useEffect(() => {
+    const getData = async () => {
+      setAccount(await getAccountByID(String(key)));
+    }
+    getData();
+  }, [])
+  React.useEffect(()=>{
+    form.setFieldsValue(account);
+    console.log(account);
+  })
   return (
     <ConfigProvider
       theme={{
@@ -30,6 +46,7 @@ const UpdateAccount = () => {
           <Row justify={'space-evenly'}>
             <Col span={22}>
               <Form
+                form={form}
                 size='middle'
                 onFinish={handleUpdate}
               >
@@ -47,6 +64,7 @@ const UpdateAccount = () => {
                           </div>
                           <Form.Item
                             name={'hoTen'}
+                            hasFeedback
                             rules={[{
                               required: true,
                               message: 'Vui lòng nhập họ tên!'
@@ -61,8 +79,10 @@ const UpdateAccount = () => {
                           </div>
                           <Form.Item
                             name={'soDienThoai'}
+                            hasFeedback
                             rules={[{
                               required: true,
+                              min: 9,
                               message: 'Vui lòng nhập số điện thoại!'
                             }]}>
                             <Input type='text' placeholder='Nhập số điện thoại' size='large' />
@@ -75,11 +95,15 @@ const UpdateAccount = () => {
                           </div>
                           <Form.Item
                             name={'email'}
+                            hasFeedback
                             rules={[{
                               required: true,
                               message: 'Vui lòng nhập Email!'
-                            }]}>
-                            <Input type='text' placeholder='Nhập Email' size='large' />
+                            }, {
+                              type: 'email',
+                              message: 'Không đúng định dạng email!',
+                            },]}>
+                            <Input type='email' placeholder='Nhập Email' size='large' />
                           </Form.Item>
                         </Space>
                         <Space direction='vertical' style={{ width: '100%' }}>
@@ -89,14 +113,15 @@ const UpdateAccount = () => {
                           </div>
                           <Form.Item
                             name={'vaiTro'}
+                            hasFeedback
                             rules={[{
                               required: true,
                               message: 'Vui lòng nhập vai trò!'
                             }]}>
-                            <Select 
-                            size='large'
-                            options={SelectionRole} 
-                            defaultValue={'Tất cả'}/>
+                            <Select
+                              size='large'
+                              options={SelectionRole}
+                              defaultValue={'Tất cả'} />
                           </Form.Item>
                         </Space>
                       </Col>
@@ -108,11 +133,12 @@ const UpdateAccount = () => {
                           </div>
                           <Form.Item
                             name={'tenDangNhap'}
+                            hasFeedback
                             rules={[{
                               required: true,
                               message: 'Vui lòng điền tên đăng nhập!'
                             }]}>
-                            <Input type='text' placeholder='Nhập tên đăng nhập' size='large'/>
+                            <Input type='text' placeholder='Nhập tên đăng nhập' size='large' />
                           </Form.Item>
                         </Space>
                         <Space direction='vertical' style={{ width: '100%' }}>
@@ -122,9 +148,13 @@ const UpdateAccount = () => {
                           </div>
                           <Form.Item
                             name={'matKhau'}
+                            hasFeedback
                             rules={[{
                               required: true,
                               message: 'Vui lòng nhập mật khẩu!'
+                            },{
+                              min:8,
+                              message:'Mật khẩu phải từ 8 ký tự trở lên!'
                             }]}>
                             <Input type='password' placeholder='Nhập mật khẩu' size='large' />
                           </Form.Item>
@@ -136,10 +166,20 @@ const UpdateAccount = () => {
                           </div>
                           <Form.Item
                             name={'nhapLaiMatKhau'}
+                            dependencies={['matKhau']}
+                            hasFeedback
                             rules={[{
                               required: true,
                               message: 'Vui lòng nhập lại mật khẩu!'
-                            }]}>
+                            },
+                            ({ getFieldValue }) => ({
+                              validator(_, value) {
+                                if (!value || getFieldValue('matKhau') === value) {
+                                  return Promise.resolve();
+                                }
+                                return Promise.reject(new Error('Hai mật khẩu không trùng khớp!'));
+                              },
+                            }),]}>
                             <Input type='password' placeholder='Nhập lại mật khẩu' size='large' />
                           </Form.Item>
                         </Space>
@@ -149,15 +189,16 @@ const UpdateAccount = () => {
                             <Text style={{ color: 'red' }}>*</Text>
                           </div>
                           <Form.Item
-                            name={'tinhTrang'}
+                            name={'trangThaiHoatDong'}
+                            hasFeedback
                             rules={[{
                               required: true,
                               message: 'Vui lòng chọn tình trạng!'
                             }]}>
-                            <Select 
+                            <Select
                               options={Status}
                               size='large'
-                              defaultValue={'Tất cả'}/>
+                              defaultValue={'Tất cả'} />
                           </Form.Item>
                         </Space>
                       </Col>

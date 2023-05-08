@@ -1,4 +1,4 @@
-import { Options } from "../../type";
+import { Options } from "../../type/types";
 
 export const SelectionService: Options[] = [
     { label: 'Tất cả', value: 'tất cả' },
@@ -11,63 +11,73 @@ export const SelectionService: Options[] = [
 ]
 export const SelectionStatus: Options[] = [
     {
-        label:'Tất cả',
-        value: 'tất cả'
+        label: 'Tất cả',
+        value: 'Tất cả'
     },
     {
-        label:'Đang chờ',
-        value: 'đang chờ'
+        label: 'Đang chờ',
+        value: 'Đang chờ'
     },
     {
-        label:'Đã sử dụng',
-        value: 'đã sử dụng'
+        label: 'Đã sử dụng',
+        value: 'Đã sử dụng'
     },
     {
-        label:'Bỏ qua',
-        value: 'bỏ qua'
+        label: 'Bỏ qua',
+        value: 'Bỏ qua'
     },
 ]
 export const SelectionRole: Options[] = [
     {
-        label:'Tất cả',
-        value:''
+        label: 'Tất cả',
+        value: 'Tất cả'
     },
     {
-        label:'Kế toán',
-        value:'kế toán'
+        label: 'Kế toán',
+        value: 'Kế toán'
     },
     {
-        label:'Bác sĩ',
-        value:'bác sĩ'
+        label: 'Bác sĩ',
+        value: 'Bác sĩ'
     },
     {
         label: 'Lễ tân',
-        value:'lễ tân'
+        value: 'Lễ tân'
     },
     {
-        label:'Quản lý',
-        value:'quản lý'
+        label: 'Quản lý',
+        value: 'Quản lý'
     },
     {
-        label:'Admin',
-        value:'admin'
+        label: 'Admin',
+        value: 'Admin'
     },
     {
-        label:'Superadmin',
-        value:'superadmin'
+        label: 'Superadmin',
+        value: 'Superadmin'
     }
 ]
-export const Status:Options[] = [
+export const Status: Options[] = [
     {
-        label:'Tất cả',
-        value:''
+        label: 'Tất cả',
+        value: 'Tất cả'
     },
     {
-        label:'Ngưng hoạt động',
-        value:'ngưng hoạt động'
+        label: 'Ngưng hoạt động',
+        value: 'Ngưng hoạt động'
     },
     {
-        label:'Hoạt động',
-        value:'hoạt động'
+        label: 'Hoạt động',
+        value: 'Hoạt động'
     }
 ]
+export const optionsCheckbox = [
+    'Chức năng x',
+    'Chức năng y',
+    'Chức năng z'
+];
+export const optionsCheckboxs = [
+    'Chức năng a',
+    'Chức năng b',
+    'Chức năng c'
+];

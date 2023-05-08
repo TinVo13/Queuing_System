@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { Badge, Button, Col, ConfigProvider, DatePicker, Input, Layout, Row, Select, Space, Table, Typography } from 'antd'
 import { SearchOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { DataService } from '../../../data';
-import { ColumnTableService } from '../../../components/Table/ColumnTable';
 import { ColumnsType } from 'antd/es/table';
-import { ServiceType } from '../../../type';
+import { ServiceType } from '../../../type/types';
+import { DocumentData, QuerySnapshot, onSnapshot } from 'firebase/firestore';
+import { serviceCollection } from '../../../firebase/controller';
 
 const { Text } = Typography;
 const { RangePicker } = DatePicker;
@@ -13,6 +13,18 @@ const ListService = () => {
     const navigate = useNavigate();
     const [searchText, setSearchText] = useState("");
     const [searchSelection, setSearchSelection] = useState("tất cả");
+    const [service,setService] = useState<ServiceType[]>([]);
+
+    React.useEffect(()=>onSnapshot(serviceCollection,(snapshot:QuerySnapshot<DocumentData>)=>{
+        setService(
+            snapshot.docs.map((doc)=>{
+                return{
+                    key: doc.id,
+                    ...doc.data()
+                }
+            })
+        )
+    }),[]);
     const ColumnTableService: ColumnsType<ServiceType> = [
         {
             title: 'Mã dịch vụ',
@@ -54,18 +66,18 @@ const ListService = () => {
         {
             title: '',
             key: 'chitiet',
-            render: () => (
+            render: (_,record) => (
                 <Space>
-                    <NavLink to={'/service/list-service/detail-service'}>Chi tiết</NavLink>
+                    <NavLink to={`/service/list-service/detail-service/${record.key}`}>Chi tiết</NavLink>
                 </Space>
             )
         },
         {
             title: '',
             key: 'capnhat',
-            render: () => (
+            render: (_,record) => (
                 <Space>
-                    <NavLink to={'/service/list-service/update-service'}>Cập nhật</NavLink>
+                    <NavLink to={`/service/list-service/update-service/${record.key}`}>Cập nhật</NavLink>
                 </Space>
             )
         },
@@ -137,7 +149,7 @@ const ListService = () => {
                     <Row gutter={24}>
                         <Col span={22}>
                             <Table
-                                dataSource={DataService}
+                                dataSource={service}
                                 columns={ColumnTableService}
                                 pagination={{ pageSize: 9 }}
                                 size='middle'

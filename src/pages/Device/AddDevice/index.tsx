@@ -1,11 +1,21 @@
 import React from 'react'
 import { Button, Card, Col, ConfigProvider, Form, Input, Layout, Row, Select, Space, Typography } from 'antd'
 import { useNavigate } from 'react-router-dom';
+import { AddDeviceType } from '../../../type/types';
+import { addDevice } from '../../../firebase/controller';
 
 const { Text } = Typography
 
 const AddDevice: React.FC = () => {
   const navigate = useNavigate();
+
+  const handleAddDevice = (values: AddDeviceType) => {
+    values.trangThaiHoatDong = "Ngưng hoạt động";
+    values.trangThaiKetNoi = "Mất kết nối";
+    addDevice(values);
+    console.log('Thêm thiết bị thành công!');
+    navigate('/device/list-device');
+  }
   return (
     <ConfigProvider
       theme={{
@@ -23,7 +33,7 @@ const AddDevice: React.FC = () => {
           </Row>
           <Row justify={'space-evenly'}>
             <Col span={22}>
-              <Form onFinish={() => navigate('/device/list-device')}>
+              <Form onFinish={(values:AddDeviceType) => handleAddDevice(values)}>
                 <Space direction='vertical' style={{ width: '100%' }} size={'large'}>
                   <Card>
                     <Text className='label-h2' strong>Thông tin thiết bị</Text>
@@ -35,7 +45,7 @@ const AddDevice: React.FC = () => {
                             <Text type='danger'>*</Text>
                           </div>
                           <Form.Item
-                            name={'Mã thiết bị'}
+                            name={'maThietBi'}
                             rules={[{
                               required: true,
                               message: 'Vui lòng nhập mã thiết bị!'
@@ -49,7 +59,7 @@ const AddDevice: React.FC = () => {
                             <Text type='danger'>*</Text>
                           </div>
                           <Form.Item
-                            name={'Tên thiết bị'}
+                            name={'tenThietBi'}
                             rules={[{
                               required: true,
                               message: 'Vui lòng nhập tên thiết bị!'
@@ -63,7 +73,7 @@ const AddDevice: React.FC = () => {
                             <Text type='danger'>*</Text>
                           </div>
                           <Form.Item
-                            name={'Địa chỉ IP'}
+                            name={'diaChiIP'}
                             rules={[{
                               required: true,
                               message: 'Vui lòng nhập địa chỉ IP!'
@@ -79,7 +89,7 @@ const AddDevice: React.FC = () => {
                             <Text type='danger'>*</Text>
                           </div>
                           <Form.Item
-                            name={'Loại thiết bị'}
+                            name={'loaiThietBi'}
                             rules={[{
                               required: true,
                               message: 'Vui lòng chọn loại thiết bị!'
@@ -96,7 +106,7 @@ const AddDevice: React.FC = () => {
                             <Text type='danger'>*</Text>
                           </div>
                           <Form.Item
-                            name={'Tài khoản'}
+                            name={'tenDangNhap'}
                             rules={[{
                               required: true,
                               message: 'Vui lòng nhập tên đăng nhập!'
@@ -110,7 +120,7 @@ const AddDevice: React.FC = () => {
                             <Text type='danger'>*</Text>
                           </div>
                           <Form.Item
-                            name={'Mật khẩu'}
+                            name={'matKhau'}
                             rules={[{
                               required: true,
                               message: 'Vui lòng nhập mật khẩu!'
@@ -128,7 +138,7 @@ const AddDevice: React.FC = () => {
                             <Text type='danger'>*</Text>
                           </div>
                           <Form.Item
-                            name={'Dịch vụ'}
+                            name={'dichVuSuDung'}
                             rules={[{
                               required: true,
                               message: 'Vui lòng nhập dịch vụ!'

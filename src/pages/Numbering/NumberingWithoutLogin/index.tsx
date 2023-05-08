@@ -4,7 +4,7 @@ import { LaptopOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom';
 import ModelNumbering from '../../../components/Model/Numbering';
 
-const { Content, Footer, Sider } = Layout;
+const { Content, Sider } = Layout;
 const { Text } = Typography;
 
 const siderstyle: React.CSSProperties = {
@@ -14,6 +14,8 @@ const siderstyle: React.CSSProperties = {
 const NumberingWithoutLogin: React.FC = () => {
   const [modelOpen, setModelOpen] = useState(false);
   const navigate = useNavigate();
+  //const user = getAllUser();
+
   return (
     <ConfigProvider
       theme={{

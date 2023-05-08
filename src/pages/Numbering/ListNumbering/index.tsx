@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { Badge, Button, Col, ConfigProvider, DatePicker, Input, Layout, Row, Select, Space, Table, Typography } from 'antd'
 import { SearchOutlined, ArrowRightOutlined, PlusCircleOutlined } from '@ant-design/icons'
-import { NumberingType } from '../../../type'
+import { NumberingType } from '../../../type/types'
 import { ColumnsType } from 'antd/es/table'
-import { DataListNumbeing } from '../../../data'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { SelectionService } from '../../../components/Selection/ItemSelection'
+import { DocumentData, QuerySnapshot, onSnapshot } from 'firebase/firestore'
+import { numberingCollection } from '../../../firebase/controller'
 
 
 
@@ -13,6 +14,20 @@ const { Text } = Typography
 const ListNumbering: React.FC = () => {
     const navigate = useNavigate();
     const [searchText, setSearchText] = useState("");
+    const [numbering,setNumbering] = useState<NumberingType[]>([]);
+
+    React.useEffect(() =>
+        onSnapshot(numberingCollection, (snapshot: QuerySnapshot<DocumentData>) => {
+            setNumbering(
+                snapshot.docs.map((doc) => {
+                    return {
+                        key: doc.id,
+                        ...doc.data()
+                    };
+                })
+            );
+        })
+        , []);
     const column: ColumnsType<NumberingType> = [
         {
             title: 'STT',
@@ -65,7 +80,7 @@ const ListNumbering: React.FC = () => {
         {
             title: '',
             render: (_, record) => (
-                <NavLink to={'/numbering/list-numbering/detail-numbering'}>Chi tiết</NavLink>
+                <NavLink to={`/numbering/list-numbering/detail-numbering/${record.key}`}>Chi tiết</NavLink>
             )
         }
     ]
@@ -153,7 +168,7 @@ const ListNumbering: React.FC = () => {
                     <Row >
                         <Col span={22} style={{ paddingLeft: 16 }}>
                             <Table
-                                dataSource={DataListNumbeing}
+                                dataSource={numbering}
                                 columns={column}
                                 pagination={{ pageSize: 9 }}
                                 bordered

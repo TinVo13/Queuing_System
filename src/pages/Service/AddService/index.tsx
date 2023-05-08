@@ -1,11 +1,20 @@
 import React from 'react'
-import { Button, Card, Checkbox, Col, ConfigProvider, Form, Input, Layout, Row, Space, Typography } from 'antd'
+import { Button, Card, Checkbox, Col, ConfigProvider, Form, Input, Layout, Row, Space, Typography,  } from 'antd'
 import { useNavigate } from 'react-router-dom';
+import { AddServiceType } from '../../../type/types';
+import { addService } from '../../../firebase/controller';
 
 const { Text } = Typography;
 const { TextArea } = Input;
 const AddService: React.FC = () => {
     const navigate = useNavigate();
+    const handleAddService = (values: AddServiceType) => {
+        //console.log(values)
+        values.trangThaiHoatDong="Hoạt động";
+        addService(values);
+        navigate('/service/list-service');
+    }
+
     return (
         <ConfigProvider
             theme={{
@@ -22,7 +31,7 @@ const AddService: React.FC = () => {
                     </Row>
                     <Row>
                         <Col span={24}>
-                            <Form onFinish={()=>navigate('/service/list-service')}>
+                            <Form onFinish={(values: AddServiceType) => handleAddService(values)}>
                                 <Space direction='vertical' size={'large'} style={{ width: '100%' }}>
                                     <Card>
                                         <Space direction='vertical' style={{ width: '100%' }}>
@@ -36,7 +45,7 @@ const AddService: React.FC = () => {
                                                             <Text strong>Mã dịch vụ:</Text><Text type='danger'>*</Text>
                                                         </div>
                                                         <Form.Item
-                                                            name={'Mã dịch vụ'}
+                                                            name={'maDichVu'}
                                                             rules={[{
                                                                 required: true,
                                                                 message: 'Vui lòng nhập mã dịch vụ!'
@@ -49,7 +58,7 @@ const AddService: React.FC = () => {
                                                             <Text strong>Tên dịch vụ:</Text><Text type='danger'>*</Text>
                                                         </div>
                                                         <Form.Item
-                                                            name={'Tên dịch vụ'}
+                                                            name={'tenDichVu'}
                                                             rules={[{
                                                                 required: true,
                                                                 message: 'Vui lòng nhập tên dịch vụ!'
@@ -63,7 +72,10 @@ const AddService: React.FC = () => {
                                                         <div>
                                                             <Text strong>Mô tả:</Text>
                                                         </div>
-                                                        <TextArea autoSize={{ minRows: 5 }} placeholder='Mô tả dịch vụ' />
+                                                        <Form.Item
+                                                            name={"moTa"}>
+                                                            <TextArea autoSize={{ minRows: 5 }} placeholder='Mô tả dịch vụ' />
+                                                        </Form.Item>
                                                     </Space>
                                                 </Col>
                                             </Row>
@@ -126,7 +138,7 @@ const AddService: React.FC = () => {
                                     <Row justify={'center'} align={'middle'}>
                                         <Space>
                                             <Form.Item>
-                                                <Button className='btn-cancel' onClick={()=>navigate('/service/list-service')}>Hủy bỏ</Button>
+                                                <Button className='btn-cancel' onClick={() => navigate('/service/list-service')}>Hủy bỏ</Button>
                                             </Form.Item>
                                             <Form.Item>
                                                 <Button htmlType='submit' className='btn-submit'>Thêm dịch vụ</Button>

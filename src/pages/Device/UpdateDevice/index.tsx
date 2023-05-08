@@ -2,23 +2,31 @@ import { Card, Col, ConfigProvider, Form, Input, Row, Select, Space, Typography,
 import Layout from 'antd/es/layout/layout';
 import React from 'react'
 import TagRender from '../../../components/CustomTag';
-import { useNavigate } from 'react-router-dom';
-import { UpdateDeviceType } from '../../../type';
+import { useNavigate, useParams } from 'react-router-dom';
+import { DeviceType } from '../../../type/types';
 import { SelectionService } from '../../../components/Selection/ItemSelection';
+import { getDeviceByID, updateDevice } from '../../../firebase/controller';
 
 const { Text } = Typography;
 
-const initialValue: UpdateDeviceType = {
-  maThietBi: 'KIO_01',
-  tenThietBi: 'Kiosk',
-  loaiThietBi: 'Kiosk',
-  tenDangNhap: 'Tin',
-  matKhau: 'abc123',
-  diaChiIP: '192.168.0.10',
-  dichVu: ['Khám tim mạch']
-}
 const UpdateDevice: React.FC = () => {
+  const [form] = Form.useForm();
+  const { key } = useParams();
+  const [device, setDevice] = React.useState<DeviceType>();
   const navigate = useNavigate()
+  React.useEffect(() => {
+    const getDevice = async () => {
+      setDevice(await getDeviceByID(String(key)));
+    }
+    getDevice();
+  }, []);
+  form.setFieldsValue(device);
+  const handleUpdateDevice = (values:DeviceType) => {
+    values.trangThaiHoatDong = "Ngưng hoạt động";
+    values.trangThaiKetNoi = "Mất kết nối";
+    updateDevice(String(key),values);
+    navigate('/device/list-device');
+  }
   return (
     <Layout>
       <ConfigProvider
@@ -38,9 +46,9 @@ const UpdateDevice: React.FC = () => {
             <Row justify={'space-evenly'}>
               <Col span={22}>
                 <Form
+                  form={form}
                   size='middle'
-                  onFinish={() => navigate('/device/list-device')}
-                  initialValues={initialValue}
+                  onFinish={(values:DeviceType) => handleUpdateDevice(values)}
                 >
                   <Space direction='vertical' size={'large'} style={{ width: '100%' }}>
                     <Card>
@@ -56,6 +64,7 @@ const UpdateDevice: React.FC = () => {
                             </div>
                             <Form.Item
                               name={'maThietBi'}
+                              hasFeedback
                               rules={[{
                                 required: true,
                                 message: 'Vui lòng nhập mã thiết bị!'
@@ -70,6 +79,7 @@ const UpdateDevice: React.FC = () => {
                             </div>
                             <Form.Item
                               name={'tenThietBi'}
+                              hasFeedback
                               rules={[{
                                 required: true,
                                 message: 'Vui lòng nhập tên thiết bị!'
@@ -84,6 +94,7 @@ const UpdateDevice: React.FC = () => {
                             </div>
                             <Form.Item
                               name={'diaChiIP'}
+                              hasFeedback
                               rules={[{
                                 required: true,
                                 message: 'Vui lòng nhập địa chỉ IP!'
@@ -100,6 +111,7 @@ const UpdateDevice: React.FC = () => {
                             </div>
                             <Form.Item
                               name={'loaiThietBi'}
+                              hasFeedback
                               rules={[{
                                 required: true,
                                 message: 'Vui lòng chọn loại thiết bị!'
@@ -116,6 +128,7 @@ const UpdateDevice: React.FC = () => {
                             </div>
                             <Form.Item
                               name={'tenDangNhap'}
+                              hasFeedback
                               rules={[{
                                 required: true,
                                 message: 'Vui lòng nhập tên đăng nhập!'
@@ -130,6 +143,7 @@ const UpdateDevice: React.FC = () => {
                             </div>
                             <Form.Item
                               name={'matKhau'}
+                              hasFeedback
                               rules={[{
                                 required: true,
                                 message: 'Vui lòng nhập mật khẩu!'
@@ -147,13 +161,14 @@ const UpdateDevice: React.FC = () => {
                               <Text style={{ color: 'red' }}>*</Text>
                             </div>
                             <Form.Item
-                              name={'dichVu'}
+                              name={'dichVuSuDung'}
+                              hasFeedback
                               rules={[{
                                 required: true,
                                 message: 'Vui lòng nhập dịch vụ!'
                               }]}>
                               <Select
-                                mode='multiple'
+                                mode='tags'
                                 tagRender={TagRender}
                                 allowClear
                                 style={{ width: '100%' }}

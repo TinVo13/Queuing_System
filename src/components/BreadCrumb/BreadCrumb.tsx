@@ -1,6 +1,7 @@
 import React from 'react'
 import { Breadcrumb, Typography } from 'antd';
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+import {RightOutlined} from '@ant-design/icons'; 
 
 const {Item} = Breadcrumb;
 const {Text} = Typography;
@@ -36,24 +37,24 @@ const BreadCrumb: React.FC = () => {
     const location = useLocation();
     const breadCrumbView = () => {
         const { pathname } = location;
-        const re:RegExp = /\b(?:userinfo|dashboard|device|list-device|detail-device|update-device|add-device|service|list-service|add-service|detail-service|update-service|numbering|list-numbering|add-numbering|report|system-setting|list-role|update-role|add-role|list-account|add-account|update-account|list-userlog)\b/gi
+        const re:RegExp = /\b(?:userinfo|dashboard|device|list-device|detail-device|update-device|add-device|service|list-service|add-service|detail-service|update-service|numbering|list-numbering|add-numbering|detail-numbering|report|system-setting|list-role|update-role|add-role|list-account|add-account|update-account|list-userlog)\b/gi
         const pathNames:string[] = pathname.replace(re,m => mapObj[m]).split("/").filter((x) => x); 
         const path:string[] = pathname.split("/").filter((x)=>x);
         //console.log(pathNames);
         return (
             <div>
-                <Breadcrumb separator=">">
+                <Breadcrumb separator={<RightOutlined/>}>
                     {pathNames.map((name, index) => {
                         const routeTo = `/${path.slice(0, index + 1).join("/")}`;
                         const isLast = index === pathNames.length - 1;
                         return isLast ? (
                             <Item key={name}>
-                                <Text strong style={{color:'#FF9138'}}>{name}</Text>
+                                <Text strong className='label-h2'>{name}</Text>
                             </Item>
                         ) : (
                             <Item key={name}>
-                                <Link to={`${routeTo}`} style={{color:'black',fontWeight:'bold'}}>{name}</Link>
-                                {/* <Text strong>{name}</Text> */}
+                                {/* <Link to={`${routeTo}`} style={{color:'black',fontWeight:'bold'}}>{name}</Link> */}
+                                <Text strong style={{fontSize:20}}>{name}</Text>
                             </Item>
                         )
                     })}

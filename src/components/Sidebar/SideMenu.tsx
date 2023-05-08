@@ -9,6 +9,7 @@ import {
     SettingOutlined,
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import { auth } from '../../firebase/firebaseConfig';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -28,7 +29,7 @@ function getItem(
 const items: MenuItem[] = [
     getItem('Dashboard', '/dashboard', <PieChartOutlined />),
     getItem('Thiết bị', '/device/list-device', <DesktopOutlined />),
-    getItem('Dịch vụ', '/service/list-service', <UserOutlined />,),
+    getItem('Dịch vụ', '/service/list-service', <UserOutlined />),
     getItem('Cấp số', '/numbering/list-numbering', <LaptopOutlined />),
     getItem('Báo cáo', '/report', <LineChartOutlined />),
     getItem('Cài đặt hệ thống', 'sub1', <SettingOutlined />, [
@@ -38,6 +39,10 @@ const items: MenuItem[] = [
 ];
 const SideMenu: React.FC = () => {
     const navigate = useNavigate();
+    //const [user,setUser] = React.useState<Account>(useAppSelector((state)=>state.account.accounts));
+    const handleLogout = () => {
+        auth.signOut();
+    }
     return (
         <div style={{ height: '100vh', }}>
             <ConfigProvider
@@ -50,14 +55,14 @@ const SideMenu: React.FC = () => {
                     <div style={{ height: 100, margin: 16, display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
                         <Image src={require('../../assets/logowhite.png')} width={150} preview={false} />
                     </div>
-                    <div style={{ height:'80vh',display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center'}}>
+                    <div style={{ height: '80vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
                         <div>
                             <Menu onClick={(item) => {
                                 navigate(item.key);
                             }} theme="light" mode="vertical" items={items} defaultSelectedKeys={['/dashboard']} />
                         </div>
                         <div>
-                            <Button block type='primary' style={{ background: '#FFF2E7', color: '#FF7506' }} onClick={() => navigate('/login')}>Đăng xuất</Button>
+                            <Button block type='primary' style={{ background: '#FFF2E7', color: '#FF7506' }} onClick={() => handleLogout()}>Đăng xuất</Button>
                         </div>
                     </div>
                 </div>

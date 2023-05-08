@@ -3,11 +3,14 @@ import { Col, ConfigProvider, DatePicker, Input, Layout, Row, Select, Space, Tab
 import {SearchOutlined} from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { ColumnsType } from 'antd/es/table';
-import { UserLogType } from '../../../type';
+import { UserLogType } from '../../../type/types';
 import { dataUserLog } from '../../../data';
 
 const {RangePicker} = DatePicker;
-const columns: ColumnsType<UserLogType> = [
+
+const {Text} = Typography;
+const UserLog = () => {
+  const columns: ColumnsType<UserLogType> = [
     {
         title:'Tên đăng nhập',
         key:'tenDangNhap',
@@ -29,8 +32,6 @@ const columns: ColumnsType<UserLogType> = [
         dataIndex:'thaoTacThucHien'
     },
 ]
-const {Text} = Typography;
-const UserLog = () => {
     return (
       <ConfigProvider
         theme={{

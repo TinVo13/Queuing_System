@@ -3,42 +3,53 @@ import { Button, Col, ConfigProvider, Input, Layout, Row, Space, Typography } fr
 import { PlusCircleOutlined, SearchOutlined } from '@ant-design/icons';
 import Table, { ColumnsType } from 'antd/es/table';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { RoleType } from '../../../../type';
-import { dataRole } from '../../../../data';
+import { RoleType } from '../../../../type/types';
+import { DocumentData, QuerySnapshot, onSnapshot } from 'firebase/firestore';
+import { roleCollection } from '../../../../firebase/controller';
 
 
 const { Text } = Typography;
-
-const columns: ColumnsType<RoleType> = [
-    {
-        title: 'Tên vai trò',
-        key: 'tenVaiTro',
-        dataIndex: 'tenVaiTro',
-    },
-    {
-        title: 'Số người dùng',
-        key: 'soNguoiDung',
-        dataIndex: 'soNguoiDung'
-    },
-    {
-        title: 'Mô tả',
-        key: 'moTa',
-        dataIndex: 'moTa',
-    },
-    {
-        key: 'capNhat',
-        render: () => (
-            <Space>
-                <NavLink to={'/system-setting/list-role/update-role'}>Cập nhật</NavLink>
-            </Space>
-        )
-    }
-]
 const ListRole: React.FC = () => {
     const navigate = useNavigate();
+    const [role,setRole] = React.useState<RoleType[]>([]);
+
     const handleAddRole = () => {
         navigate('/system-setting/list-role/add-role');
     }
+    React.useEffect(()=>
+        onSnapshot(roleCollection,(snapshot:QuerySnapshot<DocumentData>)=>{
+            setRole(snapshot.docs.map((doc)=>{
+                return {
+                    key: doc.id,
+                    ...doc.data()
+                }
+            }))
+        }),[]);
+    const columns: ColumnsType<RoleType> = [
+        {
+            title: 'Tên vai trò',
+            key: 'tenVaiTro',
+            dataIndex: 'tenVaiTro',
+        },
+        {
+            title: 'Số người dùng',
+            key: 'soNguoiDung',
+            dataIndex: 'soNguoiDung'
+        },
+        {
+            title: 'Mô tả',
+            key: 'moTa',
+            dataIndex: 'moTa',
+        },
+        {
+            key: 'capNhat',
+            render: (_,record) => (
+                <Space>
+                    <NavLink to={`/system-setting/list-role/update-role/${record.key}`}>Cập nhật</NavLink>
+                </Space>
+            )
+        }
+    ]
     return (
         <ConfigProvider
             theme={{
@@ -70,7 +81,7 @@ const ListRole: React.FC = () => {
                         <Col span={22} style={{ paddingLeft: 16 }}>
                             <Table
                                 columns={columns}
-                                dataSource={dataRole}
+                                dataSource={role}
                                 rowClassName={(record, index) => (index % 2 === 0 ? 'table-row-light' : 'table-row-dark')}
                                 bordered
                                 size='middle' />

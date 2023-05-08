@@ -1,17 +1,29 @@
 import React from 'react'
 import { Button, Card, Checkbox, Col, ConfigProvider, Form, Input, Layout, Row, Space, Typography } from 'antd'
-import { useNavigate } from 'react-router-dom';
-import { UpdateServiceType } from '../../../type';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ServiceType, UpdateServiceType } from '../../../type/types';
+import { getServiceByID, updateService } from '../../../firebase/controller';
 
-const {Text} = Typography;
-const {TextArea} = Input;
+const { Text } = Typography;
+const { TextArea } = Input;
 
-const initialValue:UpdateServiceType = {
-    maDichVu: '201',
-    tenDichVu: 'Khám tim mạch'
-} 
 const UpdateService = () => {
     const navigate = useNavigate();
+    const { key } = useParams();
+    const [form] = Form.useForm();
+    const [service, setService] = React.useState<ServiceType>();
+    React.useEffect(() => {
+        const getService = async () => {
+            setService(await getServiceByID(String(key)));
+        }
+        getService();
+    }, []);
+    form.setFieldsValue(service);
+    const handleUpdateService = (service: ServiceType) => {
+        service.trangThaiHoatDong="Hoạt động";
+        updateService(String(key),service);
+        navigate('/service/list-service');
+    }
     return (
         <ConfigProvider
             theme={{
@@ -28,7 +40,7 @@ const UpdateService = () => {
                     </Row>
                     <Row>
                         <Col span={24}>
-                            <Form onFinish={()=>navigate('/service/list-service')} initialValues={initialValue}>
+                            <Form form={form} onFinish={(value: ServiceType) => handleUpdateService(value)}>
                                 <Space direction='vertical' size={'large'} style={{ width: '100%' }}>
                                     <Card>
                                         <Space direction='vertical' style={{ width: '100%' }}>
@@ -42,12 +54,13 @@ const UpdateService = () => {
                                                             <Text strong>Mã dịch vụ:</Text><Text type='danger'>*</Text>
                                                         </div>
                                                         <Form.Item
-                                                            name={'maDichVu'}
+                                                            name={"maDichVu"}
+                                                            hasFeedback
                                                             rules={[{
                                                                 required: true,
                                                                 message: 'Vui lòng nhập mã dịch vụ!'
                                                             }]}>
-                                                            <Input type='text' placeholder='Nhập mã dịch vụ' size='large'/>
+                                                            <Input type='text' placeholder='Nhập mã dịch vụ' size='large' />
                                                         </Form.Item>
                                                     </Space>
                                                     <Space direction='vertical' size={'small'} style={{ width: '100%' }}>
@@ -56,6 +69,7 @@ const UpdateService = () => {
                                                         </div>
                                                         <Form.Item
                                                             name={'tenDichVu'}
+                                                            hasFeedback
                                                             rules={[{
                                                                 required: true,
                                                                 message: 'Vui lòng nhập tên dịch vụ!'
@@ -69,12 +83,15 @@ const UpdateService = () => {
                                                         <div>
                                                             <Text strong>Mô tả:</Text>
                                                         </div>
-                                                        <TextArea autoSize={{ minRows: 5 }} placeholder='Mô tả dịch vụ' />
+                                                        <Form.Item
+                                                            name={"moTa"}>
+                                                            <TextArea autoSize={{ minRows: 5 }} placeholder='Mô tả dịch vụ' />
+                                                        </Form.Item>
                                                     </Space>
                                                 </Col>
                                             </Row>
                                             <Row>
-                                                <Text style={{color:'#FF7506'}} strong>Quy tắt cấp số</Text>
+                                                <Text style={{ color: '#FF7506' }} strong>Quy tắt cấp số</Text>
                                             </Row>
                                             <Row gutter={10}>
                                                 <Col>
@@ -84,13 +101,13 @@ const UpdateService = () => {
                                                     <Text strong>Tăng tự động từ:</Text>
                                                 </Col>
                                                 <Col>
-                                                    <Input placeholder='0001' style={{ width: 60 }} defaultValue={'0001'}/>
+                                                    <Input placeholder='0001' style={{ width: 60 }} defaultValue={'0001'} />
                                                 </Col>
                                                 <Col>
                                                     <Text>đến</Text>
                                                 </Col>
                                                 <Col>
-                                                    <Input placeholder='9999' style={{ width: 60 }} defaultValue={'9999'}/>
+                                                    <Input placeholder='9999' style={{ width: 60 }} defaultValue={'9999'} />
                                                 </Col>
                                             </Row>
                                             <Row gutter={10}>
@@ -101,7 +118,7 @@ const UpdateService = () => {
                                                     <Text strong>Prefix:</Text>
                                                 </Col>
                                                 <Col>
-                                                    <Input placeholder='0001' style={{ width: 60 }} defaultValue={'0001'}/>
+                                                    <Input placeholder='0001' style={{ width: 60 }} defaultValue={'0001'} />
                                                 </Col>
                                             </Row>
                                             <Row gutter={10}>
@@ -112,7 +129,7 @@ const UpdateService = () => {
                                                     <Text strong>Surfix:</Text>
                                                 </Col>
                                                 <Col>
-                                                    <Input placeholder='0001' style={{ width: 60 }} defaultValue={'0001'}/>
+                                                    <Input placeholder='0001' style={{ width: 60 }} defaultValue={'0001'} />
                                                 </Col>
                                             </Row>
                                             <Row gutter={10}>
@@ -132,7 +149,7 @@ const UpdateService = () => {
                                     <Row justify={'center'} align={'middle'}>
                                         <Space>
                                             <Form.Item>
-                                                <Button className='btn-cancel' onClick={()=>navigate('/service/list-service')}>Hủy bỏ</Button>
+                                                <Button className='btn-cancel' onClick={() => navigate('/service/list-service')}>Hủy bỏ</Button>
                                             </Form.Item>
                                             <Form.Item>
                                                 <Button htmlType='submit' className='btn-submit' type='ghost'>Cập nhật</Button>

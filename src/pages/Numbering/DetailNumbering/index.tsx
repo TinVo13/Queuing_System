@@ -1,12 +1,23 @@
 import React from 'react'
 import { Badge, Button, Card, Col, ConfigProvider, Layout, Row, Space, Typography } from 'antd';
 import { RollbackOutlined } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { NumberingType } from '../../../type/types';
+import { getNumberingByID } from '../../../firebase/controller';
 
 
 const { Text } = Typography;
 const DetailNumbering: React.FC = () => {
+  const {key} = useParams();
   const navigate = useNavigate();
+  const [numbering,setNumbering] = React.useState<NumberingType>();
+
+  React.useEffect(()=>{
+    const getNumberingData = async () => {
+      setNumbering(await getNumberingByID(String(key)));
+    }
+    getNumberingData();
+  },[]);
   return (
     <ConfigProvider
       theme={{
@@ -42,7 +53,7 @@ const DetailNumbering: React.FC = () => {
                             <Text strong>Họ tên:</Text>
                           </Col>
                           <Col span={19}>
-                            <Text>Võ Trung Tín</Text>
+                            <Text>{numbering?.tenKhachHang}</Text>
                           </Col>
                         </Row>
                         <Row>
@@ -50,7 +61,7 @@ const DetailNumbering: React.FC = () => {
                             <Text strong>Tên dịch vụ:</Text>
                           </Col>
                           <Col span={19}>
-                            <Text>Khám tim mạch</Text>
+                            <Text>{numbering?.tenDichVu}</Text>
                           </Col>
                         </Row>
                         <Row>
@@ -58,7 +69,7 @@ const DetailNumbering: React.FC = () => {
                             <Text strong>Số thứ tự:</Text>
                           </Col>
                           <Col span={19}>
-                            <Text>2001201</Text>
+                            <Text>{numbering?.stt}</Text>
                           </Col>
                         </Row>
                         <Row>
@@ -66,7 +77,7 @@ const DetailNumbering: React.FC = () => {
                             <Text strong>Thời gian cấp:</Text>
                           </Col>
                           <Col span={19}>
-                            <Text>14:35 - 07/11/2021</Text>
+                            <Text>{numbering?.thoiGianCap}</Text>
                           </Col>
                         </Row>
                         <Row>
@@ -74,7 +85,7 @@ const DetailNumbering: React.FC = () => {
                             <Text strong>Hạn sử dụng:</Text>
                           </Col>
                           <Col span={19}>
-                            <Text>18:00 - 07/11/2021</Text>
+                            <Text>{numbering?.hanSuDung}</Text>
                           </Col>
                         </Row>
                       </Space>
@@ -86,7 +97,7 @@ const DetailNumbering: React.FC = () => {
                             <Text strong>Nguồn cấp:</Text>
                           </Col>
                           <Col span={19}>
-                            <Text>Kiosk</Text>
+                            <Text>{numbering?.nguonCap}</Text>
                           </Col>
                         </Row>
                         <Row>
@@ -94,7 +105,7 @@ const DetailNumbering: React.FC = () => {
                             <Text strong>Trạng thái:</Text>
                           </Col>
                           <Col span={19}>
-                            <Badge status='processing' text='Đang chờ' />
+                            <Badge status='processing' text={numbering?.trangThai} />
                           </Col>
                         </Row>
                         <Row>
@@ -102,7 +113,7 @@ const DetailNumbering: React.FC = () => {
                             <Text strong>Số điện thoại:</Text>
                           </Col>
                           <Col span={19}>
-                            <Text>0388055012</Text>
+                            <Text>{numbering?.soDienThoai}</Text>
                           </Col>
                         </Row>
                         <Row>
@@ -110,7 +121,7 @@ const DetailNumbering: React.FC = () => {
                             <Text strong>Địa chỉ Email:</Text>
                           </Col>
                           <Col span={19}>
-                            <Text>nguyenvana@gmail.com</Text>
+                            <Text>{numbering?.email}</Text>
                           </Col>
                         </Row>
                       </Space>

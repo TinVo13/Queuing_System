@@ -2,11 +2,27 @@ import { Button, Card, Col, ConfigProvider, Row, Space, Typography } from 'antd'
 import Layout from 'antd/es/layout/layout'
 import React from 'react'
 import { EditOutlined } from '@ant-design/icons'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { DeviceType } from '../../../type/types';
+import { getDeviceByID } from '../../../firebase/controller';
 
 const { Text, Paragraph } = Typography;
 const DetailDevice: React.FC = () => {
+  const { key } = useParams();
+  const [device, setDevice] = React.useState<DeviceType>()
   const navigate = useNavigate();
+  
+  //get device by key
+  React.useEffect(() => {
+    const getDeviceData = async () => {
+      setDevice(await getDeviceByID(String(key)));
+    }
+    getDeviceData();
+  }, []);
+  const handleUpdate = () => {
+    navigate(`/device/list-device/update-device/${device?.key}`)
+  }
+  //console.log(device);
   return (
     <Layout style={{ margin: 16, }}>
       <Row>
@@ -28,13 +44,13 @@ const DetailDevice: React.FC = () => {
                   <Text strong>Mã thiết bị:</Text>
                 </Col>
                 <Col span={8}>
-                  <Text>KIO_01</Text>
+                  <Text>{device?.maThietBi}</Text>
                 </Col>
                 <Col span={4}>
                   <Text strong>Loại thiết bị:</Text>
                 </Col>
                 <Col span={8}>
-                  <Text>Kiosk</Text>
+                  <Text>{device?.loaiThietBi}</Text>
                 </Col>
               </Row>
               <Row>
@@ -42,13 +58,13 @@ const DetailDevice: React.FC = () => {
                   <Text strong>Tên thiết bị:</Text>
                 </Col>
                 <Col span={8}>
-                  <Text>Kiosk</Text>
+                  <Text>{device?.tenThietBi}</Text>
                 </Col>
                 <Col span={4}>
                   <Text strong>Tên đăng nhập:</Text>
                 </Col>
                 <Col span={8}>
-                  <Text>Tin</Text>
+                  <Text>{device?.tenDangNhap}</Text>
                 </Col>
               </Row>
               <Row>
@@ -56,13 +72,13 @@ const DetailDevice: React.FC = () => {
                   <Text strong>Địa chỉ IP:</Text>
                 </Col>
                 <Col span={8}>
-                  <Text>192.168.0.10</Text>
+                  <Text>{device?.diaChiIP}</Text>
                 </Col>
                 <Col span={4}>
                   <Text strong>Mật khẩu:</Text>
                 </Col>
                 <Col span={8}>
-                  <Text>abc123</Text>
+                  <Text>{device?.matKhau}</Text>
                 </Col>
               </Row>
               <Row>
@@ -72,7 +88,7 @@ const DetailDevice: React.FC = () => {
               </Row>
               <Row>
                 <Col span={24}>
-                  <Text>Khám tim mạch, Khám sản - Phụ khoa, Khám răng hàm mặt, Khám tai mũi họng, Khám hô hấp, Khám tổng quát.</Text>
+                  {device?.dichVuSuDung?.join(', ')}
                 </Col>
               </Row>
             </Space>
@@ -86,7 +102,7 @@ const DetailDevice: React.FC = () => {
                   colorPrimary: '#FF7506'
                 }
               }}>
-              <Button className='btn-update' onClick={()=>navigate('/device/list-device/update-device')}>
+              <Button className='btn-update' onClick={()=>handleUpdate()}>
                 <EditOutlined style={{ background: '#FF7506', color: '#FFF2E7', padding: 5, borderRadius: 10 }} />
                 <Paragraph style={{ whiteSpace: 'initial', fontSize: 14 }}>Cập nhật thiết bị</Paragraph>
               </Button>
