@@ -1,30 +1,30 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { Account, AccountType } from "../../type/types";
+import { AddAccountType } from "../../type/types";
+import { AddAccount, UpdateAccount } from "../../firebase/controller";
 
-const initialState: AccountType = {
+const initialState: AddAccountType = {
     email: "",
     hoTen: "",
     soDienThoai: "",
     tenDangNhap: "",
+    matKhau:"",
     trangThaiHoatDong: "",
     vaiTro: "",
-    key:"",
 }
 export const AccountSlice = createSlice({
     name: 'account',
     initialState,
     reducers: {
-        SetCurrentAccount: (state, actions: PayloadAction<{ account: Account }>) => {
-            state.hoTen = actions.payload.account.hoTen
-            state.email = actions.payload.account.email
-            state.soDienThoai = actions.payload.account.soDienThoai
-            state.tenDangNhap = actions.payload.account.tenDangNhap
-            state.trangThaiHoatDong = actions.payload.account.trangThaiHoatDong
-            state.vaiTro = actions.payload.account.vaiTro
-            state.key = actions.payload.account.key
+        ADD_ACCOUNT:(state,actions:PayloadAction<{key:string,account:AddAccountType}>)=>{
+            state = actions.payload.account;
+            AddAccount(state,actions.payload.key);
+        },
+        UPDATE_ACCOUNT:(state,actions:PayloadAction<{key:string,account:AddAccountType}>)=>{
+            state = actions.payload.account;
+            UpdateAccount(actions.payload.key,state);
         }
     }
 })
 
 export default AccountSlice.reducer;
-export const { SetCurrentAccount } = AccountSlice.actions;
+export const { ADD_ACCOUNT,UPDATE_ACCOUNT } = AccountSlice.actions;

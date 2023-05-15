@@ -1,15 +1,15 @@
 import { Avatar, Col, Form, Input, Row, Typography, theme } from 'antd'
 import React, { FC } from 'react'
 import { UserOutlined } from '@ant-design/icons';
-import { Account } from '../../type/types';
-import { getAccountByID } from '../../firebase/controller';
+import { GetAccountByID } from '../../firebase/controller';
 import { auth } from '../../firebase/firebaseConfig';
+import { AccountType } from '../../type/types';
 
 const UserInfo: FC = () => {
-    const [account,setAccount] = React.useState<Account>();
+    const [account,setAccount] = React.useState<AccountType>();
     React.useEffect(()=>{
         const getData = async () =>{
-            setAccount(await getAccountByID(auth.currentUser?.uid!));
+            setAccount(await GetAccountByID(auth.currentUser?.uid!));
         }
         getData();
     },[])

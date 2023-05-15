@@ -4,7 +4,7 @@ import React from 'react'
 import { EditOutlined } from '@ant-design/icons'
 import { useNavigate, useParams } from 'react-router-dom';
 import { DeviceType } from '../../../type/types';
-import { getDeviceByID } from '../../../firebase/controller';
+import { GetDeviceByID } from '../../../firebase/controller';
 
 const { Text, Paragraph } = Typography;
 const DetailDevice: React.FC = () => {
@@ -15,7 +15,7 @@ const DetailDevice: React.FC = () => {
   //get device by key
   React.useEffect(() => {
     const getDeviceData = async () => {
-      setDevice(await getDeviceByID(String(key)));
+      setDevice(await GetDeviceByID(String(key)));
     }
     getDeviceData();
   }, []);

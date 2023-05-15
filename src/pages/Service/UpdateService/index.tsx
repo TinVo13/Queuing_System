@@ -1,8 +1,10 @@
 import React from 'react'
 import { Button, Card, Checkbox, Col, ConfigProvider, Form, Input, Layout, Row, Space, Typography } from 'antd'
 import { useNavigate, useParams } from 'react-router-dom';
-import { ServiceType, UpdateServiceType } from '../../../type/types';
-import { getServiceByID, updateService } from '../../../firebase/controller';
+import { AddServiceType, ServiceType } from '../../../type/types';
+import { GetServiceByID } from '../../../firebase/controller';
+import { useAppDispatch } from '../../../store/store';
+import { UPDATE_SERVICE } from '../../../store/features/serviceSlide';
 
 const { Text } = Typography;
 const { TextArea } = Input;
@@ -12,16 +14,19 @@ const UpdateService = () => {
     const { key } = useParams();
     const [form] = Form.useForm();
     const [service, setService] = React.useState<ServiceType>();
+    const dispatch = useAppDispatch();
     React.useEffect(() => {
         const getService = async () => {
-            setService(await getServiceByID(String(key)));
+            setService(await GetServiceByID(String(key)));
         }
         getService();
     }, []);
-    form.setFieldsValue(service);
-    const handleUpdateService = (service: ServiceType) => {
+    React.useEffect(()=>{
+        form.setFieldsValue(service);
+    })
+    const handleUpdateService = (service: AddServiceType) => {
         service.trangThaiHoatDong="Hoạt động";
-        updateService(String(key),service);
+        dispatch(UPDATE_SERVICE({key:String(key),service:service}));
         navigate('/service/list-service');
     }
     return (
@@ -35,12 +40,12 @@ const UpdateService = () => {
                 <Space direction='vertical'>
                     <Row>
                         <Col span={24}>
-                            <Text className='label-h1' strong>Danh sách thiết bị</Text>
+                            <Text className='label-h1' strong>Quản lý dịch vụ</Text>
                         </Col>
                     </Row>
                     <Row>
                         <Col span={24}>
-                            <Form form={form} onFinish={(value: ServiceType) => handleUpdateService(value)}>
+                            <Form form={form} onFinish={(value: AddServiceType) => handleUpdateService(value)}>
                                 <Space direction='vertical' size={'large'} style={{ width: '100%' }}>
                                     <Card>
                                         <Space direction='vertical' style={{ width: '100%' }}>

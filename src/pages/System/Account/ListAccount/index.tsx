@@ -94,8 +94,14 @@ const ListAccount: React.FC = () => {
   return (
     <ConfigProvider
       theme={{
+        inherit:false,
         token: {
           colorPrimary: '#FF9138'
+        },
+        components: {
+          Badge: {
+            colorPrimary: 'blue'
+          }
         }
       }}>
       <Layout>
@@ -116,7 +122,7 @@ const ListAccount: React.FC = () => {
                     size='large'
                     options={SelectionRole}
                     style={{ width: 300 }}
-                    defaultValue={'tất cả'} />
+                    defaultValue={'Tất cả'} />
                 </Space>
                 <Space direction='vertical'>
                   <Text strong>Từ khóa</Text>

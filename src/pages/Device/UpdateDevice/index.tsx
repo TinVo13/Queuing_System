@@ -3,9 +3,11 @@ import Layout from 'antd/es/layout/layout';
 import React from 'react'
 import TagRender from '../../../components/CustomTag';
 import { useNavigate, useParams } from 'react-router-dom';
-import { DeviceType } from '../../../type/types';
+import { AddDeviceType, DeviceType } from '../../../type/types';
 import { SelectionService } from '../../../components/Selection/ItemSelection';
-import { getDeviceByID, updateDevice } from '../../../firebase/controller';
+import { GetDeviceByID } from '../../../firebase/controller';
+import { useAppDispatch } from '../../../store/store';
+import { UPDATE_DEVICE } from '../../../store/features/deviceSlide';
 
 const { Text } = Typography;
 
@@ -13,20 +15,19 @@ const UpdateDevice: React.FC = () => {
   const [form] = Form.useForm();
   const { key } = useParams();
   const [device, setDevice] = React.useState<DeviceType>();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate()
   React.useEffect(() => {
     const getDevice = async () => {
-      setDevice(await getDeviceByID(String(key)));
+      setDevice(await GetDeviceByID(String(key)));
     }
     getDevice();
   }, []);
   React.useEffect(()=>{
     form.setFieldsValue(device);
   })
-  const handleUpdateDevice = (values:DeviceType) => {
-    values.trangThaiHoatDong = "Ngưng hoạt động";
-    values.trangThaiKetNoi = "Mất kết nối";
-    updateDevice(String(key),values);
+  const handleUpdateDevice = (values:AddDeviceType) => {
+    dispatch(UPDATE_DEVICE({key:key!,device:values}))
     navigate('/device/list-device');
   }
   return (
@@ -50,7 +51,7 @@ const UpdateDevice: React.FC = () => {
                 <Form
                   form={form}
                   size='middle'
-                  onFinish={(values:DeviceType) => handleUpdateDevice(values)}
+                  onFinish={(values:AddDeviceType) => handleUpdateDevice(values)}
                 >
                   <Space direction='vertical' size={'large'} style={{ width: '100%' }}>
                     <Card>

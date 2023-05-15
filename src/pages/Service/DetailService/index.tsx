@@ -5,7 +5,7 @@ import { SearchOutlined, EditOutlined, RollbackOutlined } from '@ant-design/icon
 import { DetailServiceType, ServiceType } from '../../../type/types'
 import { DataDetailService } from '../../../data'
 import { useNavigate, useParams } from 'react-router-dom'
-import { getServiceByID } from '../../../firebase/controller'
+import { GetServiceByID } from '../../../firebase/controller'
 
 const { Text, Title } = Typography
 const { RangePicker } = DatePicker
@@ -29,7 +29,7 @@ const DetailService = () => {
 
     React.useEffect(() => {
         const getService = async () => {
-            setService(await getServiceByID(String(key)));
+            setService(await GetServiceByID(String(key)));
         }
         getService();
     }, [])

@@ -6,20 +6,23 @@ import { AddRoleType, RoleType } from '../../../../type/types';
 import { optionsCheckbox, optionsCheckboxs } from '../../../../components/Selection/ItemSelection';
 import { CheckboxValueType } from 'antd/es/checkbox/Group';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
-import { addRole, getRoleByID, updateRole } from '../../../../firebase/controller';
+import { GetRoleByID } from '../../../../firebase/controller';
+import { useAppDispatch } from '../../../../store/store';
+import { UPDATE_ROLE } from '../../../../store/features/roleSlide';
 
 const { Text } = Typography;
 const UpdateRole: React.FC = () => {
-  const navigate = useNavigate();
   const [form] = Form.useForm();
-  const {key} = useParams();
-  const [role,setRole] = React.useState<RoleType>();
+  const { key } = useParams();
+  const [role, setRole] = React.useState<RoleType>();
   const [checkedList, setCheckedList] = React.useState<CheckboxValueType[]>([]);
   const [indeterminate, setIndeterminate] = React.useState(true);
   const [checkAll, setCheckAll] = React.useState(false);
   const [checkedListB, setCheckedListB] = React.useState<CheckboxValueType[]>([]);
   const [indeterminateB, setIndeterminateB] = React.useState(true);
   const [checkAllB, setCheckAllB] = React.useState(false);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const onChange = (list: CheckboxValueType[]) => {
     setCheckedList(list);
@@ -45,32 +48,36 @@ const UpdateRole: React.FC = () => {
     navigate('/system-setting/list-role');
   }
   const handleConfirm = (values: AddRoleType) => {
-    const a = [];
-    const b = [];
-    for(var i = 0;i<checkedList.length;i++){
-      if(checkedList.length===0){
+    const a: string[] = [];
+    const b: string[] = [];
+    for (var i = 0; i < checkedList.length; i++) {
+      if (checkedList.length === 0) {
         return;
       }
       a.push(checkedList[i].toString())
     }
-    for(var i = 0;i<checkedList.length;i++){
-      if(checkedListB.length===0){
+    for (var i = 0; i < checkedListB.length; i++) {
+      if (checkedListB.length === 0) {
         return;
       }
       b.push(checkedListB[i].toString())
     }
     values.chucNang = a.concat(b);
     values.soNguoiDung = 1;
-    updateRole(String(key),values);
+
+    //update role
+    dispatch(UPDATE_ROLE({ key: key!, role: values }));
     navigate('/system-setting/list-role');
   }
-  React.useEffect(()=>{
+  React.useEffect(() => {
     const getRole = async () => {
-      setRole(await getRoleByID(String(key)));
+      setRole(await GetRoleByID(String(key)));
     }
     getRole();
-  },[])
-  form.setFieldsValue(role);
+  }, [])
+  React.useEffect(() => {
+    form.setFieldsValue(role);
+  });
   return (
     <ConfigProvider
       theme={{
@@ -87,7 +94,7 @@ const UpdateRole: React.FC = () => {
           </Row>
           <Row>
             <Col span={24}>
-              <Form onFinish={(value)=>handleConfirm(value)} form={form}>
+              <Form onFinish={(value: AddRoleType) => handleConfirm(value)} form={form}>
                 <Space direction='vertical' size={'large'} style={{ width: '100%' }}>
                   <Card>
                     <Space direction='vertical' style={{ width: '100%' }}>
@@ -102,6 +109,7 @@ const UpdateRole: React.FC = () => {
                             </div>
                             <Form.Item
                               name={'tenVaiTro'}
+                              hasFeedback
                               rules={[{
                                 required: true,
                                 message: 'Vui lòng nhập tên vai trò!'
@@ -145,10 +153,10 @@ const UpdateRole: React.FC = () => {
                                   <Text className='label-h2' strong>Nhóm chức năng B</Text>
                                   <Form.Item
                                     valuePropName='checked'>
-                                      <Checkbox indeterminate={indeterminateB} onChange={onCheckAllChangeB} checked={checkAllB}>
-                                        Tất cả
-                                      </Checkbox>
-                                      <Checkbox.Group options={optionsCheckboxs} value={checkedListB} onChange={onChangeB} />
+                                    <Checkbox indeterminate={indeterminateB} onChange={onCheckAllChangeB} checked={checkAllB}>
+                                      Tất cả
+                                    </Checkbox>
+                                    <Checkbox.Group options={optionsCheckboxs} value={checkedListB} onChange={onChangeB} />
                                   </Form.Item>
                                 </Space>
                               </Space>

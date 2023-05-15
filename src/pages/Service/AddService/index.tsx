@@ -2,19 +2,19 @@ import React from 'react'
 import { Button, Card, Checkbox, Col, ConfigProvider, Form, Input, Layout, Row, Space, Typography,  } from 'antd'
 import { useNavigate } from 'react-router-dom';
 import { AddServiceType } from '../../../type/types';
-import { addService } from '../../../firebase/controller';
+import { useAppDispatch } from '../../../store/store';
+import { ADD_SERVICE } from '../../../store/features/serviceSlide';
 
 const { Text } = Typography;
 const { TextArea } = Input;
 const AddService: React.FC = () => {
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const handleAddService = (values: AddServiceType) => {
-        //console.log(values)
-        values.trangThaiHoatDong="Hoạt động";
-        addService(values);
+        dispatch(ADD_SERVICE({service:values}));
+        console.log("Thêm thiết bị thành công!");
         navigate('/service/list-service');
     }
-
     return (
         <ConfigProvider
             theme={{

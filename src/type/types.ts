@@ -1,30 +1,25 @@
-export const SET_USER = 'SET_USER';
-export const SIGN_OUT = 'SIGN_OUT';
-export const SET_LOADING = 'SET_LOADING';
-export const SET_ERROR = 'SET_ERROR';
-export const SET_SUCCESS = 'SET_SUCCESS';
-
 export interface DeviceType {
-    key?:string;
-    maThietBi?: string;
-    tenThietBi?: string;
-    diaChiIP?: string;
-    trangThaiHoatDong?: any;
-    trangThaiKetNoi?: any;
-    dichVuSuDung?: string[];
-    tenDangNhap?:string;
-    matKhau?:string;
+    key?:string,
+    maThietBi?: string,
+    tenThietBi?: string,
+    diaChiIP?: string,
+    trangThaiHoatDong?: any,
+    trangThaiKetNoi?: any,
+    dichVuSuDung?: string[],
+    tenDangNhap?:string,
+    matKhau?:string,
     loaiThietBi?:string
 }
 export interface AddDeviceType{
-    maThietBi: string;
-    tenThietBi: string;
-    diaChiIP: string;
-    trangThaiHoatDong: "Ngưng hoạt động";
-    trangThaiKetNoi: "Mất kết nối";
-    dichVuSuDung: string[];
-    tenDangNhap:string;
-    matKhau:string;
+    maThietBi: string,
+    tenThietBi: string,
+    diaChiIP: string,
+    loaiThietBi: string,
+    trangThaiHoatDong: "Hoạt động",
+    trangThaiKetNoi: "Kết nối",
+    dichVuSuDung: string[],
+    tenDangNhap:string,
+    matKhau:string
 }
 export interface UpdateDeviceType {
     maThietBi: string,
@@ -32,8 +27,10 @@ export interface UpdateDeviceType {
     loaiThietBi: string,
     tenDangNhap: string,
     matKhau: string,
+    trangThaiHoatDong: "Hoạt động",
+    trangThaiKetNoi: "Kết nối",
     diaChiIP: string,
-    dichVu: string[]
+    dichVuSuDung: string[]
 }
 export interface ServiceType {
     key?: string,
@@ -56,6 +53,7 @@ export interface DetailServiceType {
 export interface UpdateServiceType {
     maDichVu: string,
     tenDichVu: string,
+    moTa: string,
 }
 export interface NumberingType {
     key?: string,
@@ -103,9 +101,16 @@ export interface AddRoleType {
     moTa: string,
     chucNang: string[]
 }
+export interface UpdateRoleType {
+    tenVaiTro: string,
+    soNguoiDung: number,
+    moTa: string,
+    chucNang: string[]
+}
 export interface AccountType {
     key?: string,
     tenDangNhap?: string,
+    matKhau?:string,
     hoTen?: string,
     soDienThoai?: string,
     email?: string,
@@ -121,20 +126,14 @@ export interface AddAccountType {
     vaiTro: string,
     trangThaiHoatDong: string
 }
-export interface Account {
-    key?: string,
-    tenDangNhap?: string,
-    hoTen?: string,
-    soDienThoai?: string,
-    email?: string,
-    vaiTro?: any,
-    trangThaiHoatDong?: any,
-    matKhau?:string
-}
 export interface UserLogType{
     key:number,
     tenDangNhap:string,
     thoiGianTacDong:string,
     ipThucHien:string,
     thaoTacThucHien:string
+}
+export interface BreadcrumbType {
+    title: string,
+    href: string
 }

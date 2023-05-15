@@ -2,8 +2,10 @@ import { Button, Card, Col, ConfigProvider, Form, Input, Layout, Row, Select, Sp
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { SelectionRole, Status } from '../../../../components/Selection/ItemSelection';
-import { AccountType } from '../../../../type/types';
-import { getAccountByID, updateAccount } from '../../../../firebase/controller';
+import { AccountType, AddAccountType } from '../../../../type/types';
+import { GetAccountByID } from '../../../../firebase/controller';
+import { useAppDispatch } from '../../../../store/store';
+import { UPDATE_ACCOUNT } from '../../../../store/features/accountSlice';
 
 const { Text } = Typography;
 const UpdateAccount = () => {
@@ -11,22 +13,23 @@ const UpdateAccount = () => {
   const [form] = Form.useForm();
   const [account, setAccount] = React.useState<AccountType>();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const handleCancel = () => {
     navigate('/system-setting/list-account');
   }
-  const handleUpdate = (account: AccountType) => {
-    updateAccount(String(key), account);
+  //update account
+  const handleUpdate = (account: AddAccountType) => {
+    dispatch(UPDATE_ACCOUNT({ key: String(key), account: account }))
     navigate('/system-setting/list-account');
   }
   React.useEffect(() => {
     const getData = async () => {
-      setAccount(await getAccountByID(String(key)));
+      setAccount(await GetAccountByID(String(key)));
     }
     getData();
   }, [])
-  React.useEffect(()=>{
+  React.useEffect(() => {
     form.setFieldsValue(account);
-    console.log(account);
   })
   return (
     <ConfigProvider
@@ -152,9 +155,9 @@ const UpdateAccount = () => {
                             rules={[{
                               required: true,
                               message: 'Vui lòng nhập mật khẩu!'
-                            },{
-                              min:8,
-                              message:'Mật khẩu phải từ 8 ký tự trở lên!'
+                            }, {
+                              min: 8,
+                              message: 'Mật khẩu phải từ 8 ký tự trở lên!'
                             }]}>
                             <Input type='password' placeholder='Nhập mật khẩu' size='large' />
                           </Form.Item>

@@ -6,7 +6,8 @@ import { CheckboxValueType } from 'antd/es/checkbox/Group';
 import { optionsCheckbox, optionsCheckboxs } from '../../../../components/Selection/ItemSelection';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { AddRoleType, RoleType } from '../../../../type/types';
-import { addRole } from '../../../../firebase/controller';
+import { useAppDispatch } from '../../../../store/store';
+import { ADD_ROLE } from '../../../../store/features/roleSlide';
 
 
 const { Text } = Typography;
@@ -18,7 +19,7 @@ const AddRole: React.FC = () => {
   const [checkedListB, setCheckedListB] = React.useState<CheckboxValueType[]>([]);
   const [indeterminateB, setIndeterminateB] = React.useState(true);
   const [checkAllB, setCheckAllB] = React.useState(false);
-
+  const dispatch = useAppDispatch();
   const onChange = (list: CheckboxValueType[]) => {
     setCheckedList(list);
     setIndeterminate(!!list.length && list.length < optionsCheckbox.length);
@@ -43,25 +44,30 @@ const AddRole: React.FC = () => {
     navigate('/system-setting/list-role');
   }
   const handleConfirm = (values: AddRoleType) => {
-    const a = [];
-    const b = [];
+    const a: string[] = [];
+    const b: string[] = [];
     for (var i = 0; i < checkedList.length; i++) {
       if (checkedList.length === 0) {
         return;
       }
-      a.push(checkedList[i].toString())
+      a.push(checkedList[i].toString());
     }
-    for (var i = 0; i < checkedList.length; i++) {
+    for (var i = 0; i < checkedListB.length; i++) {
       if (checkedListB.length === 0) {
         return;
       }
-      b.push(checkedListB[i].toString())
+      b.push(checkedListB[i].toString());
+    }
+    if (values.moTa === undefined) {
+      values.moTa = "";
     }
     values.chucNang = a.concat(b);
     values.soNguoiDung = 1;
-    addRole(values);
+    dispatch(ADD_ROLE({ role: values }));
+    //addRole(values);
     navigate('/system-setting/list-role');
   }
+
   return (
     <ConfigProvider
       theme={{
@@ -78,7 +84,7 @@ const AddRole: React.FC = () => {
           </Row>
           <Row>
             <Col span={24}>
-              <Form onFinish={handleConfirm}>
+              <Form onFinish={(values: AddRoleType) => handleConfirm(values)}>
                 <Space direction='vertical' size={'large'} style={{ width: '100%' }}>
                   <Card>
                     <Space direction='vertical' style={{ width: '100%' }}>
@@ -93,6 +99,7 @@ const AddRole: React.FC = () => {
                             </div>
                             <Form.Item
                               name={'tenVaiTro'}
+                              hasFeedback
                               rules={[{
                                 required: true,
                                 message: 'Vui lòng nhập tên vai trò!'
@@ -123,7 +130,8 @@ const AddRole: React.FC = () => {
                                 <Space direction='vertical'>
                                   <Text className='label-h2' strong>Nhóm chức năng A</Text>
                                   <Form.Item
-                                    valuePropName='checked'>
+                                    valuePropName='checked'
+                                  >
                                     <Checkbox indeterminate={indeterminate} onChange={onCheckAllChange} checked={checkAll}>
                                       Tất cả
                                     </Checkbox>
@@ -133,7 +141,8 @@ const AddRole: React.FC = () => {
                                 <Space direction='vertical'>
                                   <Text className='label-h2' strong>Nhóm chức năng B</Text>
                                   <Form.Item
-                                    valuePropName='checked'>
+                                    valuePropName='checked'
+                                    >
                                     <Checkbox indeterminate={indeterminateB} onChange={onCheckAllChangeB} checked={checkAllB}>
                                       Tất cả
                                     </Checkbox>

@@ -3,23 +3,29 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { SelectionRole, Status } from '../../../../components/Selection/ItemSelection';
 import { AddAccountType } from '../../../../type/types';
-import { addAccount } from '../../../../firebase/controller';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../../../firebase/firebaseConfig';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { auth, auth2 } from '../../../../firebase/firebaseConfig';
+import { useAppDispatch } from '../../../../store/store';
+import { ADD_ACCOUNT } from '../../../../store/features/accountSlice';
 
 const { Text } = Typography;
 const AddAccount: React.FC = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const originalUser = auth.currentUser;
   const handleCancel = () => {
     navigate('/system-setting/list-account');
   }
   const handleAdd = (value: AddAccountType) => {
-    createUserWithEmailAndPassword(auth, value.email, value.matKhau)
+    createUserWithEmailAndPassword(auth2, value.email, value.matKhau)
       .then(userCredential => {
-        //add account to firestore
-        const uid = userCredential.user.uid;
-        addAccount(value, uid);
-      }).catch(error => {
+        updateProfile(userCredential.user, { displayName: value.hoTen, photoURL: "https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1931&q=80" })
+        // add account to firestore
+        dispatch(ADD_ACCOUNT({ key: userCredential.user.uid, account: value }));
+        auth2.signOut();
+        auth.updateCurrentUser(originalUser);
+      })
+      .catch(error => {
         console.log(error);
       })
     navigate('/system-setting/list-account');
@@ -77,8 +83,11 @@ const AddAccount: React.FC = () => {
                             hasFeedback
                             rules={[{
                               required: true,
-                              min: 9,
                               message: 'Vui lòng nhập số điện thoại!'
+                            },
+                            {
+                              len: 10,
+                              message: "Số điện thoại bao gốm 10 số!"
                             }]}>
                             <Input type='text' placeholder='Nhập số điện thoại' size='large' />
                           </Form.Item>

@@ -1,29 +1,22 @@
-import { Avatar, Button, Col, Popover, Row, Typography, } from 'antd';
+import { Avatar, Breadcrumb, Button, Col, Popover, Row, Typography, } from 'antd';
 import React from 'react';
 import { UserOutlined, BellOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import Notification from '../Notification';
 import BreadCrumb from '../BreadCrumb/BreadCrumb';
-import { AccountType } from '../../type/types';
-import { getAccountByID } from '../../firebase/controller';
 import { auth } from '../../firebase/firebaseConfig';
 
 const Topbar: React.FC = () => {
     const navigate = useNavigate();
-    const [account, setAccount] = React.useState<AccountType>();
-    //const account:AccountType = useAppSelector(state=>state.account);
-    React.useEffect(()=>{
-        const getData = async () => {
-            setAccount(await getAccountByID(auth.currentUser?.uid!));
-        }
-        getData();
-    },[])
+    const [account, setAccount] = React.useState<string>();
+    React.useEffect(() => {
+        setAccount(auth.currentUser?.displayName!);
+    },[]);
     return (
         <div>
             <Row justify={'center'} align={'middle'} style={{ padding: "8px 16px" }}>
                 <Col span={18}>
                     <BreadCrumb />
-                    {/* <Breadcrumb/> */}
                 </Col>
                 <Col span={1}>
                     <Popover content={<Notification />} title="Thông báo" trigger={'click'} placement='bottomRight' style={{ width: '360px' }}>
@@ -41,7 +34,7 @@ const Topbar: React.FC = () => {
                                     <Typography.Text>Xin chào</Typography.Text>
                                 </Col>
                                 <Col>
-                                    <Typography.Text onClick={() => navigate('/userinfo')}>{account?.hoTen}</Typography.Text>
+                                    <Typography.Text onClick={() => navigate('/userinfo')}>{account}</Typography.Text>
                                 </Col>
                             </Row>
                         </Col>

@@ -1,4 +1,4 @@
-import { ConfigProvider, Image, Space, Spin, Typography, } from 'antd'
+import { Alert, ConfigProvider, Image, Space, Spin, Typography, } from 'antd'
 import { Form, Input, Button } from 'antd';
 import React from 'react'
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
@@ -35,7 +35,7 @@ const LoginForm: React.FC = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = React.useState(false);
     const handleSignIn = async (values: Account) => {
-        console.log(values);
+        // console.log(values);
         setLoading(true);
         try {
             await signInWithEmailAndPassword(auth, values.userName, values.password);
@@ -44,6 +44,7 @@ const LoginForm: React.FC = () => {
         } catch (error) {
             console.log(error);
             setLoading(false);
+            <Alert message="Sai Email hoặc mật khẩu!" type='error' showIcon/>
         }
     }
 
@@ -68,6 +69,7 @@ const LoginForm: React.FC = () => {
                         Tên đăng nhập *
                         <Form.Item
                             name="userName"
+                            hasFeedback
                             rules={[{ required: true, message: 'Vui lòng điền tên đăng nhập!' }]}
                         >
                             <InputStyle
@@ -79,6 +81,7 @@ const LoginForm: React.FC = () => {
                         Mật khẩu *
                         <Form.Item
                             name="password"
+                            hasFeedback
                             rules={[{ required: true, message: 'Vui lòng nhập mật khẩu!' }]}
                         >
                             <InputStyle

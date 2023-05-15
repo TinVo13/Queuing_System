@@ -32,9 +32,7 @@ import AddAccount from './pages/System/Account/AddAccount';
 import UpdateAccount from './pages/System/Account/UpdateAccount';
 import SystemSetting from './pages/System';
 import UserLog from './pages/System/User';
-import { useAppSelector } from './store/store';
 import ErrorPage from './pages/ErrorPage';
-
 
 function App() {
   return (
@@ -44,7 +42,8 @@ function App() {
           //private route
           <Route path='/' element={<PrivateRoute />}>
             <Route path='/' Component={PageContent}>
-              <Route index path='dashboard' element={<Dashboard/>}></Route>
+              <Route index Component={Dashboard}></Route>
+              <Route path='dashboard' Component={Dashboard}></Route>
               <Route path='device' Component={Device}>
                 <Route path='list-device' Component={ListDevice}></Route>
                 <Route path='list-device/add-device' Component={AddDevice}></Route>
@@ -63,7 +62,7 @@ function App() {
                 <Route path='list-numbering/detail-numbering/:key' Component={DetailNumbering}></Route>
               </Route>
               <Route path='report' Component={Report}></Route>
-              <Route path='userinfo' element={<UserInfo />} />
+              <Route path='userinfo' Component={UserInfo} />
               <Route path='system-setting' Component={SystemSetting}>
                 <Route path='list-role' Component={ListRole}></Route>
                 <Route path='list-role/add-role' Component={AddRole}></Route>
@@ -76,9 +75,9 @@ function App() {
             </Route>
           </Route>
           //public route
-          <Route path='/login' element={<Login />} />
-          <Route path='/reset-password' element={<ResetPassword />} />
-          <Route path='/forgot-password' element={<ForgotPassword />} />
+          <Route path='/login' Component={Login} />
+          <Route path='/reset-password' Component={ResetPassword} />
+          <Route path='/forgot-password' Component={ForgotPassword} />
           <Route path='/numbering1' Component={NumberingWithoutLogin}></Route>
           //error page
           <Route path='*' element={<ErrorPage />}></Route>

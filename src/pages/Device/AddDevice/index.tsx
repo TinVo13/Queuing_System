@@ -2,17 +2,16 @@ import React from 'react'
 import { Button, Card, Col, ConfigProvider, Form, Input, Layout, Row, Select, Space, Typography } from 'antd'
 import { useNavigate } from 'react-router-dom';
 import { AddDeviceType } from '../../../type/types';
-import { addDevice } from '../../../firebase/controller';
+import { useAppDispatch } from '../../../store/store';
+import { ADD_DEVICE } from '../../../store/features/deviceSlide';
 
 const { Text } = Typography
-
 const AddDevice: React.FC = () => {
   const navigate = useNavigate();
-
+  const dispatch = useAppDispatch();
   const handleAddDevice = (values: AddDeviceType) => {
-    values.trangThaiHoatDong = "Ngưng hoạt động";
-    values.trangThaiKetNoi = "Mất kết nối";
-    addDevice(values);
+    values.dichVuSuDung = String(values.dichVuSuDung).split(",");
+    dispatch(ADD_DEVICE({device:values}));
     console.log('Thêm thiết bị thành công!');
     navigate('/device/list-device');
   }
